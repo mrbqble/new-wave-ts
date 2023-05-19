@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import Button from './Button'
-import { useContext } from '../context/Context'
+import { useContext } from '../../context/Context'
 import Link from './Link'
 
 const MainContainer = styled.div`

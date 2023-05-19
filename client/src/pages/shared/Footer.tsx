@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import data from './variables.json'
-import TiktokIcon from '../Icons/TiktokIcon';
-import InstagramIcons from '../Icons/InstagramIcon';
-import YoutubeIcon from '../Icons/YoutubeIcon';
+import TiktokIcon from '../assets/Icons/TiktokIcon';
+import InstagramIcons from '../assets/Icons/InstagramIcon';
+import YoutubeIcon from '../assets/Icons/YoutubeIcon';
 import Link from './Link';
 
 const MainContainer = styled.div`

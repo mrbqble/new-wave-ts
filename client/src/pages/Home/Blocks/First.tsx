@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import back from '../../../assets/back.png'
-import Button from '../../../shared/Button'
+import back from '../../assets/back.png'
+import Button from '../../shared/Button'
 
 const MainContainer = styled.div`
     height: 92vh;

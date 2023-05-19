@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import ArrowIcon from '../../../Icons/ArrowIcon'
-import founder from '../../../assets/1.png'
-import Link from '../../../shared/Link'
+import ArrowIcon from '../../assets/Icons/ArrowIcon'
+import founder from '../../assets/1.png'
+import Link from '../../shared/Link'
 
 const MainContainer = styled.div`
   display: flex;

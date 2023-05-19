@@ -1,15 +1,15 @@
 import 'swiper/css'
 import "swiper/css/effect-creative"
-import json from '../../../shared/variables.json'
+import json from '../../shared/variables.json'
 import { gql, useQuery } from '@apollo/client'
 import styled from 'styled-components'
 import { useContext } from '../../../context/Context'
 import { EffectCreative, Autoplay } from "swiper"
 import { Swiper, SwiperSlide } from 'swiper/react'
-import ArrowIcon from '../../../Icons/ArrowIcon'
+import ArrowIcon from '../../assets/Icons/ArrowIcon'
 import NextButton from './Next'
 import PrevButton from './Previous'
-import Link from '../../../shared/Link'
+import Link from '../../shared/Link'
 
 const Title = styled.p`
   font-size: 30px;

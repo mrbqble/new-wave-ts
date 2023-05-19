@@ -1,8 +1,8 @@
-import First from './Blocks/First'
-import Second from './Blocks/Second'
-import Third from './Blocks/Third'
-import Fourth from './Blocks/Fourth'
-import Fifth from './Blocks/Fifth'
+import First from './blocks/First'
+import Second from './blocks/Second'
+import Third from './blocks/Third'
+import Fourth from './blocks/Fourth'
+import Fifth from './blocks/Fifth'
 
 function Home() {
     return (

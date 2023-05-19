@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Footer from '../shared/Footer'
+import Footer from '../pages/shared/Footer'
 import styled from 'styled-components'
-import Navbar from '../shared/Navbar'
+import Navbar from '../pages/shared/Navbar'
 import Home from '../pages/Home/Home'
 
 const Divider = styled.hr`

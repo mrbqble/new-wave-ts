@@ -1,8 +1,8 @@
 import { Autoplay } from "swiper"
 import styled from "styled-components"
-import data from '../../../shared/variables.json'
+import data from '../../shared/variables.json'
 import { Swiper, SwiperSlide } from "swiper/react"
-import NumberAnimated from "../../../shared/NumberAnimated"
+import NumberAnimated from "../../shared/NumberAnimated"
 
 const MainContainer = styled.div`
   display: flex;
@@ -16,17 +16,16 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  `
-  
+  gap: 8px;
+`
+
   const Title = styled.p`
   font-size: 50px;
   font-weight: bold;
-  text-align: center;
 `
 
 const Subtitle = styled.p`
   font-size: 30px;
-  text-align: center;
   margin: 40px 0px;
 `
 

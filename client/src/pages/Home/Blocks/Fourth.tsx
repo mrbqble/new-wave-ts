@@ -1,9 +1,9 @@
 import styled from "styled-components"
-import sea from '../../../assets/3.png'
-import bottles from '../../../assets/4.png'
-import beach from '../../../assets/2.png'
-import data from '../../../shared/variables.json'
-import Button from "../../../shared/Button"
+import sea from '../../assets/3.png'
+import bottles from '../../assets/4.png'
+import beach from '../../assets/2.png'
+import data from '../../shared/variables.json'
+import Button from "../../shared/Button"
 
 const MainContainer = styled.div`
   padding: 50px 20px;
