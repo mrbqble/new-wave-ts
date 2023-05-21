@@ -30,15 +30,19 @@ const Query = {
     logIn: async (_, { input }, ctx) => {
         const { email, password } = input
         const user = await ctx.User.findOne({email})
-        const isPassValid = ctx.bcrypt.compareSync(password, user.password)
-        if (!isPassValid)
-            return 'Invalid password or email'
-        const token = jwt.sign(
-            {id: user._id},
-            config.get("secretKey"),
-            {expiresIn: '1h'}
-        )
-        return token
+        if (user) {
+            const isPassValid = ctx.bcrypt.compareSync(password, user.password)
+            if (!isPassValid)
+                return {token: '', success: false}
+            const token = jwt.sign(
+                {id: user._id},
+                config.get("secretKey"),
+                {expiresIn: '1h'}
+            )
+            return {token, success: true}
+        } else {
+            return {token: '', success: false}
+        }
     },
     profile: async (_, { input }, ctx) => {
         const _id = jwt_decode(input).id
@@ -54,7 +58,7 @@ const Query = {
         return "User image was changed"
     },
     checkEmail: async (_, { input }, ctx) => {
-        const user = await ctx.User.find({email: input})
+        const user = await ctx.User.findOne({email: input})
         if (user)
             return true
         return false
@@ -108,10 +112,14 @@ const Query = {
         return await ctx.Report.find()
     },
 
-    allEducation: async (_, __, ctx) => {
-        const countries = await ctx.Country.find()
-        const universities = await ctx.University.find()
-        return res.json({countries, universities})
+    allCountries: async (_, __, ctx) => {
+        return await ctx.Country.find()
+    },
+
+    allUniversities: async (_, __, ctx) => {
+        let universities = await ctx.University.find()
+        universities = universities.map((item) => { return item.name })
+        return universities
     }
 }
 

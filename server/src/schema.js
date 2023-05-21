@@ -154,16 +154,16 @@ const typeDefs = gql`
         colleges: [String]
     }
 
-    type Education {
-        countries: [Country]
-        universities: [String]
+    type LogInOutput {
+        token: String
+        success: Boolean
     }
 
     type Query {
         users: [User]
         coordinators: [User]
         profile(input: String): User
-        logIn(input: LogInInput!): String
+        logIn(input: LogInInput!): LogInOutput
         checkEmail(input: String): Boolean
         checkCode(input: String): CodeOutput
         profileImage(input: ImageInput): String
@@ -173,7 +173,8 @@ const typeDefs = gql`
         allEvents: [Event]
         allReports: [Report]
 
-        allEducation: [Education]
+        allCountries: [Country]
+        allUniversities: [String]
     }
 
     type Mutation {
