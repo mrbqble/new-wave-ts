@@ -38,11 +38,7 @@ const Content = styled.div`
   gap: 60px;
 `
 
-interface StatProps {
-  index: number
-}
-
-const Stat = styled.div<StatProps>`
+const Stat = styled.div`
   width: 26vw;
   display: flex;
   align-items: center;
@@ -111,7 +107,7 @@ function Second() {
       <Subtitle>How do we tackle with environmental issues?</Subtitle>
       <Content>
         {stats.map((item, index) =>
-          <Stat key={index} index={index}>
+          <Stat key={index}>
             <Text>{item.text}</Text>
             <Box>
               <Number><NumberAnimated num={item.number}/></Number>

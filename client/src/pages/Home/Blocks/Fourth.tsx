@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import sea from '../../assets/3.png'
-import bottles from '../../assets/4.png'
-import beach from '../../assets/2.png'
+import sea from '../../assets/images/3.png'
+import bottles from '../../assets/images/4.png'
+import beach from '../../assets/images/2.png'
 import data from '../../shared/variables.json'
 import Button from "../../shared/Button"
 

@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { useContext } from '../../../context/Context'
 import { EffectCreative, Autoplay } from "swiper"
 import { Swiper, SwiperSlide } from 'swiper/react'
-import ArrowIcon from '../../assets/Icons/ArrowIcon'
+import ArrowIcon from '../../assets/icons/ArrowIcon'
 import NextButton from './Next'
 import PrevButton from './Previous'
 import Link from '../../shared/Link'

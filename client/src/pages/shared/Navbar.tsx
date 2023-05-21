@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import Button from './Button'
 import { useContext } from '../../context/Context'
 import Link from './Link'
+import { useNavigate } from 'react-router-dom'
 
 const MainContainer = styled.div`
     height: 8vh;
@@ -31,6 +32,7 @@ const LinksContainer = styled.div`
 
 function Navbar () {
 
+    const navigate = useNavigate()
     const { isLoggedIn } = useContext()
 
     return (
@@ -49,8 +51,8 @@ function Navbar () {
                     <Link>log out</Link>
                 </>
                 : <>
-                    <Link>sign in</Link>
-                    <Link>sign up</Link>
+                    <Link onClick={() => navigate('/signin')}>sign in</Link>
+                    <Link onClick={() => navigate('/signup')}>sign up</Link>
                 </>}
                 <Button onClick={() => {}}>donate</Button>
             </LinksContainer>

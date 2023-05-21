@@ -1,5 +1,4 @@
 import Button from './Button'
-import { useState } from 'react'
 import styled from 'styled-components'
 
 interface MainContainerProps {
@@ -8,6 +7,7 @@ interface MainContainerProps {
 
 const MainContainer = styled.div<MainContainerProps>`
     z-index: 20;
+    top: 0;
     width: 100%;
     height: 100%;
     position: fixed;
@@ -37,18 +37,16 @@ interface ModalProps {
     title: String
     subtitle: String
     buttonTitle: String
+    isVisible: boolean
+    onPress: () => void
 }
 
-function Modal({ title, subtitle, buttonTitle}: ModalProps) {
+function Modal({ title, subtitle, buttonTitle, isVisible, onPress }: ModalProps) {
 
-    const [visible, setVisible] = useState(true)
-
-    const onPress = () => {
-        setVisible(false)
-    }
+    console.log(isVisible)
 
     return (
-        <MainContainer visible={visible}>
+        <MainContainer visible={isVisible}>
             <Content>
                 <Title>{title}</Title>
                 <Subtitle>{subtitle}</Subtitle>

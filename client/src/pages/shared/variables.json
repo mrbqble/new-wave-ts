@@ -107,5 +107,23 @@
             "title": "Every $1 donated to our community would clean up 2400 liters of plastic trash",
             "text": "donate now"
         }
-    ]
+    ],
+    "registration": {
+        "courses": ["1", "2", "3", "4"],
+        "grades": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+        "degrees": [
+            "Associate",
+            "Bachelour's",
+            "Magister's",
+            "Doctoral"
+        ],
+        "affiliations": [
+            "School",
+            "Work",
+            "College",
+            "University",
+            "Unemployed"
+        ],
+        "gender": ["Male", "Female"]
+    }
 }

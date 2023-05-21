@@ -4,7 +4,7 @@ const Button = styled.a`
     color: white;
     display: flex;
     padding: 15px 20px;
-    font-size: 14px;
+    font-size: 16px;
     cursor: pointer;
     font-weight: 500;
     justify-content: center;

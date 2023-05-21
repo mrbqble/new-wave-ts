@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import back from '../../assets/back.png'
+import back from '../../assets/images/back.png'
 import Button from '../../shared/Button'
 
 const MainContainer = styled.div`
