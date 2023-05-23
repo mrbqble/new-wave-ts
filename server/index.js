@@ -11,20 +11,20 @@ const University = require('./models/University')
 const { ApolloServer } = require('apollo-server')
 
 mongoose.connect(config.get('dbUrl'))
-    .then(() => console.log('MongoDB connected'))
-    .catch((err) => console.log('Error ', err))
+  .then(() => console.log('MongoDB connected'))
+  .catch((err) => console.log('Error ', err))
 
 const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    context: {
-        bcrypt,
-        User,
-        Event,
-        Report,
-        Country,
-        University
-    }
+  typeDefs,
+  resolvers,
+  context: {
+    bcrypt,
+    User,
+    Event,
+    Report,
+    Country,
+    University
+  }
 })
 
 server.listen(4000).then(() => console.log('on port 4000'))

@@ -5,15 +5,15 @@ import Fourth from './blocks/Fourth'
 import Fifth from './blocks/Fifth'
 
 function Home() {
-    return (
-        <div>
-            <First/>
-            <Second/>
-            <Third/>
-            <Fourth/>
-            <Fifth/>
-        </div>
-    )
+  return (
+    <div>
+      <First/>
+      <Second/>
+      <Third/>
+      <Fourth/>
+      <Fifth/>
+    </div>
+  )
 }
 
 export default Home

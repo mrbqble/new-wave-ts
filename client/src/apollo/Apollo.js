@@ -1,32 +1,32 @@
 import { setContext } from '@apollo/client/link/context'
 import {
-    ApolloClient,
-    InMemoryCache,
-    ApolloProvider,
-    createHttpLink
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink
 } from '@apollo/client'
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:4000/'
+  uri: 'http://localhost:4000/'
 })
 
 const authLink = setContext((_, { headers }) => {
-    let asyncToken = localStorage.getItem('token')
-    return {
-        headers: {
-        ...headers,
-        authorization: asyncToken ? `Bearer ${asyncToken}` : '',
-        }
+  let asyncToken = localStorage.getItem('token')
+  return {
+    headers: {
+    ...headers,
+    authorization: asyncToken ? `Bearer ${asyncToken}` : '',
     }
+  }
 })
 
 const client = new ApolloClient({
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache()
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache()
 })
 
 function Apollo({children}) {
-    return <ApolloProvider client={client}>{children}</ApolloProvider>
+  return <ApolloProvider client={client}>{children}</ApolloProvider>
 }
 
 export default Apollo

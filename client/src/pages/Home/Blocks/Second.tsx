@@ -50,7 +50,7 @@ const Text = styled.p`
   margin-bottom: 20px;
 `
 
-const Number = styled.p`
+const Number = styled.div`
   font-size: 50px;
   color: #0013BC;
   font-weight: bolder;
@@ -87,7 +87,7 @@ function Second() {
           style={{
             zIndex: "-1",
             height: "19vh",
-            width: '9vw',
+            width: '11em',
             overflow: 'hidden'
           }}
           autoplay={{
@@ -103,7 +103,7 @@ function Second() {
           )}
         </Swiper>
       </Header>
-      <Title style={{marginTop: -60}}>Together.</Title>
+      <Title style={{marginTop: -59}}>Together.</Title>
       <Subtitle>How do we tackle with environmental issues?</Subtitle>
       <Content>
         {stats.map((item, index) =>

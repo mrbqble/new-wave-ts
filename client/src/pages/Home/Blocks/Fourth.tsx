@@ -3,7 +3,7 @@ import sea from '../../assets/images/3.png'
 import bottles from '../../assets/images/4.png'
 import beach from '../../assets/images/2.png'
 import data from '../../shared/variables.json'
-import Button from "../../shared/Button"
+import Button, { ButtonMode } from "../../shared/Button"
 
 const MainContainer = styled.div`
   padding: 50px 20px;
@@ -79,7 +79,7 @@ function Fourth() {
               <Title>{item.title}</Title>
               {index !== 2
                 ? <Text>{item.text}</Text>
-                : <Button onClick={() => {}}>{item.text}</Button>
+                : <Button onClick={() => {}} mode={ButtonMode.PRIMARY}>{item.text}</Button>
               }
             </CardInfo>
             {index % 2 !== 0 && <CardImage src={img[index]} index={index} height={350}/>}

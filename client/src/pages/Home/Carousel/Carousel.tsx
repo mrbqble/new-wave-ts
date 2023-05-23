@@ -1,7 +1,6 @@
 import 'swiper/css'
 import "swiper/css/effect-creative"
 import json from '../../shared/variables.json'
-import { gql, useQuery } from '@apollo/client'
 import styled from 'styled-components'
 import { useContext } from '../../../context/Context'
 import { EffectCreative, Autoplay } from "swiper"
@@ -108,32 +107,15 @@ interface EventProps {
   image: string
 }
 
-const GET_ALL_EVENTS = gql`
-  query {
-    allEvents {
-      date
-      text
-      title
-      image
-    }
-  }
-`
-
 function Carousel() {
-  const { loading, error, data } = useQuery(GET_ALL_EVENTS, {
-    fetchPolicy: 'network-only'
-  })
-
   let date: string[]
   let text: string[]
   const { months } = json
-  const { events, setEvents } = useContext()
-
-  if(data && !error && !loading) {
-    setEvents(data.allEvents)
-  }
-
+  const { events } = useContext()
+  
   const renderSLides = (item: EventProps, index: number) => {
+    date = item.date.split('-')
+    text = item.text.split('\n')
     return (
       <Container>
         <Event>
@@ -188,13 +170,10 @@ function Carousel() {
     >
       {events?.length
         ? events.map((item: EventProps, index: number) => 
-          <>
-            {date = item.date.split('-')}
-            {text = item.text.split('\n')}
-            <SwiperSlide key={index}>
-              {renderSLides(item, index)}
-            </SwiperSlide>
-          </>)
+          <SwiperSlide key={index}> 
+            {renderSLides(item, index)}
+          </SwiperSlide>
+        )
         : <Title>There are no upcoming events at the moment.</Title>
       }
     </Swiper>

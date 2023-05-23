@@ -1,7 +1,7 @@
 const {Schema, model} = require("mongoose");
 
 const University = new Schema({
-    name: String
+  name: String
 });
 
 module.exports = model('University', University);
