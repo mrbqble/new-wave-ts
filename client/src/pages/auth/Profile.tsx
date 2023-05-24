@@ -182,7 +182,7 @@ function Profile() {
               <Info>{user?.school}</Info>
               <Info>{user?.grade}</Info>
             </>}
-            {user?.affiliation && <Info>{user?.degree}</Info>}
+            {user?.affiliation === 'University' && <Info>{user?.degree}</Info>}
             <Info>{user?.email}</Info>
             <Info>{user?.phoneNumber}</Info>
             <Info>{user?.instagram}</Info>

@@ -10,7 +10,7 @@ const MainContainer = styled.div`
   gap: 10px;
 `
 
-const Title = styled.p`
+const Title = styled.div`
   font-size: 22px;
   font-weight: 600;
   display: flex;

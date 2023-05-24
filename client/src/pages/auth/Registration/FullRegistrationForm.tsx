@@ -50,7 +50,7 @@ const FieldBox = styled.div`
   flex-direction: column;
 `
 
-const FieldTitle = styled.p`
+const FieldTitle = styled.div`
   font-size: 22px;
   font-weight: 600;
   display: flex;
@@ -230,8 +230,15 @@ function FullRegistrationForm() {
     setUser({...user, gender: value})
   }
 
+  
   const setAffiliation = (value: string) => {
-    setUser({...user, affiliation: value})
+    if (value === 'School') {
+      setUser({...user, affiliation: value, school: schools.length ? schools[0] : '', grade: grades[0]})
+    } else if (value === 'College') {
+      setUser({...user, affiliation: value, school: colleges.length ? colleges[0] : '', grade: courses[0]})
+    } else {
+      setUser({...user, affiliation: value, school: universities.length ? universities[0] : '', grade: courses[0]})
+    }
   }
 
   const setSchool = (value: string) => {
@@ -269,70 +276,64 @@ function FullRegistrationForm() {
   }, [loading, error, data])
 
   useEffect(() => {
-    const tmpCountry = education?.find(item => item?.name === user.country)
+    const tmpCountry = education?.find(item => item.name === user?.country)
     const tmpCities = tmpCountry?.cities
     const tmpColleges = tmpCountry?.colleges
-    tmpCities && setCities(tmpCities)
-    tmpColleges && setColleges(tmpColleges)
-  }, [user.country, education])
+    setCities(tmpCities ? tmpCities : [])
+    setColleges(tmpColleges ? tmpColleges : [])
+  }, [user?.country, education])
   
   useEffect(() => {
-    cities && setCity(edit && cities?.find(item => item?.name === user.city)
-      ? user.city
-        ? user.city
-        : ''
-      : cities
-        ? cities[0]?.name
-        : ''
-    )
+    if (cities?.length) {
+      if (!cities.find(item => item?.name === user?.city)) {
+        setCity(cities[0].name)
+      }
+    }
   }, [cities])
 
   useEffect(() => {
-    const tmpSchools = cities?.find(item => item?.name === user.city)?.schools
-    tmpSchools && setSchools(tmpSchools)
-  }, [user.city, cities])
+    const tmpSchools = cities?.find(item => item?.name === user?.city)?.schools
+    setSchools(tmpSchools?.length ? tmpSchools : [])
+  }, [user?.city, cities])
 
   useEffect(() => {
-    if (user.affiliation === 'School') {
-      schools && setSchool(edit && schools?.find(item => item === user.school)
-        ? user.school
-          ? user.school
-          : ''
-        : schools
-          ? schools[0]
-          : ''
-      )
-      setTimeout(() => setGrade(grades[0]), 1000)
-    } else if (user.affiliation === 'College') {
-      colleges && setSchool(edit && colleges?.find(item => item === user.school)
-        ? user.school
-          ? user.school
-          : ''
-        : colleges
-          ? colleges[0]
-          : ''
-      )
-    } else {
-      universities && setSchool(edit && universities?.find(item => item === user.school)
-        ? user.school
-          ? user.school
-          : ''
-        : universities
-          ? universities[0]
-          : ''
-      )
-      setTimeout(() => setGrade(courses[0]), 1000)
+    if (user?.affiliation === 'School') {
+      if (schools?.length) {
+        if (!schools.find(item => item === user?.school)) {
+          setSchool(schools[0])
+        }
+      }
     }
-  }, [schools, user.affiliation])
+  }, [schools])
+
+  useEffect(() => {
+    if (user?.affiliation === 'College') {
+      if (colleges?.length) {
+        if (!colleges.find(item => item === user?.school)) {
+          setSchool(colleges[0])
+        }
+      }
+    }
+  }, [colleges])
+
+  useEffect(() => {
+    if (user?.affiliation === 'University') {
+      if (universities?.length) {
+        if (!universities.find(item => item === user?.school)) {
+          setSchool(universities[0])
+        }
+      }
+    }
+  }, [universities])
 
   const renderAffiliation = () => {
-    const schoolData = user.affiliation === 'School'
+    const schoolData = user?.affiliation === 'School'
       ? schools
-      : user.affiliation === 'College'
+      : user?.affiliation === 'College'
         ? colleges
         : universities
 
-    if(user.affiliation !== 'Work' && user.affiliation !== 'Unemployed')
+    if(user?.affiliation !== 'Work' && user?.affiliation !== 'Unemployed')
       return <>
         <Select
           notListed

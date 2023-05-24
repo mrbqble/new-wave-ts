@@ -6,7 +6,7 @@ const MainContainer = styled.div`
   gap: 10px;
 `
 
-const Title = styled.p`
+const Title = styled.div`
   font-size: 22px;
   font-weight: 600;
   display: flex;
@@ -91,7 +91,6 @@ function Select({
         {notListed && !data?.find(item => item === value) &&
           <Field
             placeholder={`Enter your ${title?.toLowerCase()}`}
-            autoFocus
             onChange={(e) => onChange(e.target.value)}
             value={value}
           />
