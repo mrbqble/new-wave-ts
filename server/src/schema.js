@@ -63,6 +63,7 @@ const typeDefs = gql`
   }
 
   type CodeOutput {
+    year: Int
     type: String
     country: String
     fullName: String
@@ -80,19 +81,19 @@ const typeDefs = gql`
     image: String
     format: String
     status: String
+    country: String
     endTime: String
-    mapLink: String
     addInfo: String
-    duration: String
+    duration: Int
     location: String
     startTime: String
     attended: [String]
     partners: [String]
-    organizators: [String]
+    locationLink: String
+    coordinators: [String]
   }
 
   input EventInput {
-    number: Int
     places: Int
     date: String
     text: String
@@ -101,15 +102,16 @@ const typeDefs = gql`
     title: String
     image: String
     format: String
+    country: String
     endTime: String
-    mapLink: String
     addInfo: String
-    duration: String
+    duration: Int
     location: String
     startTime: String
     partners: [String]
+    locationLink: String
     status: String = "New"
-    organizators: [String]
+    coordinators: [String]
     attended: [String] = []
   }
 
@@ -177,9 +179,14 @@ const typeDefs = gql`
     countryName: String
   }
 
+  type Coordinator {
+    _id: ID
+    name: String
+  }
+
   type Query {
     users: [User]
-    coordinators: [User]
+    coordinators: [Coordinator]
     profile(input: String): User
     checkEmail(input: String): Boolean
     checkCode(input: String): CodeOutput

@@ -15,8 +15,8 @@ const uploadCertificate = async (file, code) => {
   })
 }
 
-const uploadImage = async (file) => {
-  const fileRef = ref(storage, `users/${v4()}`)
+const uploadImage = async (file, path) => {
+  const fileRef = ref(storage, `${path}/${v4()}`)
   return await uploadString(fileRef, file, 'base64').then(async (res) => {
     return await getDownloadURL(res.ref).then(async (url) => {
       return url
@@ -61,7 +61,7 @@ const Mutation = {
   profileImage: async (_, { input }, ctx) => {
     const { email, base64 } = input
     const user = await ctx.User.findOne({email})
-    user.photo = await uploadImage(base64)
+    user.photo = await uploadImage(base64, 'users')
     await user.save()
     return "User image was changed"
   },
@@ -108,6 +108,9 @@ const Mutation = {
     const event = new ctx.Event(input)
     const events = await ctx.Event.find()
     event.number = events.length + 1
+    if (event.image.length) {
+      event.image = await uploadImage(event.image.split(',')[1], 'events')
+    }
     await event.save()
     return 'Event was created'
   },

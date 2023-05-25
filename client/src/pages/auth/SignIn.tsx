@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import Link from '../shared/Link'
 import Input from '../shared/Input'
-import Button, { ButtonMode } from '../shared/Button'
-import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom'
-import { gql, useQuery } from '@apollo/client'
 import Modal from '../shared/Modal'
+import styled from 'styled-components'
+import { useQuery } from '@apollo/client'
+import { LOG_IN } from '../../apollo/actions'
+import { useNavigate } from 'react-router-dom'
 import { useContext } from '../../context/Context'
+import Button, { ButtonMode } from '../shared/Button'
 
 const MainContainer = styled.div`
   gap: 20px;
@@ -42,15 +43,6 @@ const Navigate = styled(TempA)`
 const Forgot = styled(TempA)`
   align-self: end;
   margin-top: -30px;
-`
-
-const LOG_IN = gql`
-  query($logInInput: LogInInput!) {
-    logIn(input: $logInInput) {
-      token
-      success
-    }
-  }
 `
 
 function SignIn() {

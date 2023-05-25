@@ -13,7 +13,7 @@
         },
         {
           "title": "See our financials",
-          "href": "/documents"
+          "href": "/financials"
         },
         {
           "title": "Verify documents",
@@ -51,7 +51,7 @@
         },
         {
           "title": "Become a volunteer",
-          "href": "/reg"
+          "href": "/signup"
         }
       ]
     }
@@ -108,7 +108,7 @@
       "text": "donate now"
     }
   ],
-  "registration": {
+  "signUp": {
     "courses": ["1", "2", "3", "4"],
     "grades": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
     "degrees": [
@@ -125,5 +125,29 @@
       "Unemployed"
     ],
     "gender": ["Male", "Female"]
+  },
+  "financials": {
+    "years": [
+      {
+        "year": 2022,
+        "report": "",
+        "usage": ""
+      },
+      {
+        "year": 2021,
+        "report": "",
+        "usage": ""
+      },
+      {
+        "year": 2020,
+        "report": "",
+        "usage": ""
+      }
+    ]
+  },
+  "newEvent": {
+    "formats": ["Offline", "Online"],
+    "types": ["Cleaning day", "Tree planting", "Shelter visiting"],
+    "partners": ["Taza alem"]
   }
 }

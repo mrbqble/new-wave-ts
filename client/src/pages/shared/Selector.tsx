@@ -55,7 +55,7 @@ interface Props {
   onChange: (value: string) => void
 }
 
-function Select({
+function Selector({
   data,
   title,
   value,
@@ -70,7 +70,7 @@ function Select({
   return (
     <MainContainer>
       <Title>
-        {title}
+        {title}:
         <Must>*</Must>
       </Title>
       <div>
@@ -100,4 +100,4 @@ function Select({
   )
 }
 
-export default Select
+export default Selector

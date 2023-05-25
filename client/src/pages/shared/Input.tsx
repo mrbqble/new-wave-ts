@@ -48,18 +48,18 @@ const Must = styled(Title)`
 `
 
 interface Props {
-  type: string
+  type?: string
   title: string
-  value: string | undefined
+  value: string | number | undefined
   placeholder?: string
   onChange: (value: string) => void
-  onSelect?: () => void
+  onSelect ?: () => void
   onBlur?: () => boolean
   must?: boolean
 }
 
 function Input({
-  type,
+  type = 'text',
   title,
   value,
   onChange,
@@ -106,7 +106,7 @@ function Input({
   }
 
   const isValidEmail = () => {
-    return validator.isEmail(value ? value : '')
+    return validator.isEmail(value ? value.toString() : '')
   }
 
   const onBlurField = () => {
@@ -120,7 +120,7 @@ function Input({
         setMessage('')
       }
     }
-    if (!value || (value && value.length < 2)) {
+    if ((!value || (value && value.toString().length < 2)) && must) {
       setMessage('Mandatory field!')
     }
     setTimeOutID(setTimeout(() => setMessage(''), 5000))
@@ -129,7 +129,7 @@ function Input({
   return (
     <MainContainer>
       <Title>
-        {title}
+        {title}:
         {must && <Must>*</Must>}
       </Title>
       <FieldBox>

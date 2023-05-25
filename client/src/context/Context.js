@@ -1,59 +1,8 @@
-import { gql, useLazyQuery } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import React, { createContext , useState, useEffect} from 'react'
+import { GET_EVENTS, GET_USER } from '../apollo/actions'
 
 const context = createContext()
-
-const GET_USER = gql`
-  query($input: String) {
-    profile(input: $input) {
-      _id
-      code
-      city
-      type
-      photo
-      grade
-      degree
-      gender
-      school
-      email
-      country
-      telegram
-      firstName
-      instagram
-      secondName
-      dateOfBirth
-      affiliation
-      phoneNumber
-      volunteeringHours
-    }
-  }
-`
-
-const GET_EVENTS = gql`
-  query {
-    allEvents {
-      number
-      places
-      date
-      text
-      type
-      city
-      title
-      image
-      format
-      status
-      endTime
-      mapLink
-      addInfo
-      duration
-      location
-      startTime
-      attended
-      partners
-      organizators
-    }
-  }
-`
 
 function Context({ children }) {
 

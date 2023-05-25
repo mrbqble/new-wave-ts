@@ -1,11 +1,12 @@
+import { useEffect } from 'react'
 import styled from 'styled-components'
+import { useMutation } from '@apollo/client'
+import { useNavigate } from 'react-router-dom'
 import { useContext } from '../../context/Context'
+import CameraIcon from '../assets/icons/CameraIcon'
 import Button, { ButtonMode } from '../shared/Button'
 import ProfileIcon from '../assets/icons/ProfileIcon'
-import { useNavigate } from 'react-router-dom'
-import CameraIcon from '../assets/icons/CameraIcon'
-import { gql, useMutation } from '@apollo/client'
-import { useEffect } from 'react'
+import { GET_CERTIFICATE, NEW_PROFILE_IMAGE } from '../../apollo/actions'
 
 const MainContainer = styled.div`
   padding: 50px 20px;
@@ -92,18 +93,6 @@ const EditText = styled.p`
   font-size: 18px;
 `
 
-const GET_CERTIFICATE = gql`
-  mutation($input: String) {
-    getCertificate(input: $input)
-  }
-`
-
-const NEW_PROFILE_IMAGE = gql`
-  mutation($input: ImageInput) {
-    profileImage(input: $input)
-  }
-`
-
 function Profile() {
 
   const navigate = useNavigate()
@@ -142,6 +131,10 @@ function Profile() {
       variables: { input: user?.email }
     }).then((res) => window.open(res.data.getCertificate, '_blank'))
     .catch(() => alert('apollo server error'))
+  }
+
+  const createEventPress = () => {
+    navigate('/newevent')
   }
 
   return (
@@ -219,8 +212,11 @@ function Profile() {
             onClick={editProfile}
           >edit my profile</Button>
           {user?.type === 'Coordinator' && <>
+            <Button
+              mode={ButtonMode.DEFAULT}
+              onClick={createEventPress}
+            >create event</Button>
             <Button mode={ButtonMode.DEFAULT}>create report</Button>
-            <Button mode={ButtonMode.DEFAULT}>create event</Button>
           </>}
         </Actions>
       </Content>

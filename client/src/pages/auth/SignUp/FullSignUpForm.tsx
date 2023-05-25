@@ -1,16 +1,26 @@
 import Input from '../../shared/Input'
-import Select from '../../shared/Select'
 import styled from 'styled-components'
+import Modal from '../../shared/Modal'
+import Selector from '../../shared/Selector'
 import 'react-phone-input-2/lib/style.css'
-import json from '../../shared/variables.json'
 import { useEffect, useState } from 'react'
 import PhoneInput from 'react-phone-input-2'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { gql, useMutation, useQuery } from '@apollo/client'
+import json from '../../shared/variables.json'
 import countryList from 'react-select-country-list'
-import Button, { ButtonMode } from '../../shared/Button'
-import Modal from '../../shared/Modal'
 import { useContext } from '../../../context/Context'
+import { useMutation, useQuery } from '@apollo/client'
+import Button, { ButtonMode } from '../../shared/Button'
+import { useLocation, useNavigate } from 'react-router-dom'
+import {
+  GET_EDUCATION,
+  NEW_CITY,
+  NEW_COLLEGE,
+  NEW_COUNTRY,
+  NEW_SCHOOL,
+  NEW_UNIVERSITY,
+  NEW_USER,
+  EDIT_USER
+} from '../../../apollo/actions'
 
 const MainContainer = styled.div`
   gap: 30px;
@@ -99,63 +109,7 @@ interface Country {
   colleges: string[]
 }
 
-const GET_EDUCATION = gql`
-  query {
-    allCountries {
-      name
-      cities {
-        name
-        schools
-      }
-      colleges
-    }
-    allUniversities
-  }
-`
-
-const NEW_USER = gql`
-  mutation($input: UserInput) {
-    newUser(input: $input)
-  }
-`
-
-const EDIT_USER = gql`
-  mutation($input: UserInput) {
-    editUser(input: $input)
-  }
-`
-
-const NEW_UNIVERSITY = gql`
-  mutation($input: String) {
-    newUniversity(input: $input)
-  }
-`
-
-const NEW_COUNTRY = gql`
-  mutation($input: String) {
-    newCountry(input: $input)
-  }
-`
-
-const NEW_CITY = gql`
-  mutation($input: CityInput) {
-    newCountry(input: $input)
-  }
-`
-
-const NEW_SCHOOL = gql`
-  mutation($input: SchoolInput) {
-    newCountry(input: $input)
-  }
-`
-
-const NEW_COLLEGE = gql`
-  mutation($input: CollegeInput) {
-    newCountry(input: $input)
-  }
-`
-
-function FullRegistrationForm() {
+function FullSignUpForm() {
   const navigate = useNavigate()
   const currentUser = useContext().user
   const [newUser] = useMutation(NEW_USER)
@@ -174,7 +128,7 @@ function FullRegistrationForm() {
   const [education, setEducation] = useState<Country[]>([])
   const { loading, error, data } = useQuery(GET_EDUCATION)
   const [universities, setUniversities] = useState<string[]>([])
-  const { affiliations, courses, degrees, grades, gender } = json.registration
+  const { affiliations, courses, degrees, grades, gender } = json.signUp
   const [user, setUser] = useState<User>(edit
     ? currentUser
     : {
@@ -230,7 +184,6 @@ function FullRegistrationForm() {
     setUser({...user, gender: value})
   }
 
-  
   const setAffiliation = (value: string) => {
     if (value === 'School') {
       setUser({...user, affiliation: value, school: schools.length ? schools[0] : '', grade: grades[0]})
@@ -335,21 +288,21 @@ function FullRegistrationForm() {
 
     if(user?.affiliation !== 'Work' && user?.affiliation !== 'Unemployed')
       return <>
-        <Select
+        <Selector
           notListed
           data={schoolData}
           value={user.school}
           onChange={setSchool}
           title={user.affiliation}
         />
-        <Select
+        <Selector
           title={user.affiliation === 'School' ? 'Grade' : 'Course'}
           value={user.grade}
           data={user.affiliation === 'School' ? grades : courses}
           onChange={setGrade}
         />
         {user.affiliation === 'University' &&
-          <Select
+          <Selector
             title='Degree'
             value={user.degree}
             data={degrees}
@@ -436,14 +389,12 @@ function FullRegistrationForm() {
       <Form>
         <Fields>
           <Input
-            type='text'
             title='First name'
             value={user.firstName}
             onChange={setFirstName}
             placeholder='Enter your first name'
           />
           <Input
-            type='text'
             title='Second name'
             value={user.secondName}
             onChange={setSecondName}
@@ -467,26 +418,26 @@ function FullRegistrationForm() {
               onChange={p => setPhoneNumber(p)}
             />
           </FieldBox>
-          <Select
+          <Selector
             title='Country'
             data={countries}
             value={user.country}
             onChange={setCountry}
           />
-          <Select
+          <Selector
             notListed
             title='City'
             value={user.city}
             onChange={setCity}
             data={cities?.map((item) => {return item?.name})}
           />
-          <Select
+          <Selector
             title='Gender'
             data={gender}
             value={user.gender}
             onChange={setGender}
           />
-          <Select
+          <Selector
             title='Affiliation'
             data={affiliations}
             value={user.affiliation}
@@ -494,13 +445,11 @@ function FullRegistrationForm() {
           />
           {renderAffiliation()}
           <Input
-            type='text'
             title='Instagram username'
             value={user.instagram}
             onChange={setInstagram}
           />
           <Input
-            type='text'
             title='Telegram username'
             value={user.telegram}
             onChange={setTelegram}
@@ -518,4 +467,4 @@ function FullRegistrationForm() {
   )
 }
 
-export default FullRegistrationForm
+export default FullSignUpForm

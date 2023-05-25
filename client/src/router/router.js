@@ -1,12 +1,15 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Footer from '../pages/shared/Footer'
-import styled from 'styled-components'
-import Navbar from '../pages/shared/Navbar'
 import Home from '../pages/Home/Home'
+import styled from 'styled-components'
 import SignIn from '../pages/auth/SignIn'
-import SignUp from '../pages/auth/Registration/SignUp'
-import FullRegistrationForm from '../pages/auth/Registration/FullRegistrationForm'
+import Footer from '../pages/shared/Footer'
+import Navbar from '../pages/shared/Navbar'
 import Profile from '../pages/auth/Profile'
+import SignUp from '../pages/auth/SignUp/SignUp'
+import Financials from '../pages/other/Financials'
+import CodeVerification from '../pages/other/CodeVerification'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import FullSignUpForm from '../pages/auth/SignUp/FullSignUpForm'
+import NewEvent from '../pages/event/NewEvent'
 
 const Divider = styled.hr`
   height: 2px;
@@ -31,7 +34,10 @@ function Router() {
           <Route path='/signin' element={<SignIn/>}/>
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/profile' element={<Profile/>}/>
-          <Route path='/fullregistrationform' element={<FullRegistrationForm/>}/>
+          <Route path='/newevent' element={<NewEvent/>}/>
+          <Route path='/financials' element={<Financials/>}/>
+          <Route path='/verify' element={<CodeVerification/>}/>
+          <Route path='/fullsignupform' element={<FullSignUpForm/>}/>
         </Routes>
       </MainContainer>
       <Divider/>

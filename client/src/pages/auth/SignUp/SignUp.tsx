@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import Link from '../../shared/Link'
 import styled from 'styled-components'
 import Input from '../../shared/Input'
-import Button, { ButtonMode } from '../../shared/Button'
-import Link from '../../shared/Link'
+import { useQuery } from '@apollo/client'
 import { useNavigate } from 'react-router-dom'
-import { gql, useQuery } from '@apollo/client'
+import { CHECK_EMAIL } from '../../../apollo/actions'
+import Button, { ButtonMode } from '../../shared/Button'
 
 const MainContainer = styled.div`
   padding: 50px 20px;
@@ -47,12 +48,6 @@ interface CheckProps {
 const Check = styled.p<CheckProps>`
 font-size: 16px;
 color: ${(props) => props.check ? 'green' : 'red'};
-`
-
-const CHECK_EMAIL = gql`
-query($input: String) {
-  checkEmail(input: $input)
-}
 `
 
 function SignIn() {

@@ -8,7 +8,13 @@ const Query = {
   },
 
   coordinators: async (_, __, ctx) => {
-    return await ctx.User.find({type: "Coordinator"})
+    const coordinators =  await ctx.User.find({type: "Coordinator"})
+    return coordinators.map(user => {
+      return {
+        _id: user._id,
+        name: user.firstName + ' ' + user.secondName
+      }
+    })
   },
 
   logIn: async (_, { input }, ctx) => {
@@ -44,12 +50,15 @@ const Query = {
   },
 
   checkCode: async (_, { input }, ctx) => {
-    const user = await ctx.User.find({code: input})
-    return {
-      fullName: user.firstName + ' ' + user.secondName,
-      country: user.country,
-      volunteeringHours: user.volunteeringHours,
-      type: user.type
+    const user = await ctx.User.findOne({code: input})
+    if (user) {
+      return {
+        type: user.type,
+        country: user.country,
+        year: user.code.split('-')[1],
+        volunteeringHours: user.volunteeringHours,
+        fullName: user.firstName + ' ' + user.secondName
+      }
     }
   },
 
