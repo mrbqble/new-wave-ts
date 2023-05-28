@@ -4,7 +4,14 @@ const jwt_decode = require('jwt-decode')
 
 const Query = {
   users: async (_, __, ctx) => {
-    return await ctx.User.find()
+    const users = await ctx.User.find()
+    return users.map((item) => {
+      return {
+        _id: item._id,
+        name: item.firstName + ' ' + item.secondName,
+        type: item.type
+      }
+    })
   },
 
   coordinators: async (_, __, ctx) => {

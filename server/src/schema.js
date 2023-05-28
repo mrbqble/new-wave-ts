@@ -58,8 +58,8 @@ const typeDefs = gql`
   }
 
   input StatusInput {
+    _id: ID
     type: String
-    email: String
   }
 
   type CodeOutput {
@@ -184,8 +184,14 @@ const typeDefs = gql`
     name: String
   }
 
+  type Volunteer {
+    _id: ID
+    name: String
+    type: String
+  }
+
   type Query {
-    users: [User]
+    users: [Volunteer]
     coordinators: [Coordinator]
     profile(input: String): User
     checkEmail(input: String): Boolean

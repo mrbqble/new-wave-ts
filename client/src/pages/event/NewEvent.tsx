@@ -335,7 +335,7 @@ function NewEvent() {
                 onChange={setEndTime}
             />
             <Duration>
-              <FieldTitle>Duration</FieldTitle>
+              <FieldTitle>Duration:</FieldTitle>
                 <DurationText>
                   {Math.floor(event.duration / 60) > 0 && Math.floor(event.duration / 60) + ' hours'} {event.duration ? event.duration % 60 : 0} minutes
                 </DurationText>

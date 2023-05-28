@@ -17,15 +17,19 @@ const Must = styled(Title)`
   color: red;
 `
 
-const Selection = styled.select`
-  width: 402px;
+interface SelectProps {
+  width?: number
+}
+
+const Selection = styled.select<SelectProps>`
+  width: ${({ width }) => width ? width : '402'}px;
   font-size: 18px;
   padding: 15px 20px;
   border-radius: 0px;
   border: 1px solid grey;
   -webkit-appearance: none;
   background-image: url('data:image/svg+xml,<svg width="24" height="15" viewBox="0 0 24 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 1.5L11.8795 11.5L2 1.5" stroke="%230013BC" stroke-width="4"/></svg>');
-  background-position: bottom 45% left 95%;
+  background-position: bottom 45% right 15px;
   background-size: 16px 10px;
   background-repeat: no-repeat;
 
@@ -48,6 +52,7 @@ const Field = styled.input`
 `
 
 interface Props {
+  width?: number
   title: string
   value: string
   data: string[]
@@ -60,7 +65,8 @@ function Selector({
   title,
   value,
   onChange,
-  notListed
+  notListed,
+  width
 }: Props) {
 
   const renderItem = (item: string) => {
@@ -69,12 +75,13 @@ function Selector({
 
   return (
     <MainContainer>
-      <Title>
+      {title.length > 0 && <Title>
         {title}:
         <Must>*</Must>
-      </Title>
+      </Title>}
       <div>
         <Selection
+          width={width}
           value={value}
           onChange={(e) => onChange(e.target.value)}
         >

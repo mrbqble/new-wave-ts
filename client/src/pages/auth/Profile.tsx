@@ -137,6 +137,10 @@ function Profile() {
     navigate('/newevent')
   }
 
+  const createReportPress = () => {
+    navigate('/newreport', { state: { type: 'Collections' } })
+  }
+
   return (
     <MainContainer>
       <Title>Profile</Title>
@@ -216,7 +220,10 @@ function Profile() {
               mode={ButtonMode.DEFAULT}
               onClick={createEventPress}
             >create event</Button>
-            <Button mode={ButtonMode.DEFAULT}>create report</Button>
+            <Button
+              mode={ButtonMode.DEFAULT}
+              onClick={createReportPress}
+            >create report</Button>
           </>}
         </Actions>
       </Content>

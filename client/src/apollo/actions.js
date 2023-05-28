@@ -40,14 +40,14 @@ export const GET_EVENTS = gql`
       format
       status
       endTime
-      mapLink
+      locationLink
       addInfo
       duration
       location
       startTime
       attended
       partners
-      organizators
+      coordinators
     }
   }
 `
@@ -170,5 +170,21 @@ export const GET_COORDINATORS = gql`
 export const NEW_EVENT = gql`
   mutation($input: EventInput) {
     newEvent(input: $input)
+  }
+`
+
+export const GET_VOLUNTEERS = gql`
+  query {
+    users {
+      _id
+      name
+      type
+    }
+  }
+`
+
+export const CHANGE_STATUS = gql`
+  mutation ($input: [StatusInput]) {
+    changeStatus(input: $input)
   }
 `

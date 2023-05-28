@@ -149,5 +149,6 @@
     "formats": ["Offline", "Online"],
     "types": ["Cleaning day", "Tree planting", "Shelter visiting"],
     "partners": ["Taza alem"]
-  }
+  },
+  "statuses": ["Coordinator", "Volunteer", "Administrator"]
 }

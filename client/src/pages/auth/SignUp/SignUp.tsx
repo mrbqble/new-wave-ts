@@ -93,7 +93,7 @@ function SignIn() {
   }
 
   const onPressButton = () => {
-    checkPassword() && !data.checkEmail && navigate('/fullregistrationform', {state: {email, password, edit: false}})
+    checkPassword() && !data.checkEmail && navigate('/fullsignupform', {state: {email, password, edit: false}})
   }
 
   const OnBlur = () => {

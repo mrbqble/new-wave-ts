@@ -96,8 +96,8 @@ const Mutation = {
 
   changeStatus: async (_, { input }, ctx) => {
     input.map(async (item) => {
-      const { email, type } = item
-      const user = await ctx.User.find({email})
+      const { _id, type } = item
+      const user = await ctx.User.findOne({_id})
       user.type = type
       await user.save()
     })

@@ -128,10 +128,10 @@ function Input({
 
   return (
     <MainContainer>
-      <Title>
+      {title.length > 0 && <Title>
         {title}:
         {must && <Must>*</Must>}
-      </Title>
+      </Title>}
       <FieldBox>
         <Field
           type={valueType}

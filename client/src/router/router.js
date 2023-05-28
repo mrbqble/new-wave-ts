@@ -10,6 +10,8 @@ import CodeVerification from '../pages/other/CodeVerification'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import FullSignUpForm from '../pages/auth/SignUp/FullSignUpForm'
 import NewEvent from '../pages/event/NewEvent'
+import NewReport from '../pages/report/NewReport'
+import StatusChange from '../pages/admin/StatusChange'
 
 const Divider = styled.hr`
   height: 2px;
@@ -35,8 +37,10 @@ function Router() {
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/newevent' element={<NewEvent/>}/>
+          <Route path='/newreport' element={<NewReport/>}/>
           <Route path='/financials' element={<Financials/>}/>
           <Route path='/verify' element={<CodeVerification/>}/>
+          <Route path='/statuschange' element={<StatusChange/>}/>
           <Route path='/fullsignupform' element={<FullSignUpForm/>}/>
         </Routes>
       </MainContainer>
