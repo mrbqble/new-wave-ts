@@ -10,29 +10,29 @@ import { useContext } from '../../context/Context'
 import Button, { ButtonMode } from '../shared/Button'
 
 const MainContainer = styled.div`
-  gap: 20px;
+  gap: 2rem;
   display: flex;
-  padding: 50px 20px;
+  padding: 5rem 2rem;
   align-items: center;
   flex-direction: column;
 `
 
 const Title = styled.p`
-  font-size: 50px;
+  font-size: 5rem;
   font-weight: 500;
 `
 
 const Form = styled.div`
-  gap: 30px;
+  gap: 3rem;
   display: flex;
-  padding: 30px 40px;
+  padding: 3rem 4rem;
   flex-direction: column;
   background-color: rgba(208, 213, 255, 0.5);
 `
 
 const TempA = styled(Link)`
   color: grey;
-  font-size: 16px;
+  font-size: 1.6rem;
   text-transform: none;
 `
 
@@ -42,7 +42,7 @@ const Navigate = styled(TempA)`
 
 const Forgot = styled(TempA)`
   align-self: end;
-  margin-top: -30px;
+  margin-top: -3rem;
 `
 
 function SignIn() {

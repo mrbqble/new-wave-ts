@@ -6,25 +6,25 @@ import data from '../../shared/variables.json'
 import Button, { ButtonMode } from "../../shared/Button"
 
 const MainContainer = styled.div`
-  padding: 50px 20px;
+  padding: 5rem 2rem;
   text-align: center;
 `
 
 const Header = styled.p`
-  font-size: 50px;
+  font-size: 5rem;
   font-weight: bold;
 `
 
 const Subheader = styled.p`
-  font-size: 30px;
-  margin: 40px 0px;
+  font-size: 3rem;
+  margin: 4rem 0rem;
   font-weight: 600;
 `
 
 const Title = styled.p`
-  font-size: 24px;
+  font-size: 2.4rem;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 `
 
 const Facts = styled.div`
@@ -37,7 +37,7 @@ const Facts = styled.div`
 const Card = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-top: 20px;
+  margin-top: 2rem;
   align-items: center;
 `
 
@@ -47,7 +47,7 @@ const CardInfo = styled.div`
 `
 
 const Text = styled.p`
-  font-size: 22px;
+  font-size: 2.2rem;
 `
 
 interface ImageProps {
@@ -55,7 +55,7 @@ interface ImageProps {
 }
 
 const CardImage = styled.img<ImageProps>`
-  margin-${(props) => props.index % 2 === 0 ? 'right' : 'left'}: 40px;
+  margin-${(props) => props.index % 2 === 0 ? 'right' : 'left'}: 4rem;
 `
 
 function Fourth() {

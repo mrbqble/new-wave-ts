@@ -14,16 +14,16 @@ const MainContainer = styled.div`
   align-items: center;
   background-color: white;
   justify-content: space-evenly;
-  border-bottom: 2px solid #0013BC;
+  border-bottom: .2rem solid #0013BC;
 `
 
 const Logo = styled(Link)`
-  font-size: 24px;
+  font-size: 2.4rem;
   font-weight: 700;
 `
 
 const LinksContainer = styled.div`
-  gap: 50px;
+  gap: 5rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;

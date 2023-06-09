@@ -7,20 +7,22 @@ export enum ButtonMode {
 }
 
 interface ButtonProps {
-  mode?: ButtonMode
+  mode?: ButtonMode,
+  isUppercase?: boolean,
+  padding?: string
 }
 
 const Button = styled.a<ButtonProps>`
   color: white;
   display: flex;
-  font-size: 16px;
+  font-size: 1.6rem;
   cursor: pointer;
   font-weight: 500;
-  padding: 14px 19px;
+  padding: ${(props) => props.padding || "1.4rem 1.9rem"};
   text-decoration: none;
   justify-content: center;
-  border: 1px solid #0013BC;
-  text-transform: uppercase;
+  border: .1rem solid #0013BC;
+  text-transform: ${(props) => props.isUppercase!==undefined && props.isUppercase===true ? 'uppercase' : 'none'};
   background-color: ${(props) => 
     props.mode !== ButtonMode.PRIMARY
       ? 'white'

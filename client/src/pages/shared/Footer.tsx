@@ -8,7 +8,7 @@ import Link from './Link';
 const MainContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 40px 0px 40px 0px;
+  margin: 4rem 0rem 4rem 0rem;
   justify-content: space-evenly;
 `
 
@@ -17,20 +17,20 @@ const List = styled.ul`
 `
 
 const Li = styled.li`
-  margin-top: 12px;
-  font-size: 18px;
+  margin-top: 1.2rem;
+  font-size: 1.8rem;
   display: flex;
-  gap: 10px;
+  gap: 1rem;
 `
 
 const Title = styled.p`
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: bold;
 `
 
 const Navigate = styled(Link)`
   text-transform: none;
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: 400;
 `
 

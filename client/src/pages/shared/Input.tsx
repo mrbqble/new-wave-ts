@@ -7,28 +7,28 @@ import ShowIcon from '../assets/icons/ShowIcon'
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
 `
 
 const Title = styled.div`
-  font-size: 22px;
+  font-size: 2.2rem;
   font-weight: 600;
   display: flex;
-  gap: 10px;
+  gap: 1rem;
 `
 
 const Field = styled.input`
   width: 20em;
-  font-size: 18px;
-  padding: 15px 20px;
-  border-radius: 0px;
-  border: 1px solid grey;
+  font-size: 1.8rem;
+  padding: 1.5rem 2rem;
+  border-radius: 0rem;
+  border: .1rem solid grey;
   cursor: text;
 `
 
 const Message = styled.p`
   color: red;
-  font-size: 16px;
+  font-size: .1.6rem;
   font-weight: 400;
 `
 
@@ -39,8 +39,8 @@ const FieldBox = styled.div`
 
 const ShowHideIcons = styled.div`
   display: flex;
-  margin-bottom: 20px;
-  margin-left: -40px;
+  margin-bottom: 2rem;
+  margin-left: -4rem;
 `
 
 const Must = styled(Title)`
