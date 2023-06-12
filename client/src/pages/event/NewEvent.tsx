@@ -11,6 +11,7 @@ import { useLazyQuery, useMutation } from "@apollo/client"
 import { GET_COORDINATORS, GET_COUNTRIES, NEW_EVENT } from "../../apollo/actions"
 import MultiSelect, { Option } from "../shared/MultiSelect"
 import CreatableMultiSelect from "../shared/CreatableMultiSelect"
+import { useContext } from "../../context/Context"
 
 const MainContainer = styled.div`
   gap: 40px;
@@ -147,6 +148,7 @@ interface EventType {
 
 function NewEvent() {
 
+  const { compressImage } = useContext()
   const [createEvent] = useMutation(NEW_EVENT)
   const { types, formats, partners } = data.newEvent
   const [cities, setCities] = useState<string[]>([])
@@ -226,11 +228,12 @@ function NewEvent() {
     setEvent({...event, endTime: value})
   }
 
-  const uploadImage = (files: FileList | null ) => {
+  const uploadImage = async (files: FileList | null ) => {
     if (files) {
       const newImage = files[0]
+      const compressedFile = await compressImage(newImage)
       var reader = new FileReader()
-      reader.readAsDataURL(newImage)
+      reader.readAsDataURL(compressedFile)
       reader.onload = function () {
         setEvent({...event, image: reader.result?.toString()})
       }
@@ -335,7 +338,7 @@ function NewEvent() {
                 onChange={setEndTime}
             />
             <Duration>
-              <FieldTitle>Duration:</FieldTitle>
+              <FieldTitle>Duration</FieldTitle>
                 <DurationText>
                   {Math.floor(event.duration / 60) > 0 && Math.floor(event.duration / 60) + ' hours'} {event.duration ? event.duration % 60 : 0} minutes
                 </DurationText>

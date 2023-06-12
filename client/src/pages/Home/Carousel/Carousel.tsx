@@ -9,6 +9,7 @@ import ArrowIcon from '../../assets/icons/ArrowIcon'
 import NextButton from './Next'
 import PrevButton from './Previous'
 import Link from '../../shared/Link'
+import { useNavigate } from 'react-router-dom'
 
 const Title = styled.p`
   font-size: 30px;
@@ -112,6 +113,7 @@ function Carousel() {
   let text: string[]
   const { months } = json
   const { events } = useContext()
+  const navigate = useNavigate()
   
   const renderSLides = (item: EventProps, index: number) => {
     date = item.date.split('-')
@@ -125,7 +127,7 @@ function Carousel() {
             <SubText>{text[1]}</SubText>
             <Date>{date[2] + " " + months[parseInt(date[1]) - 1] + " " + date[0]}</Date>
           </Info>
-          <Navigate>learn more<ArrowIcon/></Navigate>
+          <Navigate onClick={() => navigate(`events`, { state: { event: item }})} >learn more<ArrowIcon/></Navigate>
         </Event>
         <Slider>
           <Number>0{index + 1}</Number>

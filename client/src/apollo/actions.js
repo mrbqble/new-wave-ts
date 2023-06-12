@@ -188,3 +188,9 @@ export const CHANGE_STATUS = gql`
     changeStatus(input: $input)
   }
 `
+
+export const NEW_REPORT = gql`
+  mutation ($input: ReportInput) {
+    newReport(input: $input)
+  }
+`

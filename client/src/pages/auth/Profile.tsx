@@ -96,7 +96,7 @@ const EditText = styled.p`
 function Profile() {
 
   const navigate = useNavigate()
-  const { user, refetchUser } = useContext()
+  const { user, refetchUser, compressImage } = useContext()
   const [getCertificate] = useMutation(GET_CERTIFICATE)
   const [profileImage] = useMutation(NEW_PROFILE_IMAGE)
 
@@ -104,11 +104,12 @@ function Profile() {
     refetchUser()
   }, [])
 
-  const uploadImage = (files: FileList | null ) => {
+  const uploadImage = async (files: FileList | null ) => {
     if (files) {
       const newImage = files[0]
+      const compressedFile = await compressImage(newImage)
       var reader = new FileReader()
-      reader.readAsDataURL(newImage)
+      reader.readAsDataURL(compressedFile)
       reader.onload = function () {
         const base64 = reader.result?.toString().split(',')[1]
         profileImage({
@@ -138,7 +139,7 @@ function Profile() {
   }
 
   const createReportPress = () => {
-    navigate('/newreport', { state: { type: 'Collections' } })
+    navigate('/newreport', { state: { type: 'Clean up', _id: '' } })
   }
 
   return (

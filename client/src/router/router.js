@@ -12,6 +12,7 @@ import FullSignUpForm from '../pages/auth/SignUp/FullSignUpForm'
 import NewEvent from '../pages/event/NewEvent'
 import NewReport from '../pages/report/NewReport'
 import StatusChange from '../pages/admin/StatusChange'
+import EventInfo from '../pages/event/EventInfo'
 
 const Divider = styled.hr`
   height: 2px;
@@ -40,6 +41,7 @@ function Router() {
           <Route path='/newreport' element={<NewReport/>}/>
           <Route path='/financials' element={<Financials/>}/>
           <Route path='/verify' element={<CodeVerification/>}/>
+          <Route path='/events' element={<EventInfo/>}/>
           <Route path='/statuschange' element={<StatusChange/>}/>
           <Route path='/fullsignupform' element={<FullSignUpForm/>}/>
         </Routes>
