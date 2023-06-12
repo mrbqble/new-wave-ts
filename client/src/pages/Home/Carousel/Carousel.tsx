@@ -6,10 +6,10 @@ import { useContext } from '../../../context/Context'
 import { EffectCreative, Autoplay } from "swiper"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import ArrowIcon from '../../assets/icons/ArrowIcon'
-import NextButton from './Next'
-import PrevButton from './Previous'
 import Link from '../../shared/Link'
 import { useNavigate } from 'react-router-dom'
+import PrevButton from './buttons/PrevButton'
+import NextButton from './buttons/NextButton'
 
 const Title = styled.p`
   font-size: 3rem;
@@ -32,7 +32,7 @@ const Event = styled.div`
   flex-direction: column;
   align-items: start;
   gap: 4rem;
-  width: 45em;
+  width: 75em;
 `
 
 const Name = styled.p`

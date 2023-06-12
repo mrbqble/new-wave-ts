@@ -90,6 +90,7 @@ const Images = styled.div`
   border: 1px solid black;
   background-color: white;
   max-width: 884px;
+  font-size: 18px;
 `
 
 const DeleteImage = styled.div`

@@ -22,7 +22,7 @@ const Button = styled.a<ButtonProps>`
   text-decoration: none;
   justify-content: center;
   border: .1rem solid #0013BC;
-  text-transform: ${(props) => props.isUppercase!==undefined && props.isUppercase===true ? 'uppercase' : 'none'};
+  text-transform: uppercase;
   background-color: ${(props) => 
     props.mode !== ButtonMode.PRIMARY
       ? 'white'

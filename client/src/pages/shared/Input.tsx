@@ -18,7 +18,7 @@ const Title = styled.div`
 `
 
 const Field = styled.input`
-  width: 20em;
+  width: 23em;
   font-size: 1.8rem;
   padding: 1.5rem 2rem;
   border-radius: 0rem;
@@ -28,7 +28,7 @@ const Field = styled.input`
 
 const Message = styled.p`
   color: red;
-  font-size: .1.6rem;
+  font-size: 1.6rem;
   font-weight: 400;
 `
 

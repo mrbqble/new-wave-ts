@@ -124,7 +124,7 @@ function Profile() {
   }
 
   const editProfile = () => {
-    navigate('/fullregistrationform', {state: { edit: true }})
+    navigate('/fullsignupform', {state: { edit: true }})
   }
 
   const getCertificatePress = () => {

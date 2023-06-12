@@ -14,7 +14,6 @@ const Link = styled.a`
   &:hover {
     color: #0013BC;
   }
-
 `
 
 export default Link
