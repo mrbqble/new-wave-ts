@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Button = styled.a`
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 500;
 `
 

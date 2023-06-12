@@ -26,7 +26,7 @@ const Content = styled.div`
 
 const Title = styled.p`
   color: white;
-  font-size: 150px;
+  font-size: 15rem;
   font-weight: bolder;
   text-transform: uppercase;
   text-align: center;
@@ -36,9 +36,9 @@ const Subtitle = styled.p`
   margin-top: auto;
   margin-left: auto;
   font-weight: 500;
-  font-size: 22px;
+  font-size: 2.2rem;
   background-color: white;
-  padding: 16px 10vw 16px 20px;
+  padding: .1.6rem 10vw .1.6rem 2rem;
 `
 
 function First() {

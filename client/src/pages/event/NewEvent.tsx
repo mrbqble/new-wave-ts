@@ -14,37 +14,37 @@ import CreatableMultiSelect from "../shared/CreatableMultiSelect"
 import { useContext } from "../../context/Context"
 
 const MainContainer = styled.div`
-  gap: 40px;
+  gap: 4rem;
   display: flex;
-  padding: 50px 20px;
+  padding: 5rem 2rem;
   align-items: center;
   flex-direction: column;
 `
 
 const Title = styled.p`
-  font-size: 50px;
+  font-size: 5rem;
   font-weight: 500;
 `
 
 const Form = styled.div`
-  gap: 40px;
+  gap: 4rem;
   display: flex;
-  padding: 30px 40px;
+  padding: 3rem 4rem;
   flex-direction: column;
   background-color: rgba(208, 213, 255, 0.5);
 `
 
 const Fields = styled.div`
   display: grid;
-  gap: 40px 80px;
-  grid-template-columns: 402px 402px;
+  gap: 4rem 8rem;
+  grid-template-columns: 40.2rem 40.2rem;
 `
 
 const Field = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
 `
 
 const Duration = styled(Field)`
@@ -52,15 +52,15 @@ const Duration = styled(Field)`
 `
 
 const TimeFields = styled(Field)`
-  gap: 0px;
+  gap: 0rem;
   justify-content: space-between;
 `
 
 const FieldTitle = styled.div`
-  font-size: 22px;
+  font-size: 2.2rem;
   font-weight: 600;
   display: flex;
-  gap: 10px;
+  gap: 1rem;
 `
 
 const Must = styled.p`
@@ -69,8 +69,8 @@ const Must = styled.p`
 
 const EventImage = styled.div`
   display: flex;
-  width: 402px;
-  height: 402px;
+  width: 40.2rem;
+  height: 40.2rem;
   overflow: hidden;
   justify-content: center;
   &:hover div {
@@ -83,8 +83,8 @@ const Image = styled.img``
 const ImageInput = styled.input`
   position: absolute;
   z-index: 2;
-  width: 402px;
-  height: 402px;
+  width: 40.2rem;
+  height: 40.2rem;
   opacity: 0;
   cursor: pointer;
 `
@@ -94,18 +94,18 @@ const EditImage = styled.div`
   opacity: 0;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.5);
-  width: 402px;
-  height: 402px;
+  width: 40.2rem;
+  height: 40.2rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
 `
 
 const EditText = styled.p`
   color: white;
-  font-size: 18px;
+  font-size: 1.8rem;
 `
 
 const DurationText = styled(FieldTitle)`

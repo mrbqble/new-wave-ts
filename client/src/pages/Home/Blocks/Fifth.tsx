@@ -1,12 +1,12 @@
 import styled from "styled-components"
-import Carousel from "../carousel/Carousel"
+import Carousel from "../Carousel/Carousel"
 
 const MainContainer = styled.div`
-  padding: 50px 20px;
+  padding: 5rem 2rem;
 `
 
 const Title = styled.p`
-  font-size: 50px;
+  font-size: 5rem;
   font-weight: bold;
   text-align: center;
 `

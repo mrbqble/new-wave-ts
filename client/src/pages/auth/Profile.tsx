@@ -9,37 +9,37 @@ import ProfileIcon from '../assets/icons/ProfileIcon'
 import { GET_CERTIFICATE, NEW_PROFILE_IMAGE } from '../../apollo/actions'
 
 const MainContainer = styled.div`
-  padding: 50px 20px;
+  padding: 5rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 3rem;
 `
 
 const Title = styled.p`
-  font-size: 50px;
+  font-size: 5rem;
   font-weight: 500;
 `
 
 const Content = styled.div`
   display: flex;
-  gap: 300px;
+  gap: 30rem;
 `
 
 const UserInfo = styled.div`
   display: flex;
-  gap: 40px;
+  gap: 4rem;
 `
 
 const Data = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 20px;
+  gap: 2rem;
 `
 
 const Field = styled.p`
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: 500;
   color: #0013BC;
 `
@@ -49,13 +49,13 @@ const Info = styled(Field)`
 `
 
 const Actions = styled(Data)`
-  gap: 10px;
+  gap: 1rem;
 `
 
 const ProfileImage = styled.div`
   display: flex;
-  width: 300px;
-  height: 300px;
+  width: 30rem;
+  height: 30rem;
   overflow: hidden;
   justify-content: center;
   &:hover div {
@@ -68,8 +68,8 @@ const Image = styled.img``
 const ImageInput = styled.input`
   position: absolute;
   z-index: 2;
-  width: 300px;
-  height: 300px;
+  width: 30rem;
+  height: 30rem;
   opacity: 0;
   cursor: pointer;
 `
@@ -79,18 +79,18 @@ const EditImage = styled.div`
   opacity: 0;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.5);
-  width: 300px;
-  height: 300px;
+  width: 30rem;
+  height: 30rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
 `
 
 const EditText = styled.p`
   color: white;
-  font-size: 18px;
+  font-size: 1.8rem;
 `
 
 function Profile() {

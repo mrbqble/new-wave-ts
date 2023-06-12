@@ -4,22 +4,22 @@ import styled from 'styled-components'
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
 `
 
 const Title = styled.div`
-  font-size: 22px;
+  font-size: 2.2rem;
   font-weight: 600;
   display: flex;
-  gap: 10px;
+  gap: 1rem;
 `
 
 const Field = styled.textarea`
   width: 20em;
-  font-size: 18px;
-  padding: 15px 20px;
-  border-radius: 0px;
-  border: 1px solid grey;
+  font-size: 1.8rem;
+  padding: 1.5rem 2rem;
+  border-radius: 0rem;
+  border: .1rem solid grey;
   cursor: text;
   resize: none;
 `

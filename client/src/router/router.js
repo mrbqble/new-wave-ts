@@ -12,15 +12,15 @@ import FullSignUpForm from '../pages/auth/SignUp/FullSignUpForm'
 import NewEvent from '../pages/event/NewEvent'
 import NewReport from '../pages/report/NewReport'
 import StatusChange from '../pages/admin/StatusChange'
+import AdminPage from '../pages/admin/AdminPage'
 import EventInfo from '../pages/event/EventInfo'
-
 const Divider = styled.hr`
-  height: 2px;
+  height: .2rem;
   border: none;
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-left: 3rem;
+  margin-right: 3rem;
   background-color: #D0D5FF;
-  border-radius: 2px;
+  border-radius: .2rem;
 `
 
 const MainContainer = styled.div`
@@ -44,6 +44,7 @@ function Router() {
           <Route path='/events' element={<EventInfo/>}/>
           <Route path='/statuschange' element={<StatusChange/>}/>
           <Route path='/fullsignupform' element={<FullSignUpForm/>}/>
+          <Route path='/admin' element={<AdminPage/>}/>
         </Routes>
       </MainContainer>
       <Divider/>

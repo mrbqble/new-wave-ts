@@ -8,7 +8,7 @@ const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 50px 20px;
+  padding: 5rem 2rem;
   align-items: center;
 `
 
@@ -16,17 +16,17 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: .8rem;
 `
 
   const Title = styled.p`
-  font-size: 50px;
+  font-size: 5rem;
   font-weight: bold;
 `
 
 const Subtitle = styled.p`
-  font-size: 30px;
-  margin: 40px 0px;
+  font-size: 3rem;
+  margin: 4rem 0rem;
 `
 
 const Content = styled.div`
@@ -35,7 +35,7 @@ const Content = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
-  gap: 60px;
+  gap: 6rem;
 `
 
 const Stat = styled.div`
@@ -46,18 +46,18 @@ const Stat = styled.div`
 `
 
 const Text = styled.p`
-  font-size: 22px;
-  margin-bottom: 20px;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
 `
 
 const Number = styled.div`
-  font-size: 50px;
+  font-size: 5rem;
   color: #0013BC;
   font-weight: bolder;
 `
 
 const SubText = styled.p`
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: 600;
   text-align: center;
 `

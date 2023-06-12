@@ -6,30 +6,30 @@ import { CHECK_CODE } from "../../apollo/actions"
 import Button, { ButtonMode } from "../shared/Button"
 
 const MainContainer = styled.div`
-  gap: 40px;
+  gap: 4rem;
   display: flex;
-  padding: 50px 20px;
+  padding: 5rem 2rem;
   align-items: center;
   flex-direction: column;
 `
 
 const Title = styled.p`
-  font-size: 50px;
+  font-size: 5rem;
   font-weight: 500;
 `
 
 const Content = styled.div`
-  gap: 200px;
+  gap: 20rem;
   display: flex;
   align-items: center;
 `
 
 const Data = styled(Content)`
-  gap: 50px;
+  gap: 5rem;
 `
 
 const Form = styled.div`
-  gap: 20px;
+  gap: 2rem;
   display: flex;
   flex-direction: column;
 `
@@ -38,7 +38,7 @@ const Info = styled(Form)``
 
 const Text = styled.p`
   color: black;
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: 500;
 `
 
@@ -47,7 +47,7 @@ const Field = styled(Text)`
 `
 
 const Label = styled(Text)`
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 700;
 `
 

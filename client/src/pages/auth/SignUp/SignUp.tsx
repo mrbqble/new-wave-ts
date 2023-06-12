@@ -8,29 +8,29 @@ import { CHECK_EMAIL } from '../../../apollo/actions'
 import Button, { ButtonMode } from '../../shared/Button'
 
 const MainContainer = styled.div`
-  padding: 50px 20px;
+  padding: 5rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 2rem;
 `
 
 const Title = styled.p`
-  font-size: 50px;
+  font-size: 5rem;
   font-weight: 500;
 `
 
 const Form = styled.div`
-  gap: 30px;
+  gap: 3rem;
   display: flex;
   flex-direction: column;
-  padding: 30px 40px;
+  padding: 3rem 4rem;
   background-color: rgba(208, 213, 255, 0.5);
 `
 
 const Navigate = styled(Link)`
   text-transform: none;
-  font-size: 16px;
+  font-size: .1.6rem;
   color: grey;
   align-self: center;
 `
@@ -38,7 +38,7 @@ const Navigate = styled(Link)`
 const PasswordValidation = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
 `
 
 interface CheckProps {
@@ -46,7 +46,7 @@ interface CheckProps {
 }
 
 const Check = styled.p<CheckProps>`
-font-size: 16px;
+font-size: .1.6rem;
 color: ${(props) => props.check ? 'green' : 'red'};
 `
 
