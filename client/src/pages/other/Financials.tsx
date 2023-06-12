@@ -5,43 +5,43 @@ import data from '../shared/variables.json'
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 50px 20px;
+  gap: 2rem;
+  padding: 5rem 2rem;
   align-items: center;
 `
 
 const Title = styled.p`
-  font-size: 50px;
+  font-size: 5rem;
   font-weight: 500;
 `
 
 const Subtitle = styled.p`
-  font-size: 22px;
+  font-size: 2.2rem;
   width: 50em;
   text-align: center;
 `
 
 const Content = styled.div`
-  gap: 20px;
+  gap: 2rem;
   display: flex;
   align-items: center;
 `
 
 const Year = styled.p`
   color: #D0D5FF;
-  font-size: 150px;
+  font-size: 15rem;
   font-weight: 700;
   text-transform: uppercase;
 `
 
 const Links = styled.div`
-  gap: 20px;
+  gap: 2rem;
   display: flex;
   flex-direction: column;
 `
 
 const Document = styled(Link)`
-  font-size: 20px;
+  font-size: 2rem;
   text-transform: none;
   text-decoration: underline;
 `

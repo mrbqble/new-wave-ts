@@ -3,14 +3,14 @@ import styled from 'styled-components'
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
 `
 
 const Title = styled.div`
-  font-size: 22px;
+  font-size: 2.2rem;
   font-weight: 600;
   display: flex;
-  gap: 10px;
+  gap: 1rem;
 `
 
 const Must = styled(Title)`
@@ -22,15 +22,15 @@ interface SelectProps {
 }
 
 const Selection = styled.select<SelectProps>`
-  width: ${({ width }) => width ? width : '402'}px;
-  font-size: 18px;
-  padding: 15px 20px;
-  border-radius: 0px;
-  border: 1px solid grey;
+  width: ${({ width }) => width ? width/10 : '40.2'}rem;
+  font-size: 1.5rem;
+  padding: 1.5rem 2rem;
+  border-radius: 0rem;
+  border: .1rem solid grey;
   -webkit-appearance: none;
   background-image: url('data:image/svg+xml,<svg width="24" height="15" viewBox="0 0 24 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 1.5L11.8795 11.5L2 1.5" stroke="%230013BC" stroke-width="4"/></svg>');
-  background-position: bottom 45% right 15px;
-  background-size: 16px 10px;
+  background-position: bottom 45% right 1.5rem;
+  background-size: .1.6rem 1rem;
   background-repeat: no-repeat;
 
   &:focus {
@@ -40,13 +40,13 @@ const Selection = styled.select<SelectProps>`
 
 const Field = styled.input`
   width: 17em;
-  font-size: 18px;
-  padding: 14px 20px;
-  border-radius: 0px;
-  border: 1px solid grey;
+  font-size: 1.8rem;
+  padding: 1.4rem 2rem;
+  border-radius: 0rem;
+  border: .1rem solid grey;
   position: absolute;
-  margin-left: -400px;
-  margin-top: 2px;
+  margin-left: -40rem;
+  margin-top: .2rem;
   border: none;
   z-index: 10;
 `

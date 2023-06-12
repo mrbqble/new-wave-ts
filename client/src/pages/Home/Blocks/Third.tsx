@@ -8,21 +8,21 @@ const MainContainer = styled.div`
   flex-wrap: wrap;
   text-align: left;
   justify-content: space-evenly;
-  padding: 50px 20px;
+  padding: 5rem 2rem;
 `
 
 const Title = styled.p`
-  font-size: 50px;
+  font-size: 5rem;
   max-width: 25vw;
   font-weight: 700;
 `
 
 const Navigate = styled(Link)`
-  font-size: 20px;
+  font-size: 2rem;
 `
 
 const FounderInfo = styled.div`
-  gap: 5px;
+  gap: .5rem;
   display: flex;
   text-align: center;
   flex-direction: column;
@@ -31,7 +31,7 @@ const FounderInfo = styled.div`
 const FounderImage = styled.img``
 
 const Text = styled.p`
-  font-size: 16px;
+  font-size: .1.6rem;
   font-weight: 500;
 `
 

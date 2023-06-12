@@ -23,48 +23,48 @@ import {
 } from '../../../apollo/actions'
 
 const MainContainer = styled.div`
-  gap: 30px;
+  gap: 3rem;
   display: flex;
-  padding: 50px 20px;
+  padding: 5rem 2rem;
   align-items: center;
   flex-direction: column;
 `
 
 const Title = styled.p`
-  font-size: 50px;
+  font-size: 5rem;
   font-weight: 500;
 `
 
 const Subtitle = styled.p`
-  font-size: 22px;
+  font-size: 2.2rem;
   text-align: center;
 `
 
 const Fields = styled.div`
   display: grid;
-  gap: 40px 80px;
-  grid-template-columns: 402px 402px;
+  gap: 4rem 8rem;
+  grid-template-columns: 40.2rem 40.2rem;
 `
 
 const Form = styled.div`
-  gap: 40px;
+  gap: 4rem;
   display: flex;
-  padding: 30px 40px;
+  padding: 3rem 4rem;
   flex-direction: column;
   background-color: rgba(208, 213, 255, 0.5);
 `
 
 const FieldBox = styled.div`
-  gap: 10px;
+  gap: 1rem;
   display: flex;
   flex-direction: column;
 `
 
 const FieldTitle = styled.div`
-  font-size: 22px;
+  font-size: 2.2rem;
   font-weight: 600;
   display: flex;
-  gap: 10px;
+  gap: 1rem;
 `
 
 const Must = styled(FieldTitle)`
@@ -72,11 +72,11 @@ const Must = styled(FieldTitle)`
 `
 
 const phoneInput = {
-  height: "55px",
-  width: "402px",
-  fontSize: "20px",
-  borderRadius: "0px",
-  border: "1px solid grey"
+  height: "5.5rem",
+  width: "40.2rem",
+  fontSize: "2rem",
+  borderRadius: "0rem",
+  border: ".1rem solid grey"
 }
 
 interface User {

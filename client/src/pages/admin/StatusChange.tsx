@@ -8,21 +8,21 @@ import { useLazyQuery, useMutation } from '@apollo/client'
 import { CHANGE_STATUS, GET_VOLUNTEERS } from '../../apollo/actions'
 
 const MainContainer = styled.div`
-  gap: 20px;
+  gap: 2rem;
   display: flex;
-  padding: 50px 20px;
+  padding: 5rem 2rem;
   align-items: center;
   flex-direction: column;
 `
 
 const Title = styled.p`
-  font-size: 50px;
+  font-size: 5rem;
   font-weight: 500;
 `
 
 const Form = styled.div`
-  gap: 30px;
-  padding: 30px 40px;
+  gap: 3rem;
+  padding: 3rem 4rem;
   min-width: 40em;
   display: flex;
   flex-direction: column;
@@ -35,18 +35,18 @@ const Table = styled.table`
 
 const Row = styled.tr`
   text-align: left;
-  border-bottom: 1px solid black;
+  border-bottom: .1rem solid black;
 `
 
 const Header = styled.th`
   color: #0013BC;
-  padding: 20px 40px;
-  font-size: 18px;
+  padding: 2rem 4rem;
+  font-size: 1.8rem;
 `
 
 const Cell = styled.td`
-  padding: 20px 40px;
-  font-size: 18px;
+  padding: 2rem 4rem;
+  font-size: 1.8rem;
 `
 
 interface Volunteer {

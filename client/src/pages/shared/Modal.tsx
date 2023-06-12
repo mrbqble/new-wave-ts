@@ -18,8 +18,8 @@ const MainContainer = styled.div<MainContainerProps>`
 `
 
 const Content = styled.div`
-  gap: 30px;
-  padding: 40px;
+  gap: 3rem;
+  padding: 4rem;
   display: flex;
   max-width: 40vw;
   flex-direction: column;

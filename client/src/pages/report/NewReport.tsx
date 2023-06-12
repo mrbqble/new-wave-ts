@@ -7,37 +7,37 @@ import { stat } from 'fs'
 import Button, { ButtonMode } from '../shared/Button'
 
 const MainContainer = styled.div`
-  gap: 40px;
+  gap: 4rem;
   display: flex;
-  padding: 50px 20px;
+  padding: 5rem 2rem;
   align-items: center;
   flex-direction: column;
 `
 
 const Title = styled.p`
-  font-size: 50px;
+  font-size: 5rem;
   font-weight: 500;
 `
 
 const Form = styled.div`
-  gap: 40px;
+  gap: 4rem;
   display: flex;
-  padding: 30px 40px;
+  padding: 3rem 4rem;
   flex-direction: column;
   background-color: rgba(208, 213, 255, 0.5);
 `
 
 const Fields = styled.div`
   display: grid;
-  gap: 40px 80px;
-  grid-template-columns: 402px 402px;
+  gap: 4rem 8rem;
+  grid-template-columns: 40.2rem 40.2rem;
 `
 
 const Field = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
 `
 
 const Duration = styled(Field)`
@@ -49,10 +49,10 @@ const TimeFields = styled(Field)`
 `
 
 const FieldTitle = styled.div`
-  font-size: 22px;
+  font-size: 2.2rem;
   font-weight: 600;
   display: flex;
-  gap: 10px;
+  gap: 1rem;
 `
 
 const DurationText = styled(FieldTitle)`

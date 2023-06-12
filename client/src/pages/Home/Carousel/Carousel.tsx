@@ -11,17 +11,17 @@ import PrevButton from './Previous'
 import Link from '../../shared/Link'
 
 const Title = styled.p`
-  font-size: 30px;
+  font-size: 3rem;
   font-weight: 600;
   text-align: center;
-  margin-top: 40px;
+  margin-top: 4rem;
 `
 
 const Container = styled.div`
   display: flex;
   align-items: center;
   background-color: white;
-  padding: 40px 20px;
+  padding: 4rem 2rem;
 `
 
 const Event = styled.div`
@@ -30,12 +30,12 @@ const Event = styled.div`
   text-align: left;
   flex-direction: column;
   align-items: start;
-  gap: 40px;
+  gap: 4rem;
   width: 45em;
 `
 
 const Name = styled.p`
-  font-size: 50px;
+  font-size: 5rem;
   font-weight: 700;
 `
 
@@ -43,25 +43,25 @@ const Info = styled.div`
   margin-left: 5vw;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 4rem;
 `
 
 const Text = styled.p`
-  font-size: 22px;
+  font-size: 2.2rem;
   font-weight: 600;
 `
 
 const SubText = styled.p`
-  font-size: 22px;
+  font-size: 2.2rem;
 `
 
 const Date = styled.p`
-  font-size: 30px;
+  font-size: 3rem;
   font-weight: 700;
 `
 
 const Navigate = styled(Link)`
-  font-size: 20px;
+  font-size: 2rem;
 `
 
 const Slider = styled.div`
@@ -75,7 +75,7 @@ const Slider = styled.div`
 const Image = styled.img``
 
 const Number = styled.p`
-  font-size: 48px;
+  font-size: 4.8rem;
   color: #D0D5FF;
   font-weight: bold;
 `
@@ -85,8 +85,8 @@ const Buttons = styled.div`
 `
 
 const ButtonText = styled.p`
-	border: #D0D5FF solid 1px;
-	padding: 15px 20px;
+	border: #D0D5FF solid .1rem;
+	padding: 1.5rem 2rem;
 	cursor: pointer;
   display: flex;
   rotate: 180deg;
@@ -95,9 +95,9 @@ const ButtonText = styled.p`
 const Next = styled(ButtonText)`
   background-color: #D0D5FF;
   text-transform: uppercase;
-  gap: 10px;
+  gap: 1rem;
   rotate: 0deg;
-  line-height: 18px;
+  line-height: 1.8rem;
 `
 
 interface EventProps {
