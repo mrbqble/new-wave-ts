@@ -13,6 +13,7 @@ import NewEvent from '../pages/event/NewEvent'
 import NewReport from '../pages/report/NewReport'
 import StatusChange from '../pages/admin/StatusChange'
 import AdminPage from '../pages/admin/AdminPage'
+import EventInfo from '../pages/event/EventInfo'
 
 const Divider = styled.hr`
   height: .2rem;
@@ -37,6 +38,7 @@ function Router() {
           <Route path='/signin' element={<SignIn/>}/>
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/profile' element={<Profile/>}/>
+          <Route path='/event/:id' element={<EventInfo />} />
           <Route path='/newevent' element={<NewEvent/>}/>
           <Route path='/newreport' element={<NewReport/>}/>
           <Route path='/financials' element={<Financials/>}/>

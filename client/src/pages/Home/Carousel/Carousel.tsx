@@ -125,7 +125,7 @@ function Carousel() {
             <SubText>{text[1]}</SubText>
             <Date>{date[2] + " " + months[parseInt(date[1]) - 1] + " " + date[0]}</Date>
           </Info>
-          <Navigate>learn more<ArrowIcon/></Navigate>
+          <Navigate href="/event/1" >learn more<ArrowIcon/></Navigate>
         </Event>
         <Slider>
           <Number>0{index + 1}</Number>
