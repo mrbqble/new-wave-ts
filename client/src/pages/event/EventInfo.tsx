@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { useState } from 'react';
 import event_img from '../assets/images/3.png'
 import Button, { ButtonMode } from '../shared/Button';
 
