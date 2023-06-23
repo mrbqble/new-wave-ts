@@ -14,6 +14,7 @@ import NewReport from '../pages/report/NewReport'
 import StatusChange from '../pages/admin/StatusChange'
 import AdminPage from '../pages/admin/AdminPage'
 import EventInfo from '../pages/event/EventInfo'
+import Error from '../pages/error/Error'
 
 const Divider = styled.hr`
   height: .2rem;
@@ -46,6 +47,7 @@ function Router() {
           <Route path='/statuschange' element={<StatusChange/>}/>
           <Route path='/fullsignupform' element={<FullSignUpForm/>}/>
           <Route path='/admin' element={<AdminPage/>}/>
+          <Route path="*" element={<Error />} />
         </Routes>
       </MainContainer>
       <Divider/>

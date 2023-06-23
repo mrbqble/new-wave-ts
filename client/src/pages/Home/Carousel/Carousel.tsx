@@ -9,6 +9,7 @@ import ArrowIcon from '../../assets/icons/ArrowIcon'
 import NextButton from './Next'
 import PrevButton from './Previous'
 import Link from '../../shared/Link'
+import { useEffect } from 'react'
 
 const Title = styled.p`
   font-size: 3rem;
@@ -101,18 +102,24 @@ const Next = styled(ButtonText)`
 `
 
 interface EventProps {
-  date: String
-  title: String
-  text: String
+  date: string
+  title: string
+  text: string
   image: string
+  city: string
 }
 
 function Carousel() {
-  let date: string[]
-  let text: string[]
-  const { months } = json
-  const { events } = useContext()
-  
+  let date: string[];
+  let text: string[];
+  const { months } = json;
+  const { events } = useContext();
+  const { user, refetchUser, isLoggedIn } = useContext();
+
+  useEffect(() => {
+    refetchUser()
+  }, [])
+
   const renderSLides = (item: EventProps, index: number) => {
     date = item.date.split('-')
     text = item.text.split('\n')
@@ -169,10 +176,19 @@ function Carousel() {
       modules={[EffectCreative, Autoplay]}
     >
       {events?.length
-        ? events.map((item: EventProps, index: number) => 
-          <SwiperSlide key={index}> 
-            {renderSLides(item, index)}
-          </SwiperSlide>
+        ? events.map((item: EventProps, index: number) => {
+          if(isLoggedIn){
+            if(user?.city===item.city){
+              return <SwiperSlide key={index}> 
+                {renderSLides(item, index)}
+              </SwiperSlide>
+            }
+            return <></>;
+          }
+          return <SwiperSlide key={index}> 
+          {renderSLides(item, index)}
+        </SwiperSlide>
+        }
         )
         : <Title>There are no upcoming events at the moment.</Title>
       }
