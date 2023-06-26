@@ -1,50 +1,95 @@
 const gql = require('graphql-tag')
 
 const typeDefs = gql`
+  type InviteLink {
+    link: String
+    used: Boolean
+    joinedAt: String
+    expired: Boolean
+    createdAt: String
+    expireTime: String
+  }
+
+  type Location {
+    city: String
+    country: String
+  }
+
+  type Affiliation {
+    type: String
+    name: String
+    studyYear: Int
+    degree: String
+    location: Location
+  }
+
+  type UserEvent {
+    eventID: String
+    attended: Boolean
+    checkInTime: String
+    registeredAt: String
+    checkOutTime: String
+  }
+
+  type Task {
+    text: String
+    status: String
+    issuerID: String
+    createdAt: String
+    completedAt: String
+  }
+
+  input LocationInput {
+    city: String
+    country: String
+  }
+
+  input AffiliationInput {
+    type: String
+    name: String
+    studyYear: Int
+    degree: String
+    location: LocationInput
+  }
+
   type User {
     _id: ID
-    city: String
-    code: String
+    points: Int
     type: String
     photo: String
-    grade: String
-    degree: String
+    tasks: [Task]
+    email: String
     gender: String
-    school: String
-    email: String!
-    country: String
-    telegram: String
-    password: String!
+    leavedAt: String
     firstName: String
     instagram: String
+    telegramID: String
     secondName: String
+    location: Location
     dateOfBirth: String
-    affiliation: String
     phoneNumber: String
+    joinedChat: Boolean
+    events: [UserEvent]
+    registeredAt: String
+    telegramHandle: String
     volunteeringHours: Int
+    affiliation: Affiliation
+    inviteLinks: [InviteLink]
+    certificateRequests: [Int]
   }
 
   input UserInput {
     _id: ID
-    city: String
-    code: String = ""
-    type: String = "Volunteer"
-    photo: String = ""
-    grade: String
-    degree: String
+    email: String
     gender: String
-    school: String
-    email: String!
-    country: String
-    telegram: String
     password: String
     firstName: String
     instagram: String
     secondName: String
     dateOfBirth: String
-    affiliation: String
     phoneNumber: String
-    volunteeringHours: Int = 0
+    location: LocationInput
+    affiliation: AffiliationInput
   }
 
   input LogInInput {
@@ -77,6 +122,7 @@ const typeDefs = gql`
     text: String
     type: String
     city: String
+    duration: Int
     title: String
     image: String
     format: String
@@ -84,13 +130,17 @@ const typeDefs = gql`
     country: String
     endTime: String
     addInfo: String
-    duration: Int
     location: String
     startTime: String
     attended: [String]
     partners: [String]
     locationLink: String
     coordinators: [String]
+  }
+
+  input OrganizatorInput {
+    fullName: String
+    organizatorID: String
   }
 
   input EventInput {
@@ -101,18 +151,17 @@ const typeDefs = gql`
     city: String
     title: String
     image: String
-    format: String
-    country: String
-    endTime: String
-    addInfo: String
     duration: Int
+    format: String
+    addInfo: String
     location: String
-    startTime: String
     partners: [String]
     locationLink: String
-    status: String = "New"
-    coordinators: [String]
-    attended: [String] = []
+    organizators: [OrganizatorInput]
+    plannedEndTime: String
+    plannedStartTime: String
+    registrationEndTime: String
+    registrationStartTime: String
   }
 
   input AttendanceInput {
@@ -197,22 +246,22 @@ const typeDefs = gql`
     checkEmail(input: String): Boolean
     checkCode(input: String): CodeOutput
     logIn(input: LogInInput!): LogInOutput
-    
+
     events: [Event]
     allEvents: [Event]
     allReports: [Report]
-    
+
     allCountries: [Country]
     allUniversities: [String]
   }
-  
+
   type Mutation {
     newUser(input: UserInput): String
     editUser(input: UserInput): String
     getCertificate(input: String): String
     profileImage(input: ImageInput): String
     changeStatus(input: [StatusInput]): String
-    
+
     newEvent(input: EventInput): String
     newReport(input: ReportInput): String
     leaveEvent(input: AttendanceInput): String

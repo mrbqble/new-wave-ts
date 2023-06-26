@@ -102,19 +102,25 @@ const Next = styled(ButtonText)`
 `
 
 interface EventProps {
-  date: String
-  title: String
-  text: String
+  date: string
+  title: string
+  text: string
   image: string
+  city: string
 }
 
 function Carousel() {
-  let date: string[]
-  let text: string[]
-  const { months } = json
-  const { events } = useContext()
+  let date: string[];
+  let text: string[];
+  const { months } = json;
+  const { events } = useContext();
+  const { user, refetchUser, isLoggedIn } = useContext();
+
+  useEffect(() => {
+    refetchUser()
+  }, [])
   const navigate = useNavigate()
-  
+
   const renderSLides = (item: EventProps, index: number) => {
     date = item.date.split('-')
     text = item.text.split('\n')
@@ -127,7 +133,7 @@ function Carousel() {
             <SubText>{text[1]}</SubText>
             <Date>{date[2] + " " + months[parseInt(date[1]) - 1] + " " + date[0]}</Date>
           </Info>
-          <Navigate onClick={() => navigate(`events`, { state: { event: item }})} >learn more<ArrowIcon/></Navigate>
+          <Navigate onClick={() => navigate(`events`, { state: { event: item }})}  href="/event/1" >learn more<ArrowIcon/></Navigate>
         </Event>
         <Slider>
           <Number>0{index + 1}</Number>
@@ -171,10 +177,19 @@ function Carousel() {
       modules={[EffectCreative, Autoplay]}
     >
       {events?.length
-        ? events.map((item: EventProps, index: number) => 
-          <SwiperSlide key={index}> 
-            {renderSLides(item, index)}
-          </SwiperSlide>
+        ? events.map((item: EventProps, index: number) => {
+          if(isLoggedIn){
+            if(user?.city===item.city){
+              return <SwiperSlide key={index}> 
+                {renderSLides(item, index)}
+              </SwiperSlide>
+            }
+            return <></>;
+          }
+          return <SwiperSlide key={index}> 
+          {renderSLides(item, index)}
+        </SwiperSlide>
+        }
         )
         : <Title>There are no upcoming events at the moment.</Title>
       }

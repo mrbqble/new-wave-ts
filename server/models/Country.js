@@ -2,10 +2,9 @@ const {Schema, model} = require("mongoose");
 
 const Country = new Schema({
   name: String,
-  colleges: [String],
   cities: [{
     name: String,
-    schools: [String]
+    telegramChatID: String
   }]
 });
 

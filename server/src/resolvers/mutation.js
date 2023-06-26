@@ -6,15 +6,6 @@ const font = require('../../config/font')
 const pdf2base64 = require('pdf-to-base64')
 const { ref, uploadString, getDownloadURL } = require("firebase/storage")
 
-const uploadCertificate = async (file, code) => {
-  const fileRef = ref(storage, `certificates/${code}.pdf`)
-  return await uploadString(fileRef, file, 'base64').then(async (res) => {
-    return await getDownloadURL(res.ref).then(async (url) => {
-      return url
-    })
-  })
-}
-
 const uploadImage = async (file, path) => {
   const fileRef = ref(storage, `${path}/${v4()}`)
   return await uploadString(fileRef, file, 'base64').then(async (res) => {
@@ -28,6 +19,8 @@ const Mutation = {
   newUser: async (_, { input }, ctx) => {
     const hashPassword = await ctx.bcrypt.hash(input.password, 8)
     input.password = hashPassword
+    input.type = 'Volunteer'
+    input.registeredAt = new Date()
     const user = new ctx.User(input)
     await user.save()
     return 'User was created'
@@ -40,14 +33,9 @@ const Mutation = {
       return "User with this email already exists"
     }
     const user = await ctx.User.findOne({_id})
-    user.city = input.city
     user.email = input.email
-    user.grade = input.grade
     user.gender = input.gender
-    user.degree = input.degree
-    user.school = input.school
-    user.country = input.country
-    user.telegram = input.telegram
+    user.location = input.location
     user.instagram = input.instagram
     user.firstName = input.firstName
     user.secondName = input.secondName
@@ -68,13 +56,20 @@ const Mutation = {
 
   getCertificate: async (_, { input }, ctx) => {
     const user = await ctx.User.findOne({email: input})
+    const certificates = await ctx.Certificate.find()
     const year = new Date().getFullYear()
     const doc = new jsPDF({
       orientation: "landscape"
     })
-    if (!user.code || user.code?.split("-")[1] !== year) {
-      user.code = `CRTF-${year}-KZ-${user.type === 'Volunteer' ? 'VOL' : "CRD"}-0078-${user.firstName.toUpperCase()}`
-    }
+    const code = `CRTF-${year}-KZ-VOL-${certificates.length + 1}-${user.firstName.toUpperCase()}`
+    const certificate = new ctx.Certificate({
+      ownerID: user._id,
+      requestedAt: new Date(),
+      volunteeringHours: user.volunteeringHours,
+      code: code
+    })
+    await certificate.save()
+    user.certificateRequests = [...user.certificateRequests, certificates.length]
     await user.save()
     doc.addImage(img, 'PNG', 0, 0, 297, 210)
     doc.addFileToVFS("MyFont.ttf", font)
@@ -85,12 +80,14 @@ const Mutation = {
     doc.text(user.firstName + " " + user.secondName, 150, 85, {maxWidth: 200, align: "center"})
     doc.setFontSize(20)
     doc.setTextColor(0, 0, 0)
-    doc.text(`was volunteering for ${user.volunteeringHours} hours in ${user.year} in ${user.country}, ${user.city}`, 150, 100, {maxWidth: 150, align: "center"})
+    doc.text(`was volunteering for ${user.volunteeringHours} hours in ${year} in ${user.location.country}, ${user.location.city}`, 150, 100, {maxWidth: 150, align: "center"})
     doc.setFontSize(12)
     doc.setTextColor(255, 255, 255)
-    doc.text(user.code, 10, 197)
-    return pdf2base64("cert.pdf").then((res) => {
-      return uploadCertificate(res, user.code)
+    doc.text(code, 10, 197)
+    return doc.save('cert.pdf').then(() => {
+      return pdf2base64("cert.pdf").then((res) => {
+        return res
+      })
     })
   },
 
@@ -108,6 +105,8 @@ const Mutation = {
     const event = new ctx.Event(input)
     const events = await ctx.Event.find()
     event.number = events.length + 1
+    event.status = 'scheduled'
+    event.createdAt = new Date()
     if (event.image.length) {
       event.image = await uploadImage(event.image.split(',')[1], 'events')
     }
@@ -116,46 +115,47 @@ const Mutation = {
   },
 
   attendEvent: async (_, { input }, ctx) => {
-    const { email, _id } = input
-    const event = await ctx.Event.findOne({_id})
-    event.attended = [...event.attended, email]
+    const date = new Date()
+    const { name, eventID, userID } = input
+    const event = await ctx.Event.findOne({_id: eventID})
+    event.registered = [...event.registered, {
+      participantID: _id,
+      attended: false,
+      registeredAt: date,
+      name: name
+    }]
     await event.save()
+    const user = await ctx.User.findOne({_id: userID})
+    user.events = [...user.events, {
+      eventID,
+      attended: false,
+      registeredAt: date
+    }]
+    await user.save()
     return 'User ready to attend'
   },
 
   leaveEvent: async (_, { input }, ctx) => {
-    const { email, _id } = input
-    const event = await ctx.Event.findOne({_id})
-    event.attended = event.attended.filter(item => item.email !== email)
+    const { eventID, userID } = input
+    const event = await ctx.Event.findOne({_id: eventID})
+    event.registered = event.registered.filter(item => item.participantID !== userID)
     await event.save()
-    return 'User ready removed from attendance list'
+    const user = await ctx.User.findOne({_id: userID})
+    user.events = user.events.filter(item => item.eventID !== eventID)
+    return 'User removed from attendance list'
   },
 
   newReport: async (_, { input }, ctx) => {
-    const { eventID, attended } = input
-    const candidate = await ctx.Report.findOne({eventID})
+    const { eventID } = input
     const event = await ctx.Event.findOne({_id: eventID})
-    if (candidate)
-      return `Report with id ${eventID} already exists`
-    attended.map(async (item) => {
-      const user = await ctx.User.findOne({_id: item})
-      if (user)
-        user.volunteeringHours += parseInt(event.duration)
-      await user.save()
-    })
-    const report = new ctx.Report(input)
-    await report.save()
+    delete input.eventID
+    event.report = input
+    await event.save()
     return "Report was created"
   },
 
-  newUniversity: async (_, { input }, ctx) => {
-    const university = new ctx.University(input)
-    await university.save()
-    return "University was created"
-  },
-
   newCountry: async (_, { input }, ctx) => {
-    const country = new ctx.Country({name: input, cities: [], colleges: []})
+    const country = new ctx.Country({name: input, cities: []})
     await country.save()
     return "Country was created"
   },
@@ -163,27 +163,9 @@ const Mutation = {
   newCity: async (_, { input }, ctx) => {
     const { countryName, city } = input
     const country = await ctx.Country.findOne({name: countryName})
-    country.cities = [...country.cities, {name: city, schools: []}]
+    country.cities = [...country.cities, {name: city}]
     await country.save()
     return "City was created"
-  },
-
-  newSchool: async (_, { input }, ctx) => {
-    const { countryName, cityName, school } = input
-    const country = await ctx.Country.findOne({name: countryName})
-    const city = country.cities.find(item => item.name === cityName)
-    city.schools = [...city.schools, school]
-    country.cities = [...country.cities.filter(item => item.name !== cityName), city]
-    await country.save()
-    return "School was created"
-  },
-
-  newCollege: async (_, { input }, ctx) => {
-    const { countryName, college } = input
-    const country = await ctx.Country.findOne({name: countryName})
-    country.colleges = [...country.colleges, college]
-    await country.save()
-    return "College was created"
   }
 }
 

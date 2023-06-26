@@ -45,7 +45,6 @@ const Query = {
   profile: async (_, { input }, ctx) => {
     const _id = jwt_decode(input).id
     const user = await ctx.User.findOne({_id})
-    user.password = ""
     return user
   },
 
