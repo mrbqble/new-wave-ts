@@ -101,7 +101,7 @@ function EventInfo() {
           </DetailsSection>
           <Button style={{marginTop: "1rem"}} mode={ButtonMode.PRIMARY} isUppercase>Attend event</Button>
         </EventInfoText>
-        <EventImg src={event?.image} />
+        <EventImg src={item.image} />
         </MainContainer>
   }
 
