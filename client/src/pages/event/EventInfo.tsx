@@ -4,8 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useContext } from '../../context/Context';
 import { EventProps } from '../Home/Carousel/Carousel';
-import { useLazyQuery, useQuery } from '@apollo/client';
-import { GET_EVENTS } from '../../apollo/actions';
+import json from '../shared/variables.json';
 
 const descriptionFontSize = "2rem";
 const gapConstant = "2rem";
@@ -56,7 +55,9 @@ const DetailItem = styled.li`
 `
 
 interface EventType extends EventProps {
-
+  location: string;
+  startTime: string;
+  endTime: string;
 }
 
 function EventInfo() {
@@ -64,40 +65,50 @@ function EventInfo() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [event, setEvent] = useState<EventType>();
-
-  const [getEvents] = useLazyQuery(GET_EVENTS);
+  const { events } = useContext();
+  const { months } = json;
 
   useEffect(() => {
-    getEvents().then(res => res.data.allEvents.find((item: any) => item.number===id)).then(res => setEvent(res)).catch(err => console.log(err));
-
-    console.log(event);
-  }, []);
+    if(events){
+      if(!event){
+        const ASFNADK = events.find((item: EventType) => item.number===id);
+        console.log(ASFNADK)
+        setEvent(ASFNADK);
+      }
+    }
+  }, [events]);
 
   if(!id){
     navigate('/');
     return;
   }
+  const idN: number  = +id;
 
-  console.log(event)
+  const showEvent = (item: EventType) => {
+    const text = item.text.split('\n');
+    const date = item.date.split('-')
+    return <MainContainer>
+        <EventInfoText>
+          <EventTitle><Blueify>{item?.title}</Blueify> Event</EventTitle>
+          <EventFDescription>{text[0]}</EventFDescription>
+          <EventSDescription>{text[1]}</EventSDescription>
+          <DetailsSection>
+            <DetailItem>Location: <Blueify>{item?.location}</Blueify></DetailItem>
+            <DetailItem>Time: <Blueify>{`from ${item.startTime} to ${item.endTime}`}</Blueify></DetailItem>
+            <DetailItem>Date: <Blueify>{months[parseInt(date[1]) - 1] + " " + date[2]  + " " + date[0]}</Blueify></DetailItem>
+            <DetailItem>Volunteers needed: <Blueify>50</Blueify></DetailItem>
+            <DetailItem>Available places: <Blueify>46</Blueify></DetailItem>
+          </DetailsSection>
+          <Button style={{marginTop: "1rem"}} mode={ButtonMode.PRIMARY} isUppercase>Attend event</Button>
+        </EventInfoText>
+        <EventImg src={event?.image} />
+        </MainContainer>
+  }
 
-  return (
-    <MainContainer>
-      <EventInfoText>
-        <EventTitle><Blueify>First</Blueify> Event</EventTitle>
-        <EventFDescription>The most powerful screening about rational usage and technological progress - Join the comedy movie session ‘a hundred things and nothing more’!</EventFDescription>
-        <EventSDescription>Watch movies and help us to save the nature Every bought ticket is about 2 planted trees or 6400 liters of cleaned plastic waste! The craziest thing we do is nothing :)</EventSDescription>
-        <DetailsSection>
-          <DetailItem>Location: <Blueify>Abay Park, Shymkent</Blueify></DetailItem>
-          <DetailItem>Time: <Blueify>from 19:00 to 22:00</Blueify></DetailItem>
-          <DetailItem>Date: <Blueify>August 19th 2023</Blueify></DetailItem>
-          <DetailItem>Volunteers needed: <Blueify>50</Blueify></DetailItem>
-          <DetailItem>Available places: <Blueify>46</Blueify></DetailItem>
-        </DetailsSection>
-        <Button style={{marginTop: "1rem"}} mode={ButtonMode.PRIMARY} isUppercase>Attend event</Button>
-      </EventInfoText>
-      <EventImg src={''} />
-    </MainContainer>
-  )
+  return events ? showEvent(events.find((item: EventType) => {
+      console.log(`${item.number} and ${typeof item.number}  -  ${idN} and ${typeof idN}`)
+      return parseInt(item.number) === idN;
+    })) : <p>loading</p>
 }
 
 export default EventInfo
