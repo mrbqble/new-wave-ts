@@ -16,7 +16,7 @@ function Context({ children }) {
   const refetchUser = () => {
     refetch()
       .then(res => setUser(res.data.profile))
-      .catch(() => alert('apollo server error'))
+      .catch(() => alert('apollo server error (Context refetch user)'))
   }
 
   const contextValues = {
@@ -28,17 +28,18 @@ function Context({ children }) {
     isLoggedIn,
     refetchUser,
     setIsLoggedIn,
+    getEvents
   }
 
   useEffect(() => {
     if (token) {
       getUser()
         .then(res => setUser(res.data.profile))
-        .catch(() => alert('apollo server error'))
+        .catch(() => alert('apollo server error (Context getUser token)'))
     }
     getEvents()
       .then(res => setEvents(res.data.allEvents))
-      .catch(() => alert('apollo server error'))
+      .catch(() => alert('apollo server error (Context after token - getEvents)'))
   }, [])
 
   return <context.Provider value={contextValues}>{children}</context.Provider>

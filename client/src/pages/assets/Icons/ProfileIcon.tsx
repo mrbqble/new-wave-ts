@@ -1,7 +1,11 @@
-const ProfileIcon = () => (
+interface ProfileIconProps {
+    width?: number
+}
+
+const ProfileIcon = ({width}: ProfileIconProps) => (
     <svg
-        width={300}
-        height={300}
+        width={width || 300}
+        height={width || 300}
         viewBox="0 0 300 300"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

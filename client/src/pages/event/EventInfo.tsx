@@ -1,6 +1,11 @@
 import styled from 'styled-components'
-import event_img from '../assets/images/3.png'
 import Button, { ButtonMode } from '../shared/Button';
+import { useEffect, useState, useCallback } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useContext } from '../../context/Context';
+import { EventProps } from '../Home/Carousel/Carousel';
+import { useLazyQuery, useQuery } from '@apollo/client';
+import { GET_EVENTS } from '../../apollo/actions';
 
 const descriptionFontSize = "2rem";
 const gapConstant = "2rem";
@@ -23,9 +28,8 @@ const EventInfoText = styled.article`
   gap: ${gapConstant};
 `
 const EventImg = styled.img`
-  object-fit: contain;
+  object-fit: cover;
   width: 60rem;
-  object-position: top;
 `
 const EventTitle = styled.h1`
   font-size: 5rem;
@@ -51,7 +55,30 @@ const DetailItem = styled.li`
   margin-top: 1rem;
 `
 
+interface EventType extends EventProps {
+
+}
+
 function EventInfo() {
+
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [event, setEvent] = useState<EventType>();
+
+  const [getEvents] = useLazyQuery(GET_EVENTS);
+
+  useEffect(() => {
+    getEvents().then(res => res.data.allEvents.find((item: any) => item.number===id)).then(res => setEvent(res)).catch(err => console.log(err));
+
+    console.log(event);
+  }, []);
+
+  if(!id){
+    navigate('/');
+    return;
+  }
+
+  console.log(event)
 
   return (
     <MainContainer>
@@ -68,7 +95,7 @@ function EventInfo() {
         </DetailsSection>
         <Button style={{marginTop: "1rem"}} mode={ButtonMode.PRIMARY} isUppercase>Attend event</Button>
       </EventInfoText>
-      <EventImg src={event_img} />
+      <EventImg src={''} />
     </MainContainer>
   )
 }

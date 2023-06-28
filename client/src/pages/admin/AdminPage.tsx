@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 import Button, { ButtonMode } from '../shared/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CheckCircle from '../assets/icons/CheckMarkCircle';
 import DismissCircle from '../assets/icons/DismissCircle';
 import Clock from '../assets/icons/Clock';
 import Location from '../assets/icons/Location';
 import CheckBox from '../shared/CheckBox/CheckBox';
+import { useContext } from '../../context/Context';
+import { useNavigate } from 'react-router-dom';
+import json from '../shared/variables.json'
+import ProfileIcon from '../assets/icons/ProfileIcon';
 
 const Main = styled.main`
   display: flex;
@@ -13,6 +17,7 @@ const Main = styled.main`
   gap: 2rem;
   margin-top: 3rem;
   margin-bottom: 3rem;
+  flex-wrap: wrap;
 `
 const FCol = styled.div`
   width: 50rem;
@@ -117,6 +122,8 @@ const ExpenseDate = styled.div`
   flex: 1;
   font-size: 1.5rem;
   opacity: .5;
+  text-align: right;
+  padding-right: .5rem;
 `;
 const InvButtonsDiv = styled.div`
   display: flex;
@@ -299,17 +306,90 @@ const DelegateWrapper = styled.div`
   align-items: center;
 `
 
+interface FinanceItem {
+  spending: number;
+  description: string;
+  date: string;
+}
+interface InventoryItem {
+  spending: number;
+  description: string;
+}
+type LabelType = {
+  status: string,
+  description: string,
+}
+interface MeropriyatieItem {
+  labels: LabelType[];
+  description: string;
+  date: string;
+  location: string;
+}
+interface ZadaniyeItem {
+  description: string;
+  status: string;
+  date: string;
+  fromWho: string;
+}
+interface ExpensesType {
+  spent: number,
+  recieved: number
+}
+
+// Example data
+const provedenoLabel: LabelType = {
+  status: "green",
+  description: "Проведено"
+}
+const failedLabel: LabelType = {
+  status: "red",
+  description: "Отчет не сдан"
+}
+const plannedLabel: LabelType = {
+  status: "blue",
+  description: "Запланировано"
+}
+const exampleDate = new Date("2022-03-25");
+
 function AdminPage() {
   const [fininv, setFininv] = useState<boolean>(true);
   const [eventtask, setEventtask] = useState<boolean>(true);
+
+  const { months } = json;
+  const navigate = useNavigate();
+  const { user, refetchUser } = useContext()
+  
+  useEffect(() => {
+    refetchUser()
+  }, [])
+
+  const [finlist, setFinList] = useState<FinanceItem[]>([
+    {spending: -1500.2, description: "Покупка перчаток", date: exampleDate.getDay() + '.' + exampleDate.getMonth() + '.' + exampleDate.getFullYear()},
+    {spending: -1500.2, description: "Покупка перчаток", date: (exampleDate.getDay()+20) + '.' + exampleDate.getMonth() + '.' + exampleDate.getFullYear()}
+  ]);
+  const [inventorylist, setInventoryList] = useState<InventoryItem[]>([
+    {spending: -150.2, description: "5 л бутылок воды"},
+    {spending: 1210.2, description: "5 л бутылок воды"},
+    {spending: -150.2, description: "5 л бутылок воды"},
+  ]);
+  const [eventlist, setEventList] = useState<MeropriyatieItem[]>([
+    {labels: [provedenoLabel, failedLabel], description: "Назавание мероприятия", date: `19:00, 10 сен`, location: "Кочкар-ата"},
+    {labels: [plannedLabel, failedLabel], description: "Назавание мероприятия", date: `19:00, 10 сен`, location: "Кочкар-ата"},
+  ]);
+  const [taskList, setTaskList] = useState<ZadaniyeItem[]>([
+    {description: "Привлечь 10 волонтеfdsaров", status: "Срочно", date: "до 19:00, 10 сен", fromWho: "Ivan"},
+    {description: "Привлечь 10 волонтеров", status: "Срочно", date: "до 19:00, 10 сен", fromWho: "Ivan"}
+  ]);
+  const [expenses, setExpenses] = useState<ExpensesType>({spent: 1500, recieved: 1500});
+
   return (
     <Main>
       <FCol>
         <FRow>
-          <Avatarka src={require('../assets/images/1.png')} />
+          {user?.photo ? <Avatarka src={user?.photo} /> : <ProfileIcon width={90} />}
           <AvatarText>
-            <AvatarTitle>Иван Иванов</AvatarTitle>
-            <AvatarDescription>Координатор в Алматы</AvatarDescription>
+            <AvatarTitle>{user?.firstName} {user?.secondName}</AvatarTitle>
+            <AvatarDescription>Координатор в {user?.city}</AvatarDescription>
           </AvatarText>
         </FRow>
         <SRow>
@@ -324,27 +404,23 @@ function AdminPage() {
           {fininv ?
           <><FinReport>
             <GotSpendDiv>
-              <GotSpendAmount color={"green"}>1 500,5 ₸</GotSpendAmount>
+              <GotSpendAmount color={"green"}>{expenses.recieved} ₸</GotSpendAmount>
               <GotSpendDesc>Получено за месяц</GotSpendDesc>
             </GotSpendDiv>
             <GotSpendDiv>
-              <GotSpendAmount color={"red"}>1 500,5 ₸</GotSpendAmount>
-              <GotSpendDesc>Получено за месяц</GotSpendDesc>
+              <GotSpendAmount color={"red"}>{expenses.spent} ₸</GotSpendAmount>
+              <GotSpendDesc>Потрачено за месяц</GotSpendDesc>
             </GotSpendDiv>
           </FinReport>
           <Button mode={ButtonMode.PRIMARY} >Добавить отчет</Button>
           <FinListExpenses>
-            <ItemExpense>
-              <ExpenseAmount color="red">-1 500,5</ExpenseAmount>
-              <ExpenseDescription>Покупка перчаток</ExpenseDescription>
-              <ExpenseDate>21.12.2077</ExpenseDate>
-            </ItemExpense>
-            <ItemExpense>
-              <ExpenseAmount color="red">-1 500,5</ExpenseAmount>
-              <ExpenseDescription>Покупка перчаток</ExpenseDescription>
-              <ExpenseDate>21.12.2077</ExpenseDate>
-            </ItemExpense>
-            
+            {finlist.map((item: FinanceItem, index: number) => {
+              return <ItemExpense key={index}>
+                <ExpenseAmount color={item.spending<=0 ? "red" : "green"}>{item.spending}</ExpenseAmount>
+                <ExpenseDescription>{item.description}</ExpenseDescription>
+                <ExpenseDate>{item.date}</ExpenseDate>
+              </ItemExpense>
+            })}            
           </FinListExpenses>
           <Button mode={ButtonMode.DEFAULT}>Показать все траты</Button>
           </>
@@ -354,22 +430,12 @@ function AdminPage() {
             <ButWrapInv><Button mode={ButtonMode.PRIMARY}>Добавить</Button></ButWrapInv>
           </InvButtonsDiv>
           <InvList>
-            <InvItem>
-              <InvAmount color="red">-150</InvAmount>
-              <InvDesc>5 л бутылок воды</InvDesc>
-            </InvItem>
-            <InvItem>
-              <InvAmount color="red">-150</InvAmount>
-              <InvDesc>5 л бутылок воды</InvDesc>
-            </InvItem>
-            <InvItem>
-              <InvAmount color="red">-150</InvAmount>
-              <InvDesc>5 л бутылок воды</InvDesc>
-            </InvItem>
-            <InvItem>
-              <InvAmount color="red">-150</InvAmount>
-              <InvDesc>5 л бутылок воды</InvDesc>
-            </InvItem>
+            {inventorylist.map((item: InventoryItem, index: number) => {
+              return <InvItem key={index}>
+                <InvAmount color={item.spending<0 ? "red" : "green"}>{item.spending}</InvAmount>
+                <InvDesc>{item.description}</InvDesc>
+              </InvItem>
+            })}
           </InvList>
           <Button mode={ButtonMode.DEFAULT}>Показать весь инвертарь</Button>
             </>
@@ -380,14 +446,14 @@ function AdminPage() {
         <FinanceInv>
           <FinInvWrapper style={{"borderBottom": eventtask ? ".2rem solid #0013BC" : "none", "color": eventtask ? "#141414" : "#6C6C6C"}}>
             <EventTaskWrapper>
-              <FinInvText onClick={() => setEventtask(true)}>Финансы</FinInvText>
-              <EventTaskNumber>2</EventTaskNumber>
+              <FinInvText onClick={() => setEventtask(true)}>Мероприятия</FinInvText>
+              <EventTaskNumber>{eventlist.length}</EventTaskNumber>
             </EventTaskWrapper>
           </FinInvWrapper>
           <FinInvWrapper style={{"borderBottom": !eventtask ? ".2rem solid #0013BC" : "none", "color": !eventtask ? "#141414" : "#6C6C6C"}}>
           <EventTaskWrapper>
             <FinInvText onClick={() => setEventtask(false)}>Задачи</FinInvText>
-            <EventTaskNumber>3</EventTaskNumber>
+            <EventTaskNumber>{taskList.length}</EventTaskNumber>
           </EventTaskWrapper>
           </FinInvWrapper>
         </FinanceInv>
@@ -395,28 +461,20 @@ function AdminPage() {
           
         <Button mode={ButtonMode.PRIMARY}>Создать мероприятие</Button>
         <EventList>
-          <EventItem>
-            <EventStatuses>
-              <EventStatus backgroundColor='green' color='black' opacity='.65'><CheckCircle />Проведено</EventStatus>
-              <EventStatus backgroundColor='red' color='white'><DismissCircle />Отчет не сдан</EventStatus>
-            </EventStatuses>
-            <NameOfTheEvent>Назавание мероприятия</NameOfTheEvent>
-            <DateTimeBlock>
-              <DateTime><Clock />19:00, 10 сен</DateTime>
-              <DateTime><Location />Кочкар-ата</DateTime>
-            </DateTimeBlock>
-          </EventItem>
-          <EventItem>
-            <EventStatuses>
-              <EventStatus backgroundColor='blue' color='white'><CheckCircle fill="white" opacity='1' />Запланировано</EventStatus>
-              <EventStatus backgroundColor='red' color='white'><DismissCircle />Отчет не сдан</EventStatus>
-            </EventStatuses>
-            <NameOfTheEvent>Назавание мероприятия</NameOfTheEvent>
-            <DateTimeBlock>
-              <DateTime><Clock />19:00, 10 сен</DateTime>
-              <DateTime><Location />Кочкар-ата</DateTime>
-            </DateTimeBlock>
-          </EventItem>
+        {eventlist.map((item: MeropriyatieItem, index: number) => {
+            return <EventItem key={index}>
+              <EventStatuses>
+                {item.labels.map((label: LabelType, ind: number) => {
+                  return <EventStatus key={ind} backgroundColor={label.status} color={label.status==='green' ? 'black' : 'white'} opacity={label.status==='green' ? '0.65' : '1'}>{label.status==='red' ? <DismissCircle /> : <CheckCircle fill={label.status==='blue' ? "white" : "black"} opacity={label.status==='blue' ? "1" : undefined} />}{label.description}</EventStatus>
+                })}
+              </EventStatuses>
+              <NameOfTheEvent>{item.description}</NameOfTheEvent>
+              <DateTimeBlock>
+                <DateTime><Clock />{item.date}</DateTime>
+                <DateTime><Location />{item.location}</DateTime>
+              </DateTimeBlock>
+            </EventItem>
+          })}
         </EventList>
         <Button mode={ButtonMode.DEFAULT}>Показать все траты</Button>
         </> : <>
@@ -424,6 +482,22 @@ function AdminPage() {
         <Button mode={ButtonMode.PRIMARY}>Создать задачу</Button>
 
         <TaskList>
+          {taskList.map((item: ZadaniyeItem, index: number) => {
+            return <TaskItem key={index}>
+              <CheckBox />
+              <TaskDescription>
+                <TaskHeader>{item.description}</TaskHeader>
+                <TaskDescLabels>
+                  <TaskLabel backgroundColor={item.status==='Срочно' ? 'red' : undefined}>{item.status}</TaskLabel>
+                  <TaskLabel><Clock fill="black" />{item.date}</TaskLabel>
+                  <TaskLabel><FromWhoImg src={require('../assets/images/1.png')} />{item.fromWho}</TaskLabel>
+                </TaskDescLabels>
+              </TaskDescription>
+              <DelegateWrapper>
+                <Button mode={ButtonMode.DEFAULT} padding='1rem 1.5rem'>Делегировать</Button>
+              </DelegateWrapper>
+            </TaskItem>
+          })}
           <TaskItem>
             <CheckBox />
             <TaskDescription>
