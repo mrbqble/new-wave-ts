@@ -1,30 +1,45 @@
+const cors = require('cors')
+const http = require('http')
 const config = require('config')
 const bcrypt = require('bcryptjs')
+const express = require('express')
 const mongoose = require('mongoose')
-const User = require('./models/User')
-const Event = require('./models/Event')
-const Report = require('./models/Report')
-const typeDefs = require('./src/schema.js')
-const Country = require('./models/Country')
-const resolvers = require('./src/resolver.js')
-const University = require('./models/University')
-const { ApolloServer } = require('apollo-server')
+const { ApolloServer } = require('apollo-server-express')
+const api = require('./src/api/index')
+const Certificate = require('./src/api/models/Certificate')
 
-mongoose.connect(config.get('dbUrl'))
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => console.log('Error ', err))
+const startServer = async () => {
+  const app = express()
+  
+  app.use(cors())
+  app.use(express.json({ limit: "40mb", extended: true }))
+  
+  mongoose.connect(config.get('dbUrl'))
+    .then(() => console.log('MongoDB connected'))
+    .catch((err) => console.log('Error ', err))
+  
+  const httpServer = http.createServer(app)
+  
+  const apolloServer = new ApolloServer({
+    typeDefs: api.typeDefs,
+    resolvers: api.resolvers,
+    context: {
+      bcrypt,
+      Certificate,
+      ...api.context
+    }
+  })
+  
+  await apolloServer.start()
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: {
-    bcrypt,
-    User,
-    Event,
-    Report,
-    Country,
-    University
-  }
-})
+  apolloServer.applyMiddleware({
+    app,
+    path: '/graphql'
+  })
+  
+  httpServer.listen({ port: 4000 })
+  
+  console.log('server ready at port 4000')
+}
 
-server.listen(4000).then(() => console.log('on port 4000'))
+startServer()

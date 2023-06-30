@@ -30,7 +30,7 @@ const Form = styled.div`
 
 const Navigate = styled(Link)`
   text-transform: none;
-  font-size: .1.6rem;
+  font-size: 1.6rem;
   color: grey;
   align-self: center;
 `

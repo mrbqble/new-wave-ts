@@ -1,6 +1,6 @@
 {
   "secretKey": "new-wave-website-backend",
-  "dbUrl": "mongodb+srv://bibol:bibol2148@trial.v6ubr.mongodb.net/?retryWrites=true&w=majority",
+  "dbUrl": "mongodb+srv://bibol:bibol2148@trial.v6ubr.mongodb.net/",
   "firebaseConfig": {
     "apiKey": "AIzaSyA_eyATtXC8FOXATKDBcevKokZJeLlLWoc",
     "authDomain": "new-wave-d4fd1.firebaseapp.com",

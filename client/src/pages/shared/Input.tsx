@@ -28,7 +28,7 @@ const Field = styled.input`
 
 const Message = styled.p`
   color: red;
-  font-size: .1.6rem;
+  font-size: 1.6rem;
   font-weight: 400;
 `
 

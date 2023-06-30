@@ -87,7 +87,7 @@ function Second() {
           style={{
             zIndex: "-1",
             height: "19vh",
-            width: '11em',
+            width: '9vw',
             overflow: 'hidden'
           }}
           autoplay={{

@@ -4,33 +4,38 @@ export const GET_USER = gql`
   query($input: String) {
     profile(input: $input) {
       _id
-      code
-      city
       type
       photo
-      grade
-      degree
-      gender
-      school
       email
-      country
-      telegram
+      gender
       firstName
       instagram
       secondName
+      location {
+        city
+        country
+      }
       dateOfBirth
-      affiliation
       phoneNumber
+      telegramHandle
       volunteeringHours
+      affiliation {
+        type
+        name
+        studyYear
+        degree
+        location {
+          city
+          country
+        }
+      }
     }
   }
 `
 
 export const GET_EVENTS = gql`
   query {
-    allEvents {
-      number
-      places
+    events {
       date
       text
       type
@@ -39,26 +44,26 @@ export const GET_EVENTS = gql`
       image
       format
       status
-      endTime
-      locationLink
-      addInfo
+      number
+      places
+      plannedEndTime
+      plannedStartTime
+      registrationEndTime
+      registrationStartTime
+      createdAt
       duration
-      location
-      startTime
-      attended
       partners
-      coordinators
     }
   }
 `
 
 export const LOG_IN = gql`
-query($logInInput: LogInInput!) {
-  logIn(input: $logInInput) {
-    token
-    success
+  query($logInInput: LogInInput!) {
+    logIn(input: $logInInput) {
+      token
+      success
+    }
   }
-}
 `
 
 export const GET_CERTIFICATE = gql`
@@ -186,5 +191,11 @@ export const GET_VOLUNTEERS = gql`
 export const CHANGE_STATUS = gql`
   mutation ($input: [StatusInput]) {
     changeStatus(input: $input)
+  }
+`
+
+export const NEW_REPORT = gql`
+  mutation ($input: ReportInput) {
+    newReport(input: $input)
   }
 `
