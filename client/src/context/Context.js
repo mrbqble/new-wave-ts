@@ -17,7 +17,7 @@ function Context({ children }) {
   const refetchUser = () => {
     refetch()
       .then(res => setUser(res.data.profile))
-      .catch(() => alert('apollo server error refetch'))
+      .catch(() => alert('apollo server error refetch user'))
   }
 
   const compressImage = async (file) => {

@@ -44,9 +44,6 @@ const Fields = styled.div`
   display: grid;
   gap: 4rem 8rem;
   grid-template-columns: 40.2rem 40.2rem;
-  @media (max-width: 720px) {
-    grid-template-columns: 100%;
-  }
 `
 
 const Form = styled.div`
@@ -55,9 +52,6 @@ const Form = styled.div`
   padding: 3rem 4rem;
   flex-direction: column;
   background-color: rgba(208, 213, 255, 0.5);
-  @media (max-width: 720px) {
-    width: min(70rem, 100%);
-  }
 `
 
 const FieldBox = styled.div`
@@ -79,7 +73,7 @@ const Must = styled(FieldTitle)`
 
 const phoneInput = {
   height: "5.5rem",
-  width: "max(20em, 100%)",
+  width: "min(40.2rem, 100%)",
   fontSize: "1.8rem",
   borderRadius: "0rem",
   border: ".1rem solid grey"
