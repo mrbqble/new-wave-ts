@@ -47,7 +47,7 @@ function Context({ children }) {
         .catch(() => alert('apollo server error (Context getUser token)'))
     }
     getEvents()
-      .then(res => setEvents(res.data.allEvents))
+      .then(res => setEvents(res.data.events))
       .catch(() => alert('apollo server error (Context after token - getEvents)'))
   }, [])
 

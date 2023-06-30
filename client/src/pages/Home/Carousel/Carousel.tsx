@@ -7,8 +7,8 @@ import { EffectCreative, Autoplay } from "swiper"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import ArrowIcon from '../../assets/icons/ArrowIcon'
 import Link from '../../shared/Link'
-import NextButton from './Next'
-import PrevButton from './Previous'
+import NextButton from '../Carousel/buttons/NextButton'
+import PrevButton from '../Carousel/buttons/PrevButton'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -122,7 +122,6 @@ function Carousel() {
   useEffect(() => {
     refetchUser()
   }, [])
-  const navigate = useNavigate()
 
   const renderSLides = (item: EventProps, index: number) => {
     date = item.date.split('-')
