@@ -9,7 +9,7 @@ const User = new Schema({
   firstName: String,
   instagram: String,
   secondName: String,
-  dateOfBirth: Date,
+  dateOfBirth: String,
   phoneNumber: String,
   volunteeringHours: Number,
   password: String,
@@ -20,9 +20,9 @@ const User = new Schema({
   points: Number,
   inviteLinks: [{
     link: String,
+    used: Boolean,
     createdAt: Date,
     expireTime: Date,
-    used: Boolean,
     expired: Boolean,
     joinedAt: Date
   }],
@@ -33,8 +33,8 @@ const User = new Schema({
   affiliation: {
     type: String,
     name: String,
-    studyYear: Number,
     degree: String,
+    studyYear: Number,
     location: {
       city: String,
       country: String
@@ -55,6 +55,8 @@ const User = new Schema({
     issuerID: String
   }],
   certificateRequests: [Number]
-})
+},
+{ typeKey: '$type' }
+)
 
 module.exports = model('User', User)

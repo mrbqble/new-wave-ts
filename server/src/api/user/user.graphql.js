@@ -88,11 +88,6 @@ const typeDefs = _.gql`
     affiliation: AffiliationInput
   }
 
-  input LogInInput {
-    email: String!
-    password: String!
-  }
-
   input ImageInput {
     email: String
     base64: String
@@ -120,6 +115,11 @@ const typeDefs = _.gql`
   type Coordinator {
     _id: ID
     name: String
+  }
+
+  input LogInInput {
+    email: String!
+    password: String!
   }
 
   type LogInOutput {

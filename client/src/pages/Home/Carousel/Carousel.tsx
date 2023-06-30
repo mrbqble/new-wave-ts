@@ -10,6 +10,7 @@ import Link from '../../shared/Link'
 import { useNavigate } from 'react-router-dom'
 import PrevButton from './buttons/PrevButton'
 import NextButton from './buttons/NextButton'
+import { useEffect } from 'react'
 
 const Title = styled.p`
   font-size: 3rem;

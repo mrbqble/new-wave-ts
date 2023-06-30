@@ -6,11 +6,13 @@ const express = require('express')
 const mongoose = require('mongoose')
 const { ApolloServer } = require('apollo-server-express')
 const api = require('./src/api/index')
+const Certificate = require('./src/api/models/Certificate')
 
 const startServer = async () => {
   const app = express()
   
   app.use(cors())
+  app.use(express.json({ limit: "40mb", extended: true }))
   
   mongoose.connect(config.get('dbUrl'))
     .then(() => console.log('MongoDB connected'))
@@ -23,6 +25,7 @@ const startServer = async () => {
     resolvers: api.resolvers,
     context: {
       bcrypt,
+      Certificate,
       ...api.context
     }
   })

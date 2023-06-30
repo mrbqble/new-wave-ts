@@ -74,12 +74,15 @@ const resolvers = {
       }
     }
   },
+
   Mutation: {
     newUser: async (_, { input }, ctx) => {
       const hashPassword = await ctx.bcrypt.hash(input.password, 8)
-      input.password = hashPassword
+      input.points = 0
       input.type = 'Volunteer'
-      input.registeredAt = new Date()
+      input.volunteeringHours = 0
+      input.password = hashPassword
+      input.registeredwAt = new Date()
       const user = new ctx.User(input)
       await user.save()
       return 'User was created'
@@ -143,10 +146,9 @@ const resolvers = {
       doc.setFontSize(12)
       doc.setTextColor(255, 255, 255)
       doc.text(code, 10, 197)
-      return doc.save('cert.pdf').then(() => {
-        return pdf2base64("cert.pdf").then((res) => {
-          return res
-        })
+      doc.save('cert.pdf')
+      return pdf2base64("cert.pdf").then((res) => {
+        return res
       })
     },
   
@@ -162,4 +164,4 @@ const resolvers = {
   }
 }
 
-module.export = resolvers
+module.exports = resolvers

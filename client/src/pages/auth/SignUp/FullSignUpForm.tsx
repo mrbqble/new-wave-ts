@@ -79,23 +79,32 @@ const phoneInput = {
   border: ".1rem solid grey"
 }
 
-interface User {
+interface Location {
   city: string
-  grade: string
-  email: string
-  degree: string
-  gender: string
-  school: string
   country: string
-  telegram: string
+}
+
+interface Affiliation {
+  type: string
+  name: string
+  studyYear: Number
+  degree: string
+  location: Location
+}
+
+interface User {
+  email: string
+  gender: string
+  country: string
   password: string
   firstName: string
   instagram: string
   secondName: string
+  location: Location
   dateOfBirth: string
-  affiliation: string
   phoneNumber: string
   __typename?: string
+  affiliation: Affiliation
 }
 
 interface City {
@@ -132,23 +141,30 @@ function FullSignUpForm() {
   const [user, setUser] = useState<User>(edit
     ? currentUser
     : {
-      city: '',
-      school: '',
       email: email,
       firstName: '',
-      telegram: '@',
       secondName: '',
       gender: 'Male',
       instagram: '@',
       phoneNumber: '+',
-      grade: grades[0],
-      degree: degrees[0],
       password: password,
-      country: 'Kazakhstan',
       dateOfBirth: '2022-02-22',
-      affiliation: affiliations[0]
+      affiliation: {
+        type: affiliations[0],
+        name: schools[0],
+        studyYear: grades[0],
+        degree: degrees[0],
+        location: {
+          city: cities[0],
+          country: 'Kazakhstan'
+        }
+      },
+      location: {
+        city: cities[0],
+        country: 'Kazakhstan'
+      }
   })
-  
+
   const NameInput = (value: string) => {
     return value.toLowerCase()
       .replace(/[^a-zA-Z\s]/g, "")
@@ -177,7 +193,7 @@ function FullSignUpForm() {
   }
 
   const setCity = (value: string) => {
-    setUser({...user, city: value})
+    setUser({...user, location: {...user.location, city: value}})
   }
 
   const setGender = (value: string) => {
@@ -186,32 +202,28 @@ function FullSignUpForm() {
 
   const setAffiliation = (value: string) => {
     if (value === 'School') {
-      setUser({...user, affiliation: value, school: schools.length ? schools[0] : '', grade: grades[0]})
+      setUser({...user, affiliation: {...user.affiliation, type: value, name: schools.length ? schools[0] : '', studyYear: parseInt(grades[0]), location: user.location}})
     } else if (value === 'College') {
-      setUser({...user, affiliation: value, school: colleges.length ? colleges[0] : '', grade: courses[0]})
+      setUser({...user, affiliation: {...user.affiliation, type: value, name: colleges.length ? colleges[0] : '', studyYear: parseInt(courses[0]), location: user.location}})
     } else {
-      setUser({...user, affiliation: value, school: universities.length ? universities[0] : '', grade: courses[0]})
+      setUser({...user, affiliation: {...user.affiliation, type: value, name: universities.length ? universities[0] : '', studyYear: parseInt(courses[0]), location: user.location}})
     }
   }
 
   const setSchool = (value: string) => {
-    setUser({...user, school: value})
+    setUser({...user, affiliation: {...user.affiliation, name: value}})
   }
 
   const setGrade = (value: string) => {
-    setUser({...user, grade: value})
+    setUser({...user, affiliation: {...user.affiliation, studyYear: parseInt(value)}})
   }
 
   const setDegree = (value: string) => {
-    setUser({...user, degree: value})
+    setUser({...user, affiliation: {...user.affiliation, degree: value}})
   }
 
   const setInstagram = (value: string) => {
     setUser({...user, instagram: value ? value : '@'})
-  }
-
-  const setTelegram = (value: string) => {
-    setUser({...user, telegram: value ? value : '@'})
   }
 
   const setEmail = (value: string) => {
@@ -238,21 +250,21 @@ function FullSignUpForm() {
   
   useEffect(() => {
     if (cities?.length) {
-      if (!cities.find(item => item?.name === user?.city)) {
+      if (!cities.find(item => item?.name === user?.location.city)) {
         setCity(cities[0].name)
       }
     }
   }, [cities])
 
   useEffect(() => {
-    const tmpSchools = cities?.find(item => item?.name === user?.city)?.schools
+    const tmpSchools = cities?.find(item => item?.name === user?.location.city)?.schools
     setSchools(tmpSchools?.length ? tmpSchools : [])
-  }, [user?.city, cities])
+  }, [user?.location.city, cities])
 
   useEffect(() => {
-    if (user?.affiliation === 'School') {
+    if (user?.affiliation.type === 'School') {
       if (schools?.length) {
-        if (!schools.find(item => item === user?.school)) {
+        if (!schools.find(item => item === user?.affiliation.name)) {
           setSchool(schools[0])
         }
       }
@@ -260,9 +272,9 @@ function FullSignUpForm() {
   }, [schools])
 
   useEffect(() => {
-    if (user?.affiliation === 'College') {
+    if (user?.affiliation.type === 'College') {
       if (colleges?.length) {
-        if (!colleges.find(item => item === user?.school)) {
+        if (!colleges.find(item => item === user?.affiliation.name)) {
           setSchool(colleges[0])
         }
       }
@@ -270,9 +282,9 @@ function FullSignUpForm() {
   }, [colleges])
 
   useEffect(() => {
-    if (user?.affiliation === 'University') {
+    if (user?.affiliation.type === 'University') {
       if (universities?.length) {
-        if (!universities.find(item => item === user?.school)) {
+        if (!universities.find(item => item === user?.affiliation.name)) {
           setSchool(universities[0])
         }
       }
@@ -280,31 +292,31 @@ function FullSignUpForm() {
   }, [universities])
 
   const renderAffiliation = () => {
-    const schoolData = user?.affiliation === 'School'
+    const schoolData = user?.affiliation.type === 'School'
       ? schools
-      : user?.affiliation === 'College'
+      : user?.affiliation.type === 'College'
         ? colleges
         : universities
 
-    if(user?.affiliation !== 'Work' && user?.affiliation !== 'Unemployed')
+    if(user?.affiliation.type !== 'Work' && user?.affiliation.type !== 'Unemployed')
       return <>
         <Selector
           notListed
           data={schoolData}
-          value={user.school}
+          value={user.affiliation.name}
           onChange={setSchool}
-          title={user.affiliation}
+          title={user.affiliation.type}
         />
         <Selector
-          title={user.affiliation === 'School' ? 'Grade' : 'Course'}
-          value={user.grade}
-          data={user.affiliation === 'School' ? grades : courses}
+          title={user.affiliation.type === 'School' ? 'Grade' : 'Course'}
+          value={user.affiliation.studyYear.toString()}
+          data={user.affiliation.type === 'School' ? grades : courses}
           onChange={setGrade}
         />
-        {user.affiliation === 'University' &&
+        {user.affiliation.type === 'University' &&
           <Selector
             title='Degree'
-            value={user.degree}
+            value={user.affiliation.degree}
             data={degrees}
             onChange={setDegree}
           />
@@ -315,54 +327,15 @@ function FullSignUpForm() {
   const onPress = () => {
     if (edit) {
       delete user.__typename
-      editUser({ variables: { input: user } })
+      editUser({ variables: { input: user }})
         .then(() => setModal(true))
         .catch(() => alert('apollo server error'))
     } else {
       newUser({ variables: { input: user } })
         .then(() => setModal(true))
-        .catch(() => alert('apollo server error'))
-    }
-
-    if (user.affiliation === 'University' && !universities?.find(item => item === user.school)) {
-      newUniversity({ variables: { input: user.school }})
-        .catch(() => alert('apollo server error'))
-    }
-
-    if (!education?.find(item => item.name === user.country)) {
-      newCountry({ variables: { input: user.country }})
-        .catch(() => alert('apollo server error'))
-    }
-
-    if (!cities?.find(item => item.name === user.city)) {
-      newCity({
-        variables: {
-          input: {
-            city: user.city,
-            countryName: user.country
-      }}})
-        .catch(() => alert('apollo server error'))
-    }
-
-    if (user.affiliation === 'School' && !schools?.find(item => item === user.school)) {
-      newSchool({
-        variables: {
-          input: {
-            school: user.school,
-            cityName: user.city,
-            countryName: user.country,
-      }}})
-        .catch(() => alert('apollo server error'))
-    }
-
-    if (user.affiliation === 'College' && !colleges?.find(item => item === user.school)) {
-      newCollege({
-        variables: {
-          input: {
-            college: user.school,
-            countryName: user.country
-      }}})
-        .catch(() => alert('apollo server error'))
+        .catch((err) => {
+          console.log(err)
+          alert('apollo server error')})
     }
   }
 
@@ -421,13 +394,13 @@ function FullSignUpForm() {
           <Selector
             title='Country'
             data={countries}
-            value={user.country}
+            value={user.location.country}
             onChange={setCountry}
           />
           <Selector
             notListed
             title='City'
-            value={user.city}
+            value={user.location.city}
             onChange={setCity}
             data={cities?.map((item) => {return item?.name})}
           />
@@ -440,7 +413,7 @@ function FullSignUpForm() {
           <Selector
             title='Affiliation'
             data={affiliations}
-            value={user.affiliation}
+            value={user.affiliation.type}
             onChange={setAffiliation}
           />
           {renderAffiliation()}
@@ -448,11 +421,6 @@ function FullSignUpForm() {
             title='Instagram username'
             value={user.instagram}
             onChange={setInstagram}
-          />
-          <Input
-            title='Telegram username'
-            value={user.telegram}
-            onChange={setTelegram}
           />
           {edit && <Input
             type='email'

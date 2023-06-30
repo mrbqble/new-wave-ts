@@ -9,9 +9,7 @@ const typeDefs = [
   eventApi.typeDefs.loc.source.body
 ]
 
-
 const resolvers = _.merge(
-  {},
   userApi.resolvers,
   eventApi.resolvers
 )

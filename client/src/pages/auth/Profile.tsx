@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { saveAs } from 'file-saver'
 import styled from 'styled-components'
 import { useMutation } from '@apollo/client'
 import { useNavigate } from 'react-router-dom'
@@ -118,7 +119,9 @@ function Profile() {
             base64: base64
           }
         }}).then(() => refetchUser())
-        .catch(() => alert('apollo server error'))
+        .catch((err) => {
+          console.log(err)
+          alert('apollo server error')})
       }
     }
   }
@@ -130,7 +133,10 @@ function Profile() {
   const getCertificatePress = () => {
     getCertificate({
       variables: { input: user?.email }
-    }).then((res) => window.open(res.data.getCertificate, '_blank'))
+    }).then((res) => {
+      const file = `data:application/pdf;base64,${res.data.getCertificate}`
+      saveAs(file, `certificate.pdf`)
+    })
     .catch(() => alert('apollo server error'))
   }
 
@@ -141,6 +147,8 @@ function Profile() {
   const createReportPress = () => {
     navigate('/newreport', { state: { type: 'Clean up', _id: '' } })
   }
+
+  const dateOfBirth = new Date(parseInt(user?.dateOfBirth)).toDateString()
 
   return (
     <MainContainer>
@@ -156,36 +164,34 @@ function Profile() {
             <Field>Country:</Field>
             <Field>City:</Field>
             <Field>Affiliation:</Field>
-            {user?.affiliation !== 'Work' && user?.affiliation !== 'Unemployed' && <>
-              <Field>{user?.affiliation}:</Field>
-              <Field>{user?.affiliation === 'School' ? 'Grade' : 'Course'}:</Field>
+            {user?.affiliation.type !== 'Work' && user?.affiliation.type !== 'Unemployed' && <>
+              <Field>{user?.affiliation.type}:</Field>
+              <Field>{user?.affiliation.type === 'School' ? 'Grade' : 'Course'}:</Field>
             </>}
-            {user?.affiliation === 'University' && <Field>Degree:</Field>}
+            {user?.affiliation.type === 'University' && <Field>Degree:</Field>}
             <Field>E-mail:</Field>
             <Field>Phone number:</Field>
             <Field>Instagram account:</Field>
             <Field>Telegram username:</Field>
-            <Field>Code:</Field>
           </Data>
           <Data>
             <Info>{user?.firstName} {user?.secondName}</Info>
-            <Info>{user?.dateOfBirth}</Info>
+            <Info>{dateOfBirth}</Info>
             <Info>{user?.gender}</Info>
             <Info>{user?.type}</Info>
             <Info>{user?.volunteeringHours}</Info>
-            <Info>{user?.country}</Info>
-            <Info>{user?.city}</Info>
-            <Info>{user?.affiliation}</Info>
-            {user?.affiliation !== 'Work' && user?.affiliation !== 'Unemployed' && <>
-              <Info>{user?.school}</Info>
-              <Info>{user?.grade}</Info>
+            <Info>{user?.location.country}</Info>
+            <Info>{user?.location.city}</Info>
+            <Info>{user?.affiliation.type}</Info>
+            {user?.affiliation.type !== 'Work' && user?.affiliation.type !== 'Unemployed' && <>
+              <Info>{user?.affiliation.name}</Info>
+              <Info>{user?.affiliation.studyYear}</Info>
             </>}
-            {user?.affiliation === 'University' && <Info>{user?.degree}</Info>}
+            {user?.affiliation.type === 'University' && <Info>{user?.affiliation.degree}</Info>}
             <Info>{user?.email}</Info>
             <Info>{user?.phoneNumber}</Info>
             <Info>{user?.instagram}</Info>
-            <Info>{user?.telegram}</Info>
-            <Info>{user?.code}</Info>
+            <Info>{user?.telegramHandle ?? 'unknown'}</Info>
           </Data>
         </UserInfo>
         <Actions>
