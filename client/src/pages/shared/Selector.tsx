@@ -23,7 +23,7 @@ interface SelectProps {
 
 const Selection = styled.select<SelectProps>`
   width: ${({ width }) => width ? width/10 + 'rem' : 'max(20em, 100%)'};
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   padding: 1.5rem 2rem;
   border-radius: 0rem;
   border: .1rem solid grey;
