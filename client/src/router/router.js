@@ -44,6 +44,7 @@ function Router() {
           <Route path='/newreport' element={<NewReport/>}/>
           <Route path='/financials' element={<Financials/>}/>
           <Route path='/verify' element={<CodeVerification/>}/>
+          <Route path='/events' element={<EventInfo/>}/>
           <Route path='/statuschange' element={<StatusChange/>}/>
           <Route path='/fullsignupform' element={<FullSignUpForm/>}/>
           <Route path='/admin' element={<AdminPage/>}/>

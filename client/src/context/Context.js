@@ -1,6 +1,7 @@
 import { useLazyQuery } from '@apollo/client'
 import React, { createContext , useState, useEffect} from 'react'
 import { GET_EVENTS, GET_USER } from '../apollo/actions'
+import imageCompression from 'browser-image-compression'
 
 const context = createContext()
 
@@ -19,6 +20,14 @@ function Context({ children }) {
       .catch(() => alert('apollo server error (Context refetch user)'))
   }
 
+  const compressImage = async (file) => {
+    const options = {
+      maxSizeMB: 0.5,
+      maxWidthOrHeight: 1080
+    }
+    return await imageCompression(file, options)
+  }
+
   const contextValues = {
     user,
     events,
@@ -28,7 +37,7 @@ function Context({ children }) {
     isLoggedIn,
     refetchUser,
     setIsLoggedIn,
-    getEvents
+    compressImage
   }
 
   useEffect(() => {
@@ -38,7 +47,7 @@ function Context({ children }) {
         .catch(() => alert('apollo server error (Context getUser token)'))
     }
     getEvents()
-      .then(res => setEvents(res.data.allEvents))
+      .then(res => setEvents(res.data.events))
       .catch(() => alert('apollo server error (Context after token - getEvents)'))
   }, [])
 

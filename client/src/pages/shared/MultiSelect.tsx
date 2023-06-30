@@ -46,6 +46,7 @@ function MultiSelect({
           control: (baseStyles) => ({
             ...baseStyles,
             borderRadius: '0rem',
+            fontSize: '18px',
             border: '.1rem solid gray'
           }),
           multiValue: (baseStyles) => ({
@@ -57,7 +58,7 @@ function MultiSelect({
           }),
           multiValueLabel: (baseStyles) => ({
             ...baseStyles,
-            fontSize: '1.8rem',
+            fontSize: '18px',
             padding: '.3rem .5rem',
             color: 'black'
           }),
@@ -68,7 +69,7 @@ function MultiSelect({
           }),
           input: (baseStyles) => ({
             ...baseStyles,
-            fontSize: '1.8rem',
+            fontSize: '18px',
             color: 'black'
           }),
           dropdownIndicator: (baseStyles, state) => ({
@@ -85,6 +86,14 @@ function MultiSelect({
             ...baseStyles,
             display: state.isMulti ? 'flex' : 'none',
           }),
+          option: (baseStyles) => ({
+            ...baseStyles,
+            fontSize: '18px'
+          }),
+          noOptionsMessage: (baseStyles) => ({
+            ...baseStyles,
+            fontSize: '18px'
+          })
         }}
       />
     </MainContainer>

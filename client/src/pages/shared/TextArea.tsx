@@ -15,7 +15,7 @@ const Title = styled.div`
 `
 
 const Field = styled.textarea`
-  width: 20em;
+  width: 22.334em;
   font-size: 1.8rem;
   padding: 1.5rem 2rem;
   border-radius: 0rem;

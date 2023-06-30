@@ -23,14 +23,14 @@ interface SelectProps {
 
 const Selection = styled.select<SelectProps>`
   width: ${({ width }) => width ? width/10 + 'rem' : 'max(20em, 100%)'};
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   padding: 1.5rem 2rem;
   border-radius: 0rem;
   border: .1rem solid grey;
   -webkit-appearance: none;
   background-image: url('data:image/svg+xml,<svg width="24" height="15" viewBox="0 0 24 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 1.5L11.8795 11.5L2 1.5" stroke="%230013BC" stroke-width="4"/></svg>');
   background-position: bottom 45% right 1.5rem;
-  background-size: .1.6rem 1rem;
+  background-size: 1.6rem 1rem;
   background-repeat: no-repeat;
 
   &:focus {
