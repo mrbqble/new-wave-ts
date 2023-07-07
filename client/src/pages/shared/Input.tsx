@@ -18,7 +18,7 @@ const Title = styled.div`
 `
 
 const Field = styled.input`
-  width: 23em;
+  width: max(20em, 100%);
   font-size: 1.8rem;
   padding: 1.5rem 2rem;
   border-radius: 0rem;
@@ -35,12 +35,17 @@ const Message = styled.p`
 const FieldBox = styled.div`
   display: flex;
   align-items: end;
+  position: relative;
 `
 
 const ShowHideIcons = styled.div`
   display: flex;
-  margin-bottom: 2rem;
-  margin-left: -4rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
+  /* margin-bottom: 2rem;
+  margin-left: -4rem; */
 `
 
 const Must = styled(Title)`

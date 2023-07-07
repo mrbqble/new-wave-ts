@@ -196,10 +196,7 @@ function Profile() {
         </UserInfo>
         <Actions>
           <ProfileImage>
-            {user?.photo
-              ? <Image src={user?.photo}/>
-              : <ProfileIcon/>
-            }
+            <Image src={user?.photo || ProfileIcon}/>
             <EditImage>
               <CameraIcon/>
               <EditText>Edit</EditText>

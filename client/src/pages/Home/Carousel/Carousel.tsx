@@ -7,10 +7,10 @@ import { EffectCreative, Autoplay } from "swiper"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import ArrowIcon from '../../assets/icons/ArrowIcon'
 import Link from '../../shared/Link'
-import { useNavigate } from 'react-router-dom'
-import PrevButton from './buttons/PrevButton'
-import NextButton from './buttons/NextButton'
+import NextButton from '../Carousel/buttons/NextButton'
+import PrevButton from '../Carousel/buttons/PrevButton'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Title = styled.p`
   font-size: 3rem;
@@ -102,12 +102,13 @@ const Next = styled(ButtonText)`
   line-height: 1.8rem;
 `
 
-interface EventProps {
+export interface EventProps {
   date: string
   title: string
   text: string
   image: string
-  city: string
+  city: string,
+  number: string
 }
 
 function Carousel() {
@@ -116,11 +117,11 @@ function Carousel() {
   const { months } = json;
   const { events } = useContext();
   const { user, refetchUser, isLoggedIn } = useContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     refetchUser()
   }, [])
-  const navigate = useNavigate()
 
   const renderSLides = (item: EventProps, index: number) => {
     date = item.date.split('-')
@@ -134,7 +135,7 @@ function Carousel() {
             <SubText>{text[1]}</SubText>
             <Date>{date[2] + " " + months[parseInt(date[1]) - 1] + " " + date[0]}</Date>
           </Info>
-          <Navigate onClick={() => navigate(`events`, { state: { event: item }})}  href="/event/1" >learn more<ArrowIcon/></Navigate>
+          <Navigate onClick={() => navigate(`event/${item.number}`)} >learn more<ArrowIcon/></Navigate>
         </Event>
         <Slider>
           <Number>0{index + 1}</Number>

@@ -22,7 +22,7 @@ interface SelectProps {
 }
 
 const Selection = styled.select<SelectProps>`
-  width: ${({ width }) => width ? width/10 : '40.2'}rem;
+  width: ${({ width }) => width ? width/10 + 'rem' : 'max(20em, 100%)'};
   font-size: 1.8rem;
   padding: 1.5rem 2rem;
   border-radius: 0rem;
@@ -39,15 +39,20 @@ const Selection = styled.select<SelectProps>`
 `
 
 const Field = styled.input`
-  width: 17em;
+  width: 80%;
   font-size: 1.8rem;
   padding: 1.4rem 2rem;
   border-radius: 0rem;
-  border: .1rem solid grey;
   position: absolute;
-  margin-left: -40rem;
+  top: 0;
+  left: 0;
+  outline: none;
   margin-top: .2rem;
+  margin-bottom: .2rem;
+  margin-left: .2rem;
+  height: calc(100% - .4rem);
   border: none;
+  border-right: none;
   z-index: 10;
 `
 
@@ -79,7 +84,7 @@ function Selector({
         {title}:
         <Must>*</Must>
       </Title>}
-      <div>
+      <div style={{position: "relative"}}>
         <Selection
           width={width}
           value={value}

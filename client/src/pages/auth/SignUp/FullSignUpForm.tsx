@@ -73,7 +73,7 @@ const Must = styled(FieldTitle)`
 
 const phoneInput = {
   height: "5.5rem",
-  width: "40.2rem",
+  width: "max(20em, 100%)",
   fontSize: "1.8rem",
   borderRadius: "0rem",
   border: ".1rem solid grey"
