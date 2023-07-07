@@ -7,7 +7,7 @@ import {
 } from '@apollo/client'
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/graphql'
+  uri: 'https://new-wave-ts.onrender.com/graphql'
 })
 
 const authLink = setContext((_, { headers }) => {
