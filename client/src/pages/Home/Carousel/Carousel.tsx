@@ -7,10 +7,10 @@ import { EffectCreative, Autoplay } from "swiper"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import ArrowIcon from '../../assets/icons/ArrowIcon'
 import Link from '../../shared/Link'
-import NextButton from '../Carousel/buttons/NextButton'
-import PrevButton from '../Carousel/buttons/PrevButton'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import PrevButton from './buttons/PrevButton'
+import NextButton from './buttons/NextButton'
 
 const Title = styled.p`
   font-size: 3rem;

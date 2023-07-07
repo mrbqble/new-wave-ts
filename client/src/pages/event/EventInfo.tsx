@@ -3,7 +3,7 @@ import Button, { ButtonMode } from '../shared/Button';
 import { useEffect, useState, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useContext } from '../../context/Context';
-import { EventProps } from '../Home/Carousel/Carousel';
+import { EventProps } from '../Home/carousel/Carousel';
 import json from '../shared/variables.json';
 
 const descriptionFontSize = "2rem";
