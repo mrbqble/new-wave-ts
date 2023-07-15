@@ -15,6 +15,7 @@ const BackgroundImage = styled.img`
   width: 99.1vw;
   height: 100vh;
   top: 0;
+  
 `
 
 const Content = styled.div`
@@ -30,6 +31,9 @@ const Title = styled.p`
   font-weight: bolder;
   text-transform: uppercase;
   text-align: center;
+  @media (max-width: 520px) {
+    font-size: 9rem;
+  }
 `
 
 const Subtitle = styled.p`

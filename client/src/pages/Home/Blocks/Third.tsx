@@ -9,6 +9,7 @@ const MainContainer = styled.div`
   text-align: left;
   justify-content: space-evenly;
   padding: 5rem 2rem;
+  gap: 2rem;
 `
 
 const Title = styled.p`
@@ -44,19 +45,20 @@ const Quote = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: start;
+  min-width: min(40rem, 100%);
 `
 
 function Third() {
   return (
     <MainContainer>
       <Quote>
-        <Title>"A person who has collected a bag of other people's garbage will never throw out his own."</Title>
+        <Title style={{minWidth: "100%"}}>"A person who has collected a bag of other people's garbage will never throw out his own."</Title>
         <Navigate>watch our story<ArrowIcon/></Navigate>
       </Quote>
       <FounderInfo>
         <FounderImage src={founder} height={320}/>
         <Text>...ecology starts from our mind.</Text>
-        <FounderName>our founder: zinaenur islam</FounderName>
+        <FounderName>our founder: Zinaenur Islam</FounderName>
       </FounderInfo>
     </MainContainer>
   )

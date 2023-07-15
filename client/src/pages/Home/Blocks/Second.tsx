@@ -14,19 +14,29 @@ const MainContainer = styled.div`
 
 const Header = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: .8rem;
+  align-items: center;
+  min-width: 100%;
+  flex-direction: column;
 `
 
-  const Title = styled.p`
+const SubHeader = styled.div`
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  width: 100%;
+  flex-grow: 1;
+  padding-left: 10%;
+`
+
+const Title = styled.p`
   font-size: 5rem;
   font-weight: bold;
 `
 
 const Subtitle = styled.p`
   font-size: 3rem;
-  margin: 4rem 0rem;
+  margin: 6rem 0rem;
 `
 
 const Content = styled.div`
@@ -39,7 +49,7 @@ const Content = styled.div`
 `
 
 const Stat = styled.div`
-  width: 26vw;
+  width: max(26vw, 35rem);
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -76,34 +86,36 @@ function Second() {
   return (
     <MainContainer id="about">
       <Header>
-        <Title>We save the</Title>
-        <Swiper
-          initialSlide={1}
-          slidesPerView={3}
-          modules={[Autoplay]}
-          centeredSlides={true}
-          loop={true}
-          direction={"vertical"}
-          style={{
-            zIndex: "-1",
-            height: "19vh",
-            width: '9vw',
-            overflow: 'hidden'
-          }}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
-        >
-          {titles.map((item, index) =>
-            <SwiperSlide key={index}>
-              {({ isActive }) => 
-                <Title style={{color: isActive ? "#0013BC" : "#D0D5FF"}}>{item}.</Title>}
-            </SwiperSlide>
-          )}
-        </Swiper>
+        <SubHeader>
+          <Title style={{width: "100%", textAlign: "right", paddingTop: "1rem"}}>We save the</Title>
+          <Swiper
+            initialSlide={1}
+            slidesPerView={3}
+            modules={[Autoplay]}
+            centeredSlides={true}
+            loop={true}
+            direction={"vertical"}
+            style={{
+              zIndex: "-1",
+              height: "19vh",
+              width: '100%',
+              overflow: 'hidden',
+            }}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+          >
+            {titles.map((item, index) =>
+              <SwiperSlide key={index}>
+                {({ isActive }) =>
+                  <Title style={{color: isActive ? "#0013BC" : "#D0D5FF"}}>{item}.</Title>}
+              </SwiperSlide>
+            )}
+          </Swiper>
+        </SubHeader>
+        <Title>Together.</Title>
       </Header>
-      <Title style={{marginTop: -59}}>Together.</Title>
       <Subtitle>How do we tackle with environmental issues?</Subtitle>
       <Content>
         {stats.map((item, index) =>

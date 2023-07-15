@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Carousel from "../carousel/Carousel"
+import Carousel from "../Carousel/Carousel"
 
 const MainContainer = styled.div`
   padding: 5rem 2rem;
