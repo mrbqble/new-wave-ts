@@ -8,12 +8,21 @@ import Link from './Link';
 const MainContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 4rem 0rem 4rem 0rem;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
+  flex-basis: auto;
+  margin: 4rem 2rem;
+  gap: 3rem;
+  justify-content: center;
+  @media (max-width: 370px) {
+    flex-direction: column;
+  }
 `
 
 const List = styled.ul`
   list-style-type: none;
+  @media (max-width: 370px) {
+    margin-left: 20vw;
+  }
 `
 
 const Li = styled.li`
@@ -41,44 +50,44 @@ function Footer() {
   return (
     <MainContainer>
       {data.footer.map((item, index) => 
-        <List key={index}>
-          <Li>
-            <Title>{item.title}</Title>
-          </Li>
-          {item.links.map((item, index) => 
-            <Li key={index}>
-              <Navigate href={item.href}>{item.title}</Navigate>
+          <List>
+            <Li>
+              <Title>{item.title}</Title>
             </Li>
-          )}
-        </List>
+            {item.links.map((item, index) =>
+              <Li key={index}>
+                <Navigate href={item.href}>{item.title}</Navigate>
+              </Li>
+            )}
+          </List>
       )}
-      <List>
-        <Li style={{ textTransform: 'uppercase' }}>
-					<Title>new wave</Title>
-        </Li>
-        <Li>© {new Date().getFullYear()}</Li>
-        <Li>{message}</Li>
-        <Li>
-          <Link
-            target='_blank'
-            href='https://www.tiktok.com/'
-          >
-            <TiktokIcon size={45}/>
-          </Link>
-          <Link
-            target='_blank'
-            href='https://www.instagram.com/newwave_club'
-          >
-            <InstagramIcons size={45}/>
-          </Link>
-          <Link
-            target='_blank'
-            href='https://youtube.com'
-          >
-            <YoutubeIcon size={45}/>
-          </Link>
-        </Li>
-      </List>
+        <List>
+          <Li style={{ textTransform: 'uppercase' }}>
+                  <Title>new wave</Title>
+          </Li>
+          <Li>© {new Date().getFullYear()}</Li>
+          <Li>{message}</Li>
+          <Li>
+            <Link
+              target='_blank'
+              href='https://www.tiktok.com/'
+            >
+              <TiktokIcon size={45}/>
+            </Link>
+            <Link
+              target='_blank'
+              href='https://www.instagram.com/newwave_club'
+            >
+              <InstagramIcons size={45}/>
+            </Link>
+            <Link
+              target='_blank'
+              href='https://youtube.com'
+            >
+              <YoutubeIcon size={45}/>
+            </Link>
+          </Li>
+        </List>
     </MainContainer>
   )
 }
