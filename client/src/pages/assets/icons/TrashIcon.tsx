@@ -1,4 +1,4 @@
-const TrashIcon = () => (
+export const TrashIcon = () => (
   <svg
     width={45}
     height={60}
@@ -11,5 +11,4 @@ const TrashIcon = () => (
       fill="white"
     />
   </svg>
-);
-export default TrashIcon;
+)

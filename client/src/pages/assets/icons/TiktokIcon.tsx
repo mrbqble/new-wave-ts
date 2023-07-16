@@ -1,4 +1,4 @@
-const TiktokIcon = ({size = 30}) => (
+export const TiktokIcon = ({ size = 30 }) => (
   <svg
     width={size}
     height={size}
@@ -12,4 +12,3 @@ const TiktokIcon = ({size = 30}) => (
     />
   </svg>
 );
-export default TiktokIcon;
