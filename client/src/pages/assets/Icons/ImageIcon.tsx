@@ -1,4 +1,4 @@
-const ImageIcon = () => (
+export const ImageIcon = () => (
   <svg
     width={402}
     height={402}
@@ -16,4 +16,3 @@ const ImageIcon = () => (
     />
   </svg>
 );
-export default ImageIcon;

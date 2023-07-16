@@ -1,6 +1,5 @@
-import { useNavigate } from "react-router-dom"
-import "./error.css";
-
+import { useNavigate } from 'react-router-dom';
+import './error.css';
 
 // var parallax = function(e) {
 //   var windowWidth = $(window).width();
@@ -33,41 +32,47 @@ import "./error.css";
 // $(".not-found").on("mouseleave", stopParallax);
 // });
 
-
 const Error = () => {
   const navigate = useNavigate();
 
   return (
-<div className="not-found parallax">
-            <div className="sky-bg"></div>
-            <div className="wave-7"></div>
-            <div className="wave-6"></div>
-            <a className="wave-island" onClick={() => navigate('/')}>
-                    <img src="http://res.cloudinary.com/andrewhani/image/upload/v1524501929/404/island.svg" alt="Island" />
-                </a>
-            <div className="wave-5"></div>
-            <div className="wave-lost wrp">
-                <span>4</span>
-                <span>0</span>
-                <span>4</span>
-            </div>
-            <div className="wave-4"></div>
-            <div className="wave-boat">
-                <img className="boat" src="http://res.cloudinary.com/andrewhani/image/upload/v1524501894/404/boat.svg" alt="Boat" />
-            </div>
-            <div className="wave-3"></div>
-            <div className="wave-2"></div>
-            <div className="wave-1"></div>
-            <div className="wave-message">
-                <p>Your're lost</p>
-                <p>Click on the island to return</p>
-            </div>
-        </div>  )
-}
-
+    <div className="not-found parallax">
+      <div className="sky-bg"></div>
+      <div className="wave-7"></div>
+      <div className="wave-6"></div>
+      <a className="wave-island" onClick={() => navigate('/')}>
+        <img
+          src="http://res.cloudinary.com/andrewhani/image/upload/v1524501929/404/island.svg"
+          alt="Island"
+        />
+      </a>
+      <div className="wave-5"></div>
+      <div className="wave-lost wrp">
+        <span>4</span>
+        <span>0</span>
+        <span>4</span>
+      </div>
+      <div className="wave-4"></div>
+      <div className="wave-boat">
+        <img
+          className="boat"
+          src="http://res.cloudinary.com/andrewhani/image/upload/v1524501894/404/boat.svg"
+          alt="Boat"
+        />
+      </div>
+      <div className="wave-3"></div>
+      <div className="wave-2"></div>
+      <div className="wave-1"></div>
+      <div className="wave-message">
+        <p>Your're lost</p>
+        <p>Click on the island to return</p>
+      </div>
+    </div>
+  );
+};
 
 // const Error = () => {
-  
+
 //   return (
 //     <div className="main">
 //   <div>
@@ -360,9 +365,8 @@ const Error = () => {
 //   )
 // }
 
-
 // const Error = () => {
-  
+
 //   return (
 //     <svg id="404-Dave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 250">
 //     <defs>
@@ -376,7 +380,7 @@ const Error = () => {
 //       <path id="cloud-left" d="M219.3 131.1c0-4.5-3.8-8.2-8.4-7.8-1.3-3.7-4.8-6.3-8.8-6.3-3.9 0-7.3 2.4-8.7 5.9 0 5.5.6 10.9 1.6 16.2h16.5c4.2-.1 7.8-3.7 7.8-8z"/>
 //     </g>
 //     <path id="Outline-blue" fill="#263D52" d="M275.7 40.3c45.5 0 82.3 36.9 82.3 82.3S321.1 205 275.7 205s-82.3-36.9-82.3-82.3 36.8-82.4 82.3-82.4m0-4c-47.6 0-86.3 38.7-86.3 86.3s38.7 86.3 86.3 86.3c47.6 0 86.3-38.7 86.3-86.3s-38.7-86.3-86.3-86.3z"/>
-    
+
 //     <path fill="#2D495E" d="M275.7 45.3c44.6 0 80.9 35.5 82.3 79.8 0-.8.1-1.7.1-2.5 0-45.5-36.9-82.3-82.3-82.3s-82.3 36.9-82.3 82.3c0 .8 0 1.7.1 2.5 1.1-44.2 37.4-79.8 82.1-79.8z" id="Bg-Innershadow" opacity=".1"/>
 //   </g>
 //   <g id="Dave-clipper" clip-path="url(#center-circle-clip)">
@@ -426,4 +430,4 @@ const Error = () => {
 //   )
 // }
 
-export default Error
+export default Error;

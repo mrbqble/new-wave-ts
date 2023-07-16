@@ -1,13 +1,13 @@
-import styled from 'styled-components'
-import back from '../../assets/images/back.png'
-import Button, { ButtonMode } from '../../shared/Button'
+import styled from 'styled-components';
+import back from '../../assets/images/back.png';
+import Button, { ButtonMode } from '../../shared/Button';
 
 const MainContainer = styled.div`
   height: 92vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-`
+`;
 
 const BackgroundImage = styled.img`
   position: absolute;
@@ -15,14 +15,14 @@ const BackgroundImage = styled.img`
   width: 99.1vw;
   height: 100vh;
   top: 0;
-`
+`;
 
 const Content = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
   margin-top: auto;
-`
+`;
 
 const Title = styled.p`
   color: white;
@@ -30,7 +30,7 @@ const Title = styled.p`
   font-weight: bolder;
   text-transform: uppercase;
   text-align: center;
-`
+`;
 
 const Subtitle = styled.p`
   margin-top: auto;
@@ -38,20 +38,26 @@ const Subtitle = styled.p`
   font-weight: 500;
   font-size: 2.2rem;
   background-color: white;
-  padding: .1.6rem 10vw .1.6rem 2rem;
-`
+  padding: 0.1.6rem 10vw 0.1.6rem 2rem;
+`;
 
 function First() {
   return (
     <MainContainer>
-      <BackgroundImage src={back}/>
+      <BackgroundImage src={back} />
       <Content>
-        <Title>think eco<br/>logically</Title>
-        <Button onClick={() => {}} mode={ButtonMode.PRIMARY}>join our community</Button>
+        <Title>
+          think eco
+          <br />
+          logically
+        </Title>
+        <Button onClick={() => {}} mode={ButtonMode.PRIMARY}>
+          join our community
+        </Button>
       </Content>
       <Subtitle>Take a small step to save our Planet with us.</Subtitle>
     </MainContainer>
-  )
+  );
 }
 
-export default First
+export default First;

@@ -1,15 +1,15 @@
-import Apollo from './apollo/Apollo'
-import Router from './router/router'
-import Context from './context/Context'
+import Apollo from './apollo/Apollo';
+import Context from './context/Context';
+import Router from './router/router';
 
 function App() {
   return (
     <Apollo>
       <Context>
-        <Router/>
+        <Router />
       </Context>
     </Apollo>
-  )
+  );
 }
 
-export default App
+export default App;
