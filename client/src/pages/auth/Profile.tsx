@@ -131,6 +131,10 @@ function Profile() {
   }
 
   const getCertificatePress = () => {
+    if(user?.volunteeringHours<=0){
+      console.log("You need to have at least 1 volunteering hour");
+      return;
+    }
     getCertificate({
       variables: { input: user?.email }
     }).then((res) => {
