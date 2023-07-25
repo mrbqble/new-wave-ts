@@ -28,6 +28,7 @@ const MainContainer = styled.div`
   padding: 5rem 2rem;
   align-items: center;
   flex-direction: column;
+  
 `
 
 const Title = styled.p`
@@ -44,6 +45,9 @@ const Fields = styled.div`
   display: grid;
   gap: 4rem 8rem;
   grid-template-columns: 40.2rem 40.2rem;
+  @media (max-width: 580px) {
+    grid-template-columns: 100%;
+  }
 `
 
 const Form = styled.div`
@@ -52,6 +56,9 @@ const Form = styled.div`
   padding: 3rem 4rem;
   flex-direction: column;
   background-color: rgba(208, 213, 255, 0.5);
+  @media (max-width: 580px) {
+    width: min(100%, 60rem);
+  }
 `
 
 const FieldBox = styled.div`
@@ -162,7 +169,7 @@ function FullSignUpForm() {
       location: {
         city: cities[0],
         country: 'Kazakhstan'
-      }
+      },
   })
 
   const NameInput = (value: string) => {
@@ -236,7 +243,7 @@ function FullSignUpForm() {
       setEducation(allCountries)
       setUniversities(allUniversities)
     } else if (!loading && error) {
-      alert('apollo server error')
+      console.error(`apollo server error. ${error.message}`)
     }
   }, [loading, error, data])
 
@@ -300,6 +307,7 @@ function FullSignUpForm() {
 
     if(user?.affiliation.type !== 'Work' && user?.affiliation.type !== 'Unemployed')
       return <>
+        
         <Selector
           notListed
           data={schoolData}

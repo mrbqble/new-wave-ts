@@ -12,6 +12,7 @@ import { GET_COORDINATORS, GET_COUNTRIES, NEW_EVENT } from "../../apollo/actions
 import MultiSelect, { Option } from "../shared/MultiSelect"
 import CreatableMultiSelect from "../shared/CreatableMultiSelect"
 import { useContext } from "../../context/Context"
+import { useNavigate } from "react-router-dom"
 
 const MainContainer = styled.div`
   gap: 4rem;
@@ -148,7 +149,8 @@ interface EventType {
 
 function NewEvent() {
 
-  const { compressImage } = useContext()
+  const navigate = useNavigate();
+  const { compressImage, user, refetchUser } = useContext()
   const [createEvent] = useMutation(NEW_EVENT)
   const { types, formats, partners } = data.newEvent
   const [cities, setCities] = useState<string[]>([])
@@ -251,10 +253,11 @@ function NewEvent() {
   useEffect(() => {
     getCountries()
       .then((res) => setCountries(res.data.allCountries))
-      .catch(() => alert('apollo server error'))
+      .catch(() => alert('apollo server error (newevent.tsx getCountries)'))
     getCoordinators()
       .then((res) => setCoordinators(res.data.coordinators))
-      .catch(() => alert('apollo server error'))
+      .catch(() => alert('apollo server error (newevent.tsx getCoordinators)'))
+    refetchUser();
   }, [])
 
   useEffect(() => {
@@ -279,6 +282,12 @@ function NewEvent() {
       .then((res) => console.log(res.data.newEvent))
       .catch((err) => console.log(err))
   }
+
+  /* I want to navigate to home page if user is a volunteer. Vopros: Kak uznat role usera ?
+  if(user?.role===volunteer){ 
+    navigate('/');
+  }
+  */
 
   return (
     <MainContainer>
