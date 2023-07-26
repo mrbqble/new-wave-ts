@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useContext } from '../../context/Context';
 import { CheckCircle } from '../assets/icons/CheckMarkCircle';
@@ -9,7 +8,6 @@ import { Location } from '../assets/icons/Location';
 import { ProfileIcon } from '../assets/icons/ProfileIcon';
 import Button, { ButtonMode } from '../shared/Button';
 import CheckBox from '../shared/CheckBox/CheckBox';
-import json from '../shared/variables.json';
 
 const Main = styled.main`
   display: flex;
@@ -353,9 +351,6 @@ const exampleDate = new Date('2022-03-25');
 function AdminPage() {
   const [fininv, setFininv] = useState<boolean>(true);
   const [eventtask, setEventtask] = useState<boolean>(true);
-
-  const { months } = json;
-  const navigate = useNavigate();
   const { user, refetchUser } = useContext();
 
   useEffect(() => {

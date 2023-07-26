@@ -135,6 +135,7 @@ function Input({
         <Field
           type={valueType}
           value={value}
+          max={1000}
           placeholder={placeholder}
           onKeyDown={(e) => InputCheck(e)}
           onChange={(e) => onChange(e.target.value)}

@@ -1,26 +1,20 @@
-import Input from '../../shared/Input';
-import styled from 'styled-components';
-import Modal from '../../shared/Modal';
-import Selector from '../../shared/Selector';
-import 'react-phone-input-2/lib/style.css';
+import { useMutation } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
-import json from '../../shared/variables.json';
-import countryList from 'react-select-country-list';
-import { useContext } from '../../../context/Context';
-import { useMutation, useQuery } from '@apollo/client';
-import Button, { ButtonMode } from '../../shared/Button';
+import 'react-phone-input-2/lib/style.css';
 import { useLocation, useNavigate } from 'react-router-dom';
+import countryList from 'react-select-country-list';
+import styled from 'styled-components';
 import {
-  GET_EDUCATION,
-  NEW_CITY,
-  NEW_COLLEGE,
-  NEW_COUNTRY,
-  NEW_SCHOOL,
-  NEW_UNIVERSITY,
-  NEW_USER,
   EDIT_USER,
+  NEW_USER
 } from '../../../apollo/actions';
+import { useContext } from '../../../context/Context';
+import Button, { ButtonMode } from '../../shared/Button';
+import Input from '../../shared/Input';
+import Modal from '../../shared/Modal';
+import Selector from '../../shared/Selector';
+import json from '../../shared/variables.json';
 
 const MainContainer = styled.div`
   gap: 3rem;
@@ -122,20 +116,14 @@ function FullSignUpForm() {
   const navigate = useNavigate();
   const currentUser = useContext().user;
   const [newUser] = useMutation(NEW_USER);
-  const [newCity] = useMutation(NEW_CITY);
   const [editUser] = useMutation(EDIT_USER);
-  const [newSchool] = useMutation(NEW_SCHOOL);
   const countries = countryList().getLabels();
-  const [newCountry] = useMutation(NEW_COUNTRY);
-  const [newCollege] = useMutation(NEW_COLLEGE);
   const [cities, setCities] = useState<City[]>([]);
   const [schools, setSchools] = useState<string[]>([]);
   const [modal, setModal] = useState<boolean>(false);
-  const [newUniversity] = useMutation(NEW_UNIVERSITY);
   const [colleges, setColleges] = useState<string[]>([]);
   const { email, password, edit } = useLocation().state;
   const [education, setEducation] = useState<Country[]>([]);
-  const { loading, error, data } = useQuery(GET_EDUCATION);
   const [universities, setUniversities] = useState<string[]>([]);
   const { affiliations, courses, degrees, grades, gender } = json.signUp;
   const [user, setUser] = useState<User>(
@@ -261,16 +249,6 @@ function FullSignUpForm() {
   const setEmail = (value: string) => {
     setUser({ ...user, email: value });
   };
-
-  useEffect(() => {
-    if (!loading && !error && data) {
-      const { allCountries, allUniversities } = data;
-      setEducation(allCountries);
-      setUniversities(allUniversities);
-    } else if (!loading && error) {
-      alert('apollo server error');
-    }
-  }, [loading, error, data]);
 
   useEffect(() => {
     const tmpCountry = education?.find((item) => item.name === user?.country);

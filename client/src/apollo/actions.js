@@ -29,6 +29,8 @@ export const GET_USER = gql`
           country
         }
       }
+      joinedChat
+      points
     }
   }
 `;
@@ -53,6 +55,9 @@ export const GET_EVENTS = gql`
       createdAt
       duration
       partners
+      registered {
+        participantID
+      }
     }
   }
 `;
@@ -84,20 +89,6 @@ export const CHECK_EMAIL = gql`
   }
 `;
 
-export const GET_EDUCATION = gql`
-  query {
-    allCountries {
-      name
-      cities {
-        name
-        schools
-      }
-      colleges
-    }
-    allUniversities
-  }
-`;
-
 export const NEW_USER = gql`
   mutation ($input: UserInput) {
     newUser(input: $input)
@@ -110,55 +101,14 @@ export const EDIT_USER = gql`
   }
 `;
 
-export const NEW_UNIVERSITY = gql`
-  mutation ($input: String) {
-    newUniversity(input: $input)
-  }
-`;
-
-export const NEW_COUNTRY = gql`
-  mutation ($input: String) {
-    newCountry(input: $input)
-  }
-`;
-
-export const NEW_CITY = gql`
-  mutation ($input: CityInput) {
-    newCountry(input: $input)
-  }
-`;
-
-export const NEW_SCHOOL = gql`
-  mutation ($input: SchoolInput) {
-    newCountry(input: $input)
-  }
-`;
-
-export const NEW_COLLEGE = gql`
-  mutation ($input: CollegeInput) {
-    newCountry(input: $input)
-  }
-`;
-
 export const CHECK_CODE = gql`
   query ($input: String) {
     checkCode(input: $input) {
       type
       year
       country
-      fullName
-      volunteeringHours
-    }
-  }
-`;
-
-export const GET_COUNTRIES = gql`
-  query {
-    allCountries {
       name
-      cities {
-        name
-      }
+      volunteeringHours
     }
   }
 `;

@@ -1,13 +1,13 @@
-import { useEffect } from 'react';
-import { saveAs } from 'file-saver';
-import styled from 'styled-components';
 import { useMutation } from '@apollo/client';
+import { saveAs } from 'file-saver';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { GET_CERTIFICATE, NEW_PROFILE_IMAGE } from '../../apollo/actions';
 import { useContext } from '../../context/Context';
 import { CameraIcon } from '../assets/icons/CameraIcon';
-import Button, { ButtonMode } from '../shared/Button';
 import { ProfileIcon } from '../assets/icons/ProfileIcon';
-import { GET_CERTIFICATE, NEW_PROFILE_IMAGE } from '../../apollo/actions';
+import Button, { ButtonMode } from '../shared/Button';
 
 const MainContainer = styled.div`
   padding: 5rem 2rem;
@@ -152,8 +152,6 @@ function Profile() {
     navigate('/newreport', { state: { type: 'Clean up', _id: '' } });
   };
 
-  const dateOfBirth = new Date(parseInt(user?.dateOfBirth)).toDateString();
-
   return (
     <MainContainer>
       <Title>Profile</Title>
@@ -181,13 +179,12 @@ function Profile() {
             <Field>E-mail:</Field>
             <Field>Phone number:</Field>
             <Field>Instagram account:</Field>
-            <Field>Telegram username:</Field>
           </Data>
           <Data>
             <Info>
               {user?.firstName} {user?.secondName}
             </Info>
-            <Info>{dateOfBirth}</Info>
+            <Info>{user?.dateOfBirth}</Info>
             <Info>{user?.gender}</Info>
             <Info>{user?.type}</Info>
             <Info>{user?.volunteeringHours}</Info>
@@ -205,14 +202,13 @@ function Profile() {
               <Info>{user?.affiliation.degree}</Info>
             )}
             <Info>{user?.email}</Info>
-            <Info>{user?.phoneNumber}</Info>
+            <Info>+{user?.phoneNumber}</Info>
             <Info>{user?.instagram}</Info>
-            <Info>{user?.telegramHandle ?? 'unknown'}</Info>
           </Data>
         </UserInfo>
         <Actions>
           <ProfileImage>
-            <Image src={user?.photo || ProfileIcon} />
+            {user?.photo ? <Image src={user?.photo} /> : <ProfileIcon/>}
             <EditImage>
               <CameraIcon />
               <EditText>Edit</EditText>
@@ -235,7 +231,7 @@ function Profile() {
           <Button mode={ButtonMode.DEFAULT} onClick={editProfile}>
             edit my profile
           </Button>
-          {user?.type === 'Coordinator' && (
+          {user?.type !== 'Volunteer' && (
             <>
               <Button mode={ButtonMode.DEFAULT} onClick={createEventPress}>
                 create event

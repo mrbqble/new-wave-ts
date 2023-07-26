@@ -1,7 +1,7 @@
 import { useLazyQuery } from '@apollo/client';
-import React, { createContext, useState, useEffect } from 'react';
-import { GET_EVENTS, GET_USER } from '../apollo/actions';
 import imageCompression from 'browser-image-compression';
+import React, { createContext, useEffect, useState } from 'react';
+import { GET_EVENTS, GET_USER } from '../apollo/actions';
 
 const context = createContext();
 

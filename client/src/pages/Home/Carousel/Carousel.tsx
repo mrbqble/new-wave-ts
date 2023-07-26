@@ -1,16 +1,16 @@
-import 'swiper/css';
-import 'swiper/css/effect-creative';
-import json from '../../shared/variables.json';
-import styled from 'styled-components';
-import { useContext } from '../../../context/Context';
-import { EffectCreative, Autoplay } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { ArrowIcon } from '../../assets/icons/ArrowIcon';
-import Link from '../../shared/Link';
-import NextButton from '../Carousel/buttons/NextButton';
-import PrevButton from '../Carousel/buttons/PrevButton';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { Autoplay, EffectCreative } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/effect-creative';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { useContext } from '../../../context/Context';
+import { ArrowIcon } from '../../assets/icons/ArrowIcon';
+import Link from '../../shared/Link';
+import json from '../../shared/variables.json';
+import NextButton from '../Carousel/buttons/NextButton';
+import PrevButton from '../Carousel/buttons/PrevButton';
 
 const Title = styled.p`
   font-size: 3rem;
@@ -185,15 +185,12 @@ function Carousel() {
     >
       {events?.length ? (
         events.map((item: EventProps, index: number) => {
-          if (isLoggedIn) {
-            if (user?.city === item.city) {
-              return (
-                <SwiperSlide key={index}>
-                  {renderSLides(item, index)}
-                </SwiperSlide>
-              );
-            }
-            return <></>;
+          if (user?.city === item.city) {
+            return (
+              <SwiperSlide key={index}>
+                {renderSLides(item, index)}
+              </SwiperSlide>
+            );
           }
           return (
             <SwiperSlide key={index}>{renderSLides(item, index)}</SwiperSlide>

@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import Input from '../shared/Input';
-import styled from 'styled-components';
 import { useLazyQuery } from '@apollo/client';
+import { useState } from 'react';
+import styled from 'styled-components';
 import { CHECK_CODE } from '../../apollo/actions';
 import Button, { ButtonMode } from '../shared/Button';
+import Input from '../shared/Input';
 
 const MainContainer = styled.div`
   gap: 4rem;
@@ -55,7 +55,7 @@ interface DataType {
   type: string;
   year: number;
   country: string;
-  fullName: string;
+  name: string;
   volunteeringHours: number;
 }
 
@@ -102,7 +102,7 @@ function CodeVerification() {
             </Info>
             {data ? (
               <Info>
-                <Text>{data.fullName}</Text>
+                <Text>{data.name}</Text>
                 <Text>{data.year}</Text>
                 <Text>{data.country}</Text>
                 <Text>{data.volunteeringHours}</Text>
