@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import Button, { ButtonMode } from './Button'
-import { useContext } from '../../context/Context'
 import { useState, useEffect } from 'react'
-import Link from './Link'
-import { useNavigate } from 'react-router-dom'
+import Button, { ButtonMode } from './Button';
+import { useContext } from '../../context/Context';
+import Link from './Link';
+import { useNavigate } from 'react-router-dom';
 
 const MainContainer = styled.div`
   height: 8vh;
@@ -15,13 +15,13 @@ const MainContainer = styled.div`
   align-items: center;
   background-color: white;
   justify-content: space-evenly;
-  border-bottom: .2rem solid #0013BC;
-`
+  border-bottom: 0.2rem solid #0013bc;
+`;
 
 const Logo = styled(Link)`
   font-size: 2.4rem;
   font-weight: 700;
-`
+`;
 
 const LinksContainer = styled.div`
   gap: 5rem;
@@ -29,9 +29,11 @@ const LinksContainer = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-`
+`;
 
-function Navbar () {
+function Navbar() {
+  const navigate = useNavigate();
+  const { isLoggedIn, setUser, setToken, setIsLoggedIn } = useContext();
 
   function getWindowSize() {
     const {innerWidth, innerHeight} = window;
@@ -51,42 +53,49 @@ function Navbar () {
     };
   }, []);
 
+  const NavBarLink = () => navigate('/');
 
-  const navigate = useNavigate()
-  const { isLoggedIn, setUser, setToken, setIsLoggedIn } = useContext()
-
-  const NavBarLink = () => navigate('/')
-  
   const LogOut = () => {
-    setUser({})
-    setToken('')
-    navigate('/')
-    setIsLoggedIn(false)
-    localStorage.removeItem('token')
-
-  }
+    setUser({});
+    setToken('');
+    navigate('/');
+    setIsLoggedIn(false);
+    localStorage.removeItem('token');
+  };
 
   return (
     windowSize.innerWidth >640 ?
     <MainContainer>
       <Logo onClick={NavBarLink}>new wave</Logo>
       <LinksContainer>
-        <Link href='#about' onClick={NavBarLink}>about us</Link>
-        <Link href='#takeaction' onClick={NavBarLink}>take action!</Link>
-        <Link href='#community' onClick={NavBarLink}>community</Link>
-        <Link onClick={NavBarLink} style={{color: '#0013BC'}}>our projects</Link>
+        <Link href="#about" onClick={NavBarLink}>
+          about us
+        </Link>
+        <Link href="#takeaction" onClick={NavBarLink}>
+          take action!
+        </Link>
+        <Link href="#community" onClick={NavBarLink}>
+          community
+        </Link>
+        <Link onClick={NavBarLink} style={{ color: '#0013BC' }}>
+          our projects
+        </Link>
       </LinksContainer>
       <LinksContainer>
-        {isLoggedIn
-        ? <>
-          <Link onClick={() => navigate('/profile')}>profile</Link>
-          <Link onClick={LogOut}>log out</Link>
-        </>
-        : <>
-          <Link onClick={() => navigate('/signin')}>sign in</Link>
-          <Link onClick={() => navigate('/signup')}>sign up</Link>
-        </>}
-        <Button onClick={() => {}} mode={ButtonMode.PRIMARY}>donate</Button>
+        {isLoggedIn ? (
+          <>
+            <Link onClick={() => navigate('/profile')}>profile</Link>
+            <Link onClick={LogOut}>log out</Link>
+          </>
+        ) : (
+          <>
+            <Link onClick={() => navigate('/signin')}>sign in</Link>
+            <Link onClick={() => navigate('/signup')}>sign up</Link>
+          </>
+        )}
+        <Button onClick={() => {}} mode={ButtonMode.PRIMARY}>
+          donate
+        </Button>
       </LinksContainer>
     </MainContainer> :
     <header className='header'>
@@ -108,7 +117,7 @@ function Navbar () {
     <li><Link >sign up</Link></li>
   </ol>
 </nav></header>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

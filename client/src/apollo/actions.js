@@ -1,7 +1,7 @@
-import { gql } from "@apollo/client"
+import { gql } from '@apollo/client';
 
 export const GET_USER = gql`
-  query($input: String) {
+  query ($input: String) {
     profile(input: $input) {
       _id
       type
@@ -29,9 +29,11 @@ export const GET_USER = gql`
           country
         }
       }
+      joinedChat
+      points
     }
   }
-`
+`;
 
 export const GET_EVENTS = gql`
   query {
@@ -53,115 +55,63 @@ export const GET_EVENTS = gql`
       createdAt
       duration
       partners
+      registered {
+        participantID
+      }
     }
   }
-`
+`;
 
 export const LOG_IN = gql`
-  query($logInInput: LogInInput!) {
+  query ($logInInput: LogInInput!) {
     logIn(input: $logInInput) {
       token
       success
     }
   }
-`
+`;
 
 export const GET_CERTIFICATE = gql`
-  mutation($input: String) {
+  mutation ($input: String) {
     getCertificate(input: $input)
   }
-`
+`;
 
 export const NEW_PROFILE_IMAGE = gql`
-  mutation($input: ImageInput) {
+  mutation ($input: ImageInput) {
     profileImage(input: $input)
   }
-`
+`;
 
 export const CHECK_EMAIL = gql`
-  query($input: String) {
+  query ($input: String) {
     checkEmail(input: $input)
   }
-`
-
-export const GET_EDUCATION = gql`
-  query {
-    allCountries {
-      name
-      cities {
-        name
-        schools
-      }
-      colleges
-    }
-    allUniversities
-  }
-`
+`;
 
 export const NEW_USER = gql`
-  mutation($input: UserInput) {
+  mutation ($input: UserInput) {
     newUser(input: $input)
   }
-`
+`;
 
 export const EDIT_USER = gql`
-  mutation($input: UserInput) {
+  mutation ($input: UserInput) {
     editUser(input: $input)
   }
-`
-
-export const NEW_UNIVERSITY = gql`
-  mutation($input: String) {
-    newUniversity(input: $input)
-  }
-`
-
-export const NEW_COUNTRY = gql`
-  mutation($input: String) {
-    newCountry(input: $input)
-  }
-`
-
-export const NEW_CITY = gql`
-  mutation($input: CityInput) {
-    newCountry(input: $input)
-  }
-`
-
-export const NEW_SCHOOL = gql`
-  mutation($input: SchoolInput) {
-    newCountry(input: $input)
-  }
-`
-
-export const NEW_COLLEGE = gql`
-  mutation($input: CollegeInput) {
-    newCountry(input: $input)
-  }
-`
+`;
 
 export const CHECK_CODE = gql`
-  query($input: String) {
+  query ($input: String) {
     checkCode(input: $input) {
       type
       year
       country
-      fullName
+      name
       volunteeringHours
     }
   }
-`
-
-export const GET_COUNTRIES = gql`
-  query {
-    allCountries {
-      name
-      cities {
-        name
-      }
-    }
-  }
-`
+`;
 
 export const GET_COORDINATORS = gql`
   query {
@@ -170,13 +120,13 @@ export const GET_COORDINATORS = gql`
       name
     }
   }
-`
+`;
 
 export const NEW_EVENT = gql`
-mutation($input: EventInput) {
+  mutation ($input: EventInput) {
     newEvent(input: $input)
   }
-`
+`;
 
 export const GET_VOLUNTEERS = gql`
   query {
@@ -186,16 +136,16 @@ export const GET_VOLUNTEERS = gql`
       type
     }
   }
-`
+`;
 
 export const CHANGE_STATUS = gql`
   mutation ($input: [StatusInput]) {
     changeStatus(input: $input)
   }
-`
+`;
 
 export const NEW_REPORT = gql`
   mutation ($input: ReportInput) {
     newReport(input: $input)
   }
-`
+`;

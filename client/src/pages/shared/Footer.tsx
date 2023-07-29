@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import data from './variables.json'
-import TiktokIcon from '../assets/icons/TiktokIcon';
-import InstagramIcons from '../assets/icons/InstagramIcon';
-import YoutubeIcon from '../assets/icons/YoutubeIcon';
+import { InstagramIcon } from '../assets/icons/InstagramIcon';
+import { TiktokIcon } from '../assets/icons/TiktokIcon';
+import { YoutubeIcon } from '../assets/icons/YoutubeIcon';
 import Link from './Link';
+import data from './variables.json';
 
 const MainContainer = styled.div`
   display: flex;
@@ -30,21 +30,20 @@ const Li = styled.li`
   font-size: 1.8rem;
   display: flex;
   gap: 1rem;
-`
+`;
 
 const Title = styled.p`
   font-size: 1.8rem;
   font-weight: bold;
-`
+`;
 
 const Navigate = styled(Link)`
   text-transform: none;
   font-size: 1.8rem;
   font-weight: 400;
-`
+`;
 
 function Footer() {
-
   const message = 'made with love <3';
 
   return (
@@ -89,7 +88,7 @@ function Footer() {
           </Li>
         </List>
     </MainContainer>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

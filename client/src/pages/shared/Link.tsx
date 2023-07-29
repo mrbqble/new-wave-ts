@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Link = styled.a`
   color: black;
@@ -12,8 +12,8 @@ const Link = styled.a`
   align-items: center;
   text-transform: uppercase;
   &:hover {
-    color: #0013BC;
+    color: #0013bc;
   }
-`
+`;
 
-export default Link
+export default Link;
