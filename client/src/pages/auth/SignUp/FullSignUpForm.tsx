@@ -22,7 +22,8 @@ const MainContainer = styled.div`
   padding: 5rem 2rem;
   align-items: center;
   flex-direction: column;
-`;
+  
+`
 
 const Title = styled.p`
   font-size: 5rem;
@@ -38,7 +39,10 @@ const Fields = styled.div`
   display: grid;
   gap: 4rem 8rem;
   grid-template-columns: 40.2rem 40.2rem;
-`;
+  @media (max-width: 580px) {
+    grid-template-columns: 100%;
+  }
+`
 
 const Form = styled.div`
   gap: 4rem;
@@ -46,7 +50,10 @@ const Form = styled.div`
   padding: 3rem 4rem;
   flex-direction: column;
   background-color: rgba(208, 213, 255, 0.5);
-`;
+  @media (max-width: 580px) {
+    width: min(100%, 60rem);
+  }
+`
 
 const FieldBox = styled.div`
   gap: 1rem;
@@ -113,47 +120,51 @@ interface Country {
 }
 
 function FullSignUpForm() {
-  const navigate = useNavigate();
-  const currentUser = useContext().user;
-  const [newUser] = useMutation(NEW_USER);
-  const [editUser] = useMutation(EDIT_USER);
-  const countries = countryList().getLabels();
-  const [cities, setCities] = useState<City[]>([]);
-  const [schools, setSchools] = useState<string[]>([]);
-  const [modal, setModal] = useState<boolean>(false);
-  const [colleges, setColleges] = useState<string[]>([]);
-  const { email, password, edit } = useLocation().state;
-  const [education, setEducation] = useState<Country[]>([]);
-  const [universities, setUniversities] = useState<string[]>([]);
-  const { affiliations, courses, degrees, grades, gender } = json.signUp;
-  const [user, setUser] = useState<User>(
-    edit
-      ? currentUser
-      : {
-          email: email,
-          firstName: '',
-          secondName: '',
-          gender: 'Male',
-          instagram: '@',
-          phoneNumber: '+',
-          password: password,
-          dateOfBirth: '2022-02-22',
-          affiliation: {
-            type: affiliations[0],
-            name: schools[0],
-            studyYear: grades[0],
-            degree: degrees[0],
-            location: {
-              city: cities[0],
-              country: 'Kazakhstan',
-            },
-          },
-          location: {
-            city: cities[0],
-            country: 'Kazakhstan',
-          },
+  const navigate = useNavigate()
+  const currentUser = useContext().user
+  const [newUser] = useMutation(NEW_USER)
+  const [newCity] = useMutation(NEW_CITY)
+  const [editUser] = useMutation(EDIT_USER)
+  const [newSchool] = useMutation(NEW_SCHOOL)
+  const countries = countryList().getLabels()
+  const [newCountry] = useMutation(NEW_COUNTRY)
+  const [newCollege] = useMutation(NEW_COLLEGE)
+  const [cities, setCities] = useState<City[]>([])
+  const [schools, setSchools] = useState<string[]>([])
+  const [modal, setModal] = useState<boolean>(false)
+  const [newUniversity] = useMutation(NEW_UNIVERSITY)
+  const [colleges, setColleges] = useState<string[]>([])
+  const { email, password, edit } = useLocation().state
+  const [education, setEducation] = useState<Country[]>([])
+  const { loading, error, data } = useQuery(GET_EDUCATION)
+  const [universities, setUniversities] = useState<string[]>([])
+  const { affiliations, courses, degrees, grades, gender } = json.signUp
+  const [user, setUser] = useState<User>(edit
+    ? currentUser
+    : {
+      email: email,
+      firstName: '',
+      secondName: '',
+      gender: 'Male',
+      instagram: '@',
+      phoneNumber: '+',
+      password: password,
+      dateOfBirth: '2022-02-22',
+      affiliation: {
+        type: affiliations[0],
+        name: schools[0],
+        studyYear: grades[0],
+        degree: degrees[0],
+        location: {
+          city: cities[0],
+          country: 'Kazakhstan'
         }
-  );
+      },
+      location: {
+        city: cities[0],
+        country: 'Kazakhstan'
+      },
+  })
 
   const NameInput = (value: string) => {
     return value
@@ -258,6 +269,23 @@ function FullSignUpForm() {
     setColleges(tmpColleges ? tmpColleges : []);
   }, [user?.country, education]);
 
+    if (!loading && !error && data) {
+      const { allCountries, allUniversities } = data
+      setEducation(allCountries)
+      setUniversities(allUniversities)
+    } else if (!loading && error) {
+      console.error(`apollo server error. ${error.message}`)
+    }
+  }, [loading, error, data])
+
+  useEffect(() => {
+    const tmpCountry = education?.find(item => item.name === user?.country)
+    const tmpCities = tmpCountry?.cities
+    const tmpColleges = tmpCountry?.colleges
+    setCities(tmpCities ? tmpCities : [])
+    setColleges(tmpColleges ? tmpColleges : [])
+  }, [user?.country, education])
+  
   useEffect(() => {
     if (cities?.length) {
       if (!cities.find((item) => item?.name === user?.location.city)) {

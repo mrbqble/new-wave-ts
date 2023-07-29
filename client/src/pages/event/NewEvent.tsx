@@ -1,20 +1,18 @@
-import { useLazyQuery, useMutation } from '@apollo/client'
-import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import {
-  GET_COORDINATORS,
-  NEW_EVENT
-} from '../../apollo/actions'
-import { useContext } from '../../context/Context'
+import Button, { ButtonMode } from '../shared/Button'
+import data from '../shared/variables.json'
+import Input from "../shared/Input"
 import { CameraIcon } from '../assets/icons/CameraIcon'
 import { ImageIcon } from '../assets/icons/ImageIcon'
-import Button, { ButtonMode } from '../shared/Button'
-import CreatableMultiSelect from '../shared/CreatableMultiSelect'
-import Input from '../shared/Input'
-import MultiSelect, { Option } from '../shared/MultiSelect'
-import Selector from '../shared/Selector'
-import TextArea from '../shared/TextArea'
-import data from '../shared/variables.json'
+import TextArea from "../shared/TextArea"
+import Selector from "../shared/Selector"
+import { useLazyQuery, useMutation } from "@apollo/client"
+import { GET_COORDINATORS, NEW_EVENT } from "../../apollo/actions"
+import MultiSelect, { Option } from "../shared/MultiSelect"
+import CreatableMultiSelect from "../shared/CreatableMultiSelect"
+import { useContext } from "../../context/Context"
+import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from 'react';
 
 const MainContainer = styled.div`
   gap: 4rem;
@@ -139,7 +137,9 @@ interface EventType {
 }
 
 function NewEvent() {
-  const { compressImage } = useContext()
+
+  const navigate = useNavigate();
+  const { compressImage, user, refetchUser } = useContext()
   const [createEvent] = useMutation(NEW_EVENT)
   const { types, formats, partners } = data.newEvent
   const [getCoordinators] = useLazyQuery(GET_COORDINATORS)
@@ -225,8 +225,9 @@ function NewEvent() {
 
   useEffect(() => {
     getCoordinators()
-      .then((res) => setCoordinators(res.data.organizators))
-      .catch(() => alert('apollo server error'))
+      .then((res) => setCoordinators(res.data.coordinators))
+      .catch(() => alert('apollo server error (newevent.tsx getCoordinators)'))
+    refetchUser();
   }, [])
 
   useEffect(() => {
@@ -244,6 +245,12 @@ function NewEvent() {
       .then((res) => console.log(res.data.newEvent))
       .catch((err) => console.log(err))
   }
+
+  /* I want to navigate to home page if user is a volunteer. Vopros: Kak uznat role usera ?
+  if(user?.role===volunteer){ 
+    navigate('/');
+  }
+  */
 
   return (
     <MainContainer>

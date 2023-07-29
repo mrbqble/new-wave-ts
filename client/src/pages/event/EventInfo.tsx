@@ -81,7 +81,11 @@ function EventInfo() {
     navigate('/');
     return;
   }
-  const idN: number = +id;
+  const idN: number  = +id;
+
+  const AttendEvent = () => {
+
+  }
 
   const showEvent = (item: EventType) => {
     const text = item.text.split('\n');
@@ -115,13 +119,7 @@ function EventInfo() {
               Available places: <Blueify>46</Blueify>
             </DetailItem>
           </DetailsSection>
-          <Button
-            style={{ marginTop: '1rem' }}
-            mode={ButtonMode.PRIMARY}
-            isUppercase
-          >
-            Attend event
-          </Button>
+          <Button style={{marginTop: "1rem"}} onClick={AttendEvent} mode={ButtonMode.PRIMARY} isUppercase>Attend event</Button>
         </EventInfoText>
         <EventImg src={item.image} />
       </MainContainer>

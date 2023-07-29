@@ -22,12 +22,12 @@ const Title = styled.p`
 const Container = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: white;
   padding: 4rem 2rem;
 `;
 
 const Event = styled.div`
-  margin-left: 12.1vw;
   display: flex;
   text-align: left;
   flex-direction: column;

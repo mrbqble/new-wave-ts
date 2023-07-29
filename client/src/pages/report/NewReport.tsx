@@ -217,14 +217,16 @@ function NewReport() {
 
   const uploadImage = async (files: FileList | null) => {
     if (files) {
-      const newImage = files[0];
-      const compressedFile = await compressImage(newImage);
-      var reader = new FileReader();
-      reader.readAsDataURL(compressedFile);
-      reader.onload = function () {
-        const newMedia = reader.result?.toString() as string;
-        setReport({ ...report, media: [...report.media, newMedia] });
-      };
+      const newImage = files[0]
+      const compressedFile = await compressImage(newImage)
+      var reader = new FileReader()
+      reader.readAsDataURL(compressedFile)
+      reader.onload = function (e) {
+        const newMedia = compressedFile.name;
+
+        console.log(compressedFile.name);
+        setReport({...report, media: [...report.media, newMedia]})
+      }
     }
   };
 
