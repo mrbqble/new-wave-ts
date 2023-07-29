@@ -223,7 +223,7 @@ function Profile() {
             mode={ButtonMode.DEFAULT}
             onClick={editProfile}
           >edit my profile</Button>
-          {user?.type === 'Coordinator' && <>
+          {user?.type !== 'Coordinator' && <>
             <Button
               mode={ButtonMode.DEFAULT}
               onClick={createEventPress}

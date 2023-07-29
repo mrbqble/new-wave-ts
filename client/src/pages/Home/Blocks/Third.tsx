@@ -32,7 +32,7 @@ const FounderInfo = styled.div`
 const FounderImage = styled.img``
 
 const Text = styled.p`
-  font-size: .1.6rem;
+  font-size: 1.4rem;
   font-weight: 500;
 `
 

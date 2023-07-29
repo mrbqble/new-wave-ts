@@ -50,7 +50,7 @@ function Footer() {
   return (
     <MainContainer>
       {data.footer.map((item, index) => 
-          <List>
+          <List key={index}>
             <Li>
               <Title>{item.title}</Title>
             </Li>

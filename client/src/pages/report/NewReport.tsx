@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 import TextArea from '../shared/TextArea'
 import Input from '../shared/Input'
@@ -219,8 +219,10 @@ function NewReport() {
       const compressedFile = await compressImage(newImage)
       var reader = new FileReader()
       reader.readAsDataURL(compressedFile)
-      reader.onload = function () {
-        const newMedia = reader.result?.toString() as string
+      reader.onload = function (e) {
+        const newMedia = compressedFile.name;
+
+        console.log(compressedFile.name);
         setReport({...report, media: [...report.media, newMedia]})
       }
     }

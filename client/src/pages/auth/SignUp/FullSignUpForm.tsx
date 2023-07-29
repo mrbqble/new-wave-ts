@@ -343,7 +343,7 @@ function FullSignUpForm() {
         .then(() => setModal(true))
         .catch((err) => {
           console.log(err)
-          alert('apollo server error')})
+          alert('apollo server error njnknj')})
     }
   }
 

@@ -84,6 +84,10 @@ function EventInfo() {
   }
   const idN: number  = +id;
 
+  const AttendEvent = () => {
+
+  }
+
   const showEvent = (item: EventType) => {
     const text = item.text.split('\n');
     const date = item.date.split('-')
@@ -94,12 +98,12 @@ function EventInfo() {
           <EventSDescription>{text[1]}</EventSDescription>
           <DetailsSection>
             <DetailItem>Location: <Blueify>{item?.location}</Blueify></DetailItem>
-            <DetailItem>Time: <Blueify>{`from ${item.startTime} to ${item.endTime}`}</Blueify></DetailItem>
+            <DetailItem>Time: <Blueify>from ${item?.startTime} to ${item?.endTime}</Blueify></DetailItem>
             <DetailItem>Date: <Blueify>{months[parseInt(date[1]) - 1] + " " + date[2]  + " " + date[0]}</Blueify></DetailItem>
             <DetailItem>Volunteers needed: <Blueify>50</Blueify></DetailItem>
             <DetailItem>Available places: <Blueify>46</Blueify></DetailItem>
           </DetailsSection>
-          <Button style={{marginTop: "1rem"}} mode={ButtonMode.PRIMARY} isUppercase>Attend event</Button>
+          <Button style={{marginTop: "1rem"}} onClick={AttendEvent} mode={ButtonMode.PRIMARY} isUppercase>Attend event</Button>
         </EventInfoText>
         <EventImg src={item.image} />
         </MainContainer>

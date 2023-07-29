@@ -173,7 +173,7 @@ export const GET_COORDINATORS = gql`
 `
 
 export const NEW_EVENT = gql`
-  mutation($input: EventInput) {
+mutation($input: EventInput) {
     newEvent(input: $input)
   }
 `
